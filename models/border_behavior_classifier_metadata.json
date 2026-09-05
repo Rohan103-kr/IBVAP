@@ -1,0 +1,36 @@
+{
+  "model_type": "RandomForestClassifier",
+  "accuracy": 1.0,
+  "num_samples": 1500,
+  "feature_names": [
+    "track_duration_sec",
+    "avg_speed_mps",
+    "max_speed_mps",
+    "direction_changes_count",
+    "distance_to_fence_m",
+    "loitering_duration_sec",
+    "in_restricted_zone",
+    "in_buffer_zone",
+    "fence_crossed",
+    "night_context",
+    "multi_camera_appearances"
+  ],
+  "feature_importances": {
+    "track_duration_sec": 0.0173,
+    "avg_speed_mps": 0.145,
+    "max_speed_mps": 0.2003,
+    "direction_changes_count": 0.1256,
+    "distance_to_fence_m": 0.2243,
+    "loitering_duration_sec": 0.1675,
+    "in_restricted_zone": 0.0498,
+    "in_buffer_zone": 0.0212,
+    "fence_crossed": 0.0474,
+    "night_context": 0.0001,
+    "multi_camera_appearances": 0.0013
+  },
+  "classes": [
+    "NORMAL",
+    "SUSPICIOUS",
+    "CRITICAL"
+  ]
+}

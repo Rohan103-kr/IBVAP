@@ -1,0 +1,442 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>IBVAP Search / Filter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#c5c6cc",
+                      "on-primary-fixed-variant": "#3e4755",
+                      "on-surface": "#e4e2e3",
+                      "surface-container-lowest": "#0e0e0f",
+                      "surface-dim": "#131314",
+                      "secondary-fixed-dim": "#bfc7d3",
+                      "tertiary-fixed-dim": "#d9c3a5",
+                      "on-background": "#e4e2e3",
+                      "primary-fixed-dim": "#bdc7d8",
+                      "surface-container": "#1f1f20",
+                      "secondary": "#bfc7d3",
+                      "surface-bright": "#39393a",
+                      "on-primary-fixed": "#121c28",
+                      "error": "#ffb4ab",
+                      "on-tertiary": "#3c2e19",
+                      "secondary-fixed": "#dbe3ef",
+                      "inverse-primary": "#555f6d",
+                      "on-secondary-container": "#aeb6c1",
+                      "secondary-container": "#3f4751",
+                      "surface-container-low": "#1b1b1c",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#303031",
+                      "on-primary": "#27313e",
+                      "surface-tint": "#bdc7d8",
+                      "surface-container-high": "#2a2a2b",
+                      "on-secondary-fixed": "#141c25",
+                      "primary-fixed": "#d9e3f4",
+                      "surface-container-highest": "#353536",
+                      "background": "#131314",
+                      "on-secondary-fixed-variant": "#3f4751",
+                      "on-error": "#690005",
+                      "inverse-surface": "#e4e2e3",
+                      "on-tertiary-container": "#dcc6a8",
+                      "surface": "#131314",
+                      "outline": "#8f9196",
+                      "tertiary-container": "#62523a",
+                      "primary": "#bdc7d8",
+                      "surface-variant": "#353536",
+                      "outline-variant": "#44474c",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-container": "#bfcada",
+                      "on-secondary": "#29313a",
+                      "tertiary": "#d9c3a5",
+                      "on-tertiary-fixed-variant": "#53442d",
+                      "on-tertiary-fixed": "#251a06",
+                      "primary-container": "#4b5563",
+                      "tertiary-fixed": "#f6dfc0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "panel-gap": "1px",
+                      "unit": "4px",
+                      "gutter": "8px",
+                      "container-padding": "12px"
+              },
+              "fontFamily": {
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "label-xs": [
+                              "JetBrains Mono"
+                      ],
+                      "display-id": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-xs": [
+                              "11px",
+                              {
+                                      "lineHeight": "12px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-id": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background h-screen overflow-hidden flex flex-col font-body-md text-body-md select-none">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-16 h-12 flex justify-between items-center px-gutter z-50 bg-surface-dim dark:bg-surface-dim border-b border-outline-variant">
+<div class="flex items-center gap-gutter">
+<span class="font-display-id text-display-id text-primary dark:text-primary tracking-tighter">IBVAP OPS CENTER</span>
+</div>
+<nav class="flex h-full">
+<button class="h-full px-gutter text-on-surface-variant font-label-xs text-label-xs hover:text-primary hover:bg-surface-container transition-all cursor-pointer active:opacity-80">System Health</button>
+<button class="h-full px-gutter text-on-surface-variant font-label-xs text-label-xs hover:text-primary hover:bg-surface-container transition-all cursor-pointer active:opacity-80">UAV Sync</button>
+<button class="h-full px-gutter text-on-surface-variant font-label-xs text-label-xs hover:text-primary hover:bg-surface-container transition-all cursor-pointer active:opacity-80">Network</button>
+</nav>
+<div class="flex items-center gap-unit">
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="settings">settings</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="help">help</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="power_settings_new">power_settings_new</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full z-40 flex flex-col bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant h-screen w-16 hover:w-64 transition-all duration-300 ease-in-out group overflow-hidden">
+<div class="h-12 w-full border-b border-outline-variant flex items-center justify-center group-hover:justify-start px-unit shrink-0">
+<div class="w-8 h-8 bg-surface-variant rounded-full flex items-center justify-center shrink-0">
+<img alt="Operator Profile" class="w-full h-full object-cover rounded-full" data-alt="A highly detailed, serious headshot of a military or security operator wearing a tactical headset, dimly lit in a modern operations center setting, deep shadows, high contrast, professional and austere mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG3n3rRZ3g-nyk5E1ys18SDBNC6jwMxGKGn9mQkuxIjnSSBXMOuAddJ2DP7XES6_ARU2CdLXU-Qp_dUCAIgnpAjxexZVFFiCPtX9TgFaWzk5wpaEMZcT3io9yOTL4AZ5jJhvdOCNuWVGHgjzwgsUYSmLePIFgp56UArcZdWoRAT2Ngo8nqrZZNhUN7sY04ykqIPlQX5DUFJgvxAQilxBxl7bLZ0yxiBkwh2lvVnWMv45Zy4NJ9wTb0">
+</div>
+<div class="ml-gutter hidden group-hover:block whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="font-headline-sm text-headline-sm text-primary dark:text-primary">IBVAP</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">Sector Alpha-7</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-unit flex flex-col gap-unit">
+<button class="w-full h-10 flex items-center px-4 shrink-0 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors scale-95 duration-75 active:bg-primary-container rounded">
+<span class="material-symbols-outlined text-xl shrink-0" data-icon="videocam">videocam</span>
+<span class="ml-4 font-label-xs text-label-xs hidden group-hover:block whitespace-nowrap">Live View</span>
+</button>
+<button class="w-full h-10 flex items-center px-4 shrink-0 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors scale-95 duration-75 active:bg-primary-container rounded">
+<span class="material-symbols-outlined text-xl shrink-0" data-icon="notification_important">notification_important</span>
+<span class="ml-4 font-label-xs text-label-xs hidden group-hover:block whitespace-nowrap">Alerts</span>
+</button>
+<button class="w-full h-10 flex items-center px-4 shrink-0 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors scale-95 duration-75 active:bg-primary-container rounded">
+<span class="material-symbols-outlined text-xl shrink-0" data-icon="map">map</span>
+<span class="ml-4 font-label-xs text-label-xs hidden group-hover:block whitespace-nowrap">Map</span>
+</button>
+<button class="w-full h-10 flex items-center px-4 shrink-0 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors scale-95 duration-75 active:bg-primary-container rounded">
+<span class="material-symbols-outlined text-xl shrink-0" data-icon="emergency">emergency</span>
+<span class="ml-4 font-label-xs text-label-xs hidden group-hover:block whitespace-nowrap">Incidents</span>
+</button>
+<button class="w-full h-10 flex items-center px-4 shrink-0 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors scale-95 duration-75 active:bg-primary-container rounded">
+<span class="material-symbols-outlined text-xl shrink-0" data-icon="photo_camera">photo_camera</span>
+<span class="ml-4 font-label-xs text-label-xs hidden group-hover:block whitespace-nowrap">Camera Health</span>
+</button>
+<button class="w-full h-10 flex items-center px-4 shrink-0 bg-secondary-container text-on-secondary-container border-l-2 border-primary scale-95 duration-75 active:bg-primary-container rounded-r">
+<span class="material-symbols-outlined text-xl shrink-0" data-icon="search">search</span>
+<span class="ml-4 font-label-xs text-label-xs hidden group-hover:block whitespace-nowrap">Search</span>
+</button>
+</div>
+<div class="mt-auto p-unit border-t border-outline-variant shrink-0">
+<button class="w-full h-8 flex items-center justify-center bg-surface-container hover:bg-surface-container-high transition-colors rounded text-primary text-label-xs font-label-xs uppercase tracking-wider group-hover:px-4">
+<span class="material-symbols-outlined text-lg block group-hover:hidden" data-icon="build">build</span>
+<span class="hidden group-hover:block whitespace-nowrap">System Diagnostics</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex ml-16 mt-12 mb-8 bg-background overflow-hidden">
+<!-- Filter Sidebar -->
+<aside class="w-80 border-r border-outline-variant bg-surface-container-low flex flex-col shrink-0">
+<div class="h-12 border-b border-outline-variant flex items-center px-container-padding bg-surface-dim shrink-0">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Historical Search</h1>
+</div>
+<div class="flex-1 overflow-y-auto p-container-padding flex flex-col gap-6">
+<!-- Date Range -->
+<div class="flex flex-col gap-unit">
+<label class="font-label-xs text-label-xs text-on-surface-variant uppercase">Timeframe</label>
+<div class="grid grid-cols-2 gap-unit">
+<div class="flex flex-col gap-1">
+<span class="text-[10px] text-outline">START</span>
+<input class="bg-surface border-b border-outline-variant text-data-mono font-data-mono p-1 text-on-surface focus:border-info focus:ring-0 outline-none w-full" type="datetime-local" value="2023-10-23T00:00">
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-[10px] text-outline">END</span>
+<input class="bg-surface border-b border-outline-variant text-data-mono font-data-mono p-1 text-on-surface focus:border-info focus:ring-0 outline-none w-full" type="datetime-local" value="2023-10-24T23:59">
+</div>
+</div>
+</div>
+<!-- Camera Selection -->
+<div class="flex flex-col gap-unit">
+<label class="font-label-xs text-label-xs text-on-surface-variant uppercase">Sector / Camera</label>
+<select class="bg-surface border-b border-outline-variant text-data-mono font-data-mono p-2 text-on-surface focus:border-info focus:ring-0 outline-none w-full appearance-none">
+<option>ALL SECTORS</option>
+<option>SECTOR-A (North)</option>
+<option>SECTOR-B (East)</option>
+<option>SECTOR-C (South)</option>
+<option>SECTOR-D (West)</option>
+</select>
+</div>
+<!-- Event Type -->
+<div class="flex flex-col gap-2">
+<label class="font-label-xs text-label-xs text-on-surface-variant uppercase">Event Type</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="bg-surface border-outline-variant text-primary focus:ring-primary rounded-sm h-4 w-4" type="checkbox">
+<span class="font-data-mono text-data-mono text-on-surface group-hover:text-primary transition-colors">FENCE_CROSSING</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="bg-surface border-outline-variant text-primary focus:ring-primary rounded-sm h-4 w-4" type="checkbox">
+<span class="font-data-mono text-data-mono text-on-surface group-hover:text-primary transition-colors">VEHICLE_DETECTION</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="bg-surface border-outline-variant text-primary focus:ring-primary rounded-sm h-4 w-4" type="checkbox">
+<span class="font-data-mono text-data-mono text-on-surface group-hover:text-primary transition-colors">SIGNAL_LOSS</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="bg-surface border-outline-variant text-primary focus:ring-primary rounded-sm h-4 w-4" type="checkbox">
+<span class="font-data-mono text-data-mono text-on-surface group-hover:text-primary transition-colors">THERMAL_ANOMALY</span>
+</label>
+</div>
+</div>
+<!-- Severity -->
+<div class="flex flex-col gap-2">
+<label class="font-label-xs text-label-xs text-on-surface-variant uppercase">Severity Level</label>
+<div class="flex flex-wrap gap-2">
+<div class="bg-error-container/20 border border-error text-error px-2 py-1 rounded cursor-pointer hover:bg-error-container/40 transition-colors font-label-xs text-label-xs">CRITICAL</div>
+<div class="bg-surface-variant border border-outline text-on-surface px-2 py-1 rounded cursor-pointer hover:bg-surface-container-highest transition-colors font-label-xs text-label-xs opacity-50">HIGH</div>
+<div class="bg-surface-variant border border-outline text-on-surface px-2 py-1 rounded cursor-pointer hover:bg-surface-container-highest transition-colors font-label-xs text-label-xs opacity-50">WARNING</div>
+<div class="bg-surface-variant border border-outline text-on-surface px-2 py-1 rounded cursor-pointer hover:bg-surface-container-highest transition-colors font-label-xs text-label-xs opacity-50">INFO</div>
+</div>
+</div>
+<!-- ANPR Field -->
+<div class="flex flex-col gap-unit mt-auto">
+<label class="font-label-xs text-label-xs text-on-surface-variant uppercase">ANPR Search</label>
+<input class="bg-surface border-b border-outline-variant text-data-mono font-data-mono p-2 text-on-surface focus:border-primary focus:ring-0 outline-none w-full placeholder:text-outline-variant uppercase" placeholder="License Plate..." type="text">
+</div>
+</div>
+<!-- Filter Actions -->
+<div class="p-container-padding border-t border-outline-variant bg-surface-dim shrink-0 flex gap-2">
+<button class="flex-1 bg-surface-variant text-on-surface font-label-xs text-label-xs py-2 rounded hover:bg-surface-container-highest transition-colors uppercase">Clear All</button>
+<button class="flex-1 bg-outline-variant text-on-surface font-headline-sm text-[12px] py-2 rounded hover:bg-primary-container transition-colors uppercase font-bold">Apply Filters</button>
+</div>
+</aside>
+<!-- Results Area -->
+<section class="flex-1 flex flex-col bg-background min-w-0">
+<!-- Header -->
+<div class="h-12 border-b border-outline-variant flex justify-between items-center px-container-padding bg-surface-dim shrink-0">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Results</h2>
+<div class="bg-surface-container-highest text-data-mono font-data-mono px-2 py-0.5 rounded text-xs text-primary">142 Found</div>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-xs font-label-xs border border-outline-variant px-2 py-1 rounded hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                    EXPORT CSV
+                </button>
+</div>
+<!-- Table -->
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead class="sticky top-0 bg-surface z-10">
+<tr class="border-b border-outline-variant text-label-xs font-label-xs text-on-surface-variant uppercase bg-surface-dim">
+<th class="p-3 font-normal w-24">Snapshot</th>
+<th class="p-3 font-normal">Event Type</th>
+<th class="p-3 font-normal">Camera ID</th>
+<th class="p-3 font-normal">Timestamp</th>
+<th class="p-3 font-normal">Severity</th>
+<th class="p-3 font-normal text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50 font-data-mono text-data-mono">
+<!-- Row 1: Critical -->
+<tr class="hover:bg-surface-container-low transition-colors group hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2">
+<div class="w-20 h-11 bg-surface-variant border border-error rounded overflow-hidden relative">
+<img alt="Event Thumbnail" class="w-full h-full object-cover opacity-80 mix-blend-screen" data-alt="A low-resolution, grainy night vision surveillance camera still showing a faint silhouette of a vehicle near a chain-link fence. High contrast green and black thermal aesthetic, tense military border monitoring mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfe-bUS8nBzwfMOfLXLaDS5nDjuYy4D-8dd_pIHyWn4ndB99j6WyOcG7HCPpOtk8H8P3fGpwVoTFSjyFdFprqhKd0uA6T-FiQE6SyZJSCZV806N2yrpC3-NMFZg4jaWbpEVWHKor_HiPavXzdHAZpayFe5DxJm8EVKINHAsiLcpf0gwBesaOCAYJloRSnsiF_DBbjOF7P3YSkqOrFLimppC_IwR3tRfKGhK5j_JUBcUg1x6LV0dZEe">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSJub25lIi8+Cjxwb2x5Z29uIHBvaW50cz0iMCAwIDQgMCA0IDEgMCAxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz4KPC9zdmc+')] opacity-30 pointer-events-none"></div>
+</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm" data-icon="warning">warning</span>
+<span class="font-bold text-on-surface">FENCE_CROSSING</span>
+</div>
+</td>
+<td class="p-3 text-secondary">CAM-N04</td>
+<td class="p-3 text-on-surface-variant">2023-10-24 02:14:55</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/30 uppercase tracking-widest">CRITICAL</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary hover:text-on-surface transition-colors flex items-center justify-end gap-1 ml-auto opacity-0 group-hover:opacity-100">
+<span class="text-xs uppercase">View</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Info -->
+<tr class="hover:bg-surface-container-low transition-colors group hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2">
+<div class="w-20 h-11 bg-surface-variant border border-outline-variant rounded overflow-hidden">
+<img alt="Event Thumbnail" class="w-full h-full object-cover opacity-70 grayscale" data-alt="A daytime surveillance camera still showing a dusty road in a desert environment. A white pickup truck is driving past. Muted colors, utilitarian technical aesthetic, objective monitoring view." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqXI0JazorOLLANBOWhbWHhIOpzZPrqeSsX7hUCzmKq6MEXgsj7k-nOt4XHtiaU30R6VsF-AFlPUglm039AL5-HOB9yQtq0VnSWwoGU_h4-gMZLujHodlODQXoJUDU3f4ggRl3kbG8eLn1Fpfmvc4XykWOm780tSa3QzdikP0GppPxwBIl1s2tMsh8UUeTg8KrmohHN1wKGelHWHItfJBxFJ33vmgmx4VMwdJovY0d8Y7pC_9r5ZgO">
+</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="directions_car">directions_car</span>
+<span class="text-on-surface">VEHICLE_DETECTION</span>
+</div>
+</td>
+<td class="p-3 text-secondary">CAM-E12</td>
+<td class="p-3 text-on-surface-variant">2023-10-24 01:45:12</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-surface-container-high text-on-surface-variant border border-outline-variant uppercase tracking-widest">INFO</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary hover:text-on-surface transition-colors flex items-center justify-end gap-1 ml-auto opacity-0 group-hover:opacity-100">
+<span class="text-xs uppercase">View</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Info -->
+<tr class="hover:bg-surface-container-low transition-colors group hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2">
+<div class="w-20 h-11 bg-surface-variant border border-outline-variant rounded overflow-hidden">
+<img alt="Event Thumbnail" class="w-full h-full object-cover opacity-70 grayscale" data-alt="Another daytime surveillance camera still showing a dusty road. A different vehicle is partially visible. Muted colors, utilitarian technical aesthetic, objective monitoring view." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfL6DnwvsbeSpPq0dHdLeXZUU4CkjnJoLx0Dw0qvgEc649-zmTAxcPGKgSkETRt_dvQhDllstYtIahdg739FLwt6MzNjAvSFzd6Wol1eNmXRywE9lUyqsD8PItreoZ5PCwjV0kTSmJTNbEonX4Vz2_-l2K-Vx7um7XVice5LqLUhqUJROU8qia8JBaQyv25zm1CeZ78lgaT1JEBtWueKogt3bwBJVJI-ECrmeFAoGf1-eYj3P7giyz">
+</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="directions_car">directions_car</span>
+<span class="text-on-surface">VEHICLE_DETECTION</span>
+</div>
+</td>
+<td class="p-3 text-secondary">CAM-E12</td>
+<td class="p-3 text-on-surface-variant">2023-10-23 23:10:05</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-surface-container-high text-on-surface-variant border border-outline-variant uppercase tracking-widest">INFO</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary hover:text-on-surface transition-colors flex items-center justify-end gap-1 ml-auto opacity-0 group-hover:opacity-100">
+<span class="text-xs uppercase">View</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Critical -->
+<tr class="hover:bg-surface-container-low transition-colors group hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2">
+<div class="w-20 h-11 bg-surface-variant border border-error rounded overflow-hidden relative">
+<div class="absolute inset-0 bg-error/20 animate-pulse mix-blend-overlay"></div>
+<img alt="Event Thumbnail" class="w-full h-full object-cover opacity-90 sepia hue-rotate-180" data-alt="A distorted thermal camera image showing two bright heat signatures moving quickly across a dark, cold landscape. Heavy static and digital artifacting overlay, intense and urgent military surveillance mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaoSiM6v-AwYxZHSO1kRuvdbw8MwJY3RkcOXq7TSWnvlhKr7442LiCgCPlRkH1TaR1gfkH9a1Xz-rpGdglx-ece3gpjjN5kLZ_XgG74VJRk1eRxceyB1KlKC15JAsBoR38L44WUOT4_a2kH8qJ5kQC3T4vew4wYNRLhSOIxjg-rsBI7rXWOBQMG8OL74aBJ25ETHM0vD6mFtGDp--XDQbNyHR1ce7LNpFKE9H2uGfnjWF5rcXI8s0p">
+</div>
+</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm" data-icon="warning">warning</span>
+<span class="font-bold text-on-surface">FENCE_CROSSING</span>
+</div>
+</td>
+<td class="p-3 text-secondary">CAM-S44</td>
+<td class="p-3 text-on-surface-variant">2023-10-23 21:55:30</td>
+<td class="p-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-error/10 text-error border border-error/30 uppercase tracking-widest">CRITICAL</span>
+</td>
+<td class="p-3 text-right">
+<button class="text-primary hover:text-on-surface transition-colors flex items-center justify-end gap-1 ml-auto opacity-0 group-hover:opacity-100">
+<span class="text-xs uppercase">View</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="h-12 border-t border-outline-variant bg-surface-dim flex items-center justify-between px-container-padding shrink-0 font-label-xs text-label-xs text-on-surface-variant uppercase">
+<div class="">Showing 1 - 4 of 142</div>
+<div class="flex items-center gap-1">
+<button class="p-1 hover:text-primary disabled:opacity-30 disabled:hover:text-on-surface-variant transition-colors" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-6 h-6 flex items-center justify-center bg-primary-container text-on-primary-container rounded border border-primary">1</button>
+<button class="w-6 h-6 flex items-center justify-center hover:bg-surface-container-high rounded transition-colors">2</button>
+<button class="w-6 h-6 flex items-center justify-center hover:bg-surface-container-high rounded transition-colors">3</button>
+<span class="">...</span>
+<button class="w-6 h-6 flex items-center justify-center hover:bg-surface-container-high rounded transition-colors">36</button>
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 right-0 left-16 h-8 flex items-center justify-between px-gutter z-50 overflow-hidden bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="font-label-xs text-label-xs text-on-surface-variant">© 2024 IBVAP SURVEILLANCE • ENCRYPTED CONNECTION</div>
+<div class="flex items-center gap-4">
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Protocol</a>
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:text-primary transition-colors" href="#">Sector Maps</a>
+<a class="font-label-xs text-label-xs text-on-surface-variant hover:text-primary transition-colors" href="#">Audit Logs</a>
+</div>
+</footer>
+
+
+</body></html>

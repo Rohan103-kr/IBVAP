@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Caches and testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Environments
+.env
+.env.local
+.venv
+venv/
+ENV/
+env/
+
+# Node.js / Web Frontend
+node_modules/
+frontend/node_modules/
+dist/
+build/
+.npm/
+
+# IDE & System Files
+.DS_Store
+.voltai/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large Project Archives & Databases
+*.zip
+*.tar.gz
+*.rar
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Large generated demo video outputs
+demo/output_*.mp4

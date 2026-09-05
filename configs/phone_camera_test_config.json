@@ -1,0 +1,50 @@
+[
+  {
+    "camera_id": "CAM-01",
+    "name": "Mobile Watchtower 1 (Phone Feed / Fence Breach)",
+    "location": "Sector Alpha - Fence Ridge",
+    "stream_url": "demo/videos/phone_recorded_fence_breach.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-02",
+    "name": "Mobile Watchtower 2 (Phone Feed / Night Intrusion)",
+    "location": "Sector Alpha - Shadow Post",
+    "stream_url": "demo/videos/phone_recorded_night_intrusion.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-03",
+    "name": "ANPR Checkpoint (Phone Feed / Vehicle OCR)",
+    "location": "Sector Bravo - Security Barrier",
+    "stream_url": "demo/videos/phone_recorded_anpr_checkpoint.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-04",
+    "name": "Mobile Watchtower 3 (Phone Feed / Cross-Cam Handover)",
+    "location": "Sector Bravo - Patrol Corridor",
+    "stream_url": "demo/videos/phone_recorded_cross_camera.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  }
+]

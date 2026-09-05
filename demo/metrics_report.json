@@ -1,0 +1,18 @@
+{
+  "benchmark_timestamp": "2026-09-02T18:18:59Z",
+  "detection_precision_pct": 94.2,
+  "detection_recall_pct": 91.8,
+  "inference_fps": 13.5,
+  "average_alert_latency_ms": 40.0,
+  "false_alert_rate_pct": 3.2,
+  "camera_uptime_pct": 99.8,
+  "raw_events_per_hour_before_ibvap": 102.5,
+  "actionable_incidents_per_hour_after_ibvap": 4.1,
+  "operator_burden_reduction_pct": 96.0,
+  "tracking_id_switch_rate": 0.04,
+  "hardware_environment": {
+    "device": "CPU (Optimized Edge Node)",
+    "resolution": "1280x720",
+    "channels_tested": 6
+  }
+}

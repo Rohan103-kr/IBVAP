@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IBVAP - Map View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2a2b",
+                        "secondary-container": "#3f4751",
+                        "surface": "#131314",
+                        "outline-variant": "#44474c",
+                        "on-tertiary": "#3c2e19",
+                        "secondary-fixed": "#dbe3ef",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#121c28",
+                        "surface-variant": "#353536",
+                        "on-secondary-container": "#aeb6c1",
+                        "on-tertiary-fixed": "#251a06",
+                        "tertiary-fixed": "#f6dfc0",
+                        "surface-bright": "#39393a",
+                        "secondary-fixed-dim": "#bfc7d3",
+                        "on-surface-variant": "#c5c6cc",
+                        "surface-container": "#1f1f20",
+                        "on-primary-fixed-variant": "#3e4755",
+                        "on-surface": "#e4e2e3",
+                        "primary-fixed-dim": "#bdc7d8",
+                        "surface-container-lowest": "#0e0e0f",
+                        "tertiary-container": "#62523a",
+                        "on-secondary-fixed-variant": "#3f4751",
+                        "background": "#131314",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353536",
+                        "on-tertiary-fixed-variant": "#53442d",
+                        "on-secondary-fixed": "#141c25",
+                        "on-tertiary-container": "#dcc6a8",
+                        "inverse-primary": "#555f6d",
+                        "on-primary": "#27313e",
+                        "primary-container": "#4b5563",
+                        "inverse-surface": "#e4e2e3",
+                        "primary": "#bdc7d8",
+                        "tertiary": "#d9c3a5",
+                        "on-secondary": "#29313a",
+                        "surface-container-low": "#1b1b1c",
+                        "tertiary-fixed-dim": "#d9c3a5",
+                        "on-primary-container": "#bfcada",
+                        "outline": "#8f9196",
+                        "inverse-on-surface": "#303031",
+                        "surface-tint": "#bdc7d8",
+                        "on-background": "#e4e2e3",
+                        "secondary": "#bfc7d3",
+                        "surface-dim": "#131314",
+                        "primary-fixed": "#d9e3f4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "8px",
+                        "container-padding": "12px",
+                        "panel-gap": "1px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-xs": ["JetBrains Mono"],
+                        "display-id": ["JetBrains Mono"],
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-xs": ["11px", { "lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-id": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scanline {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+            background-size: 100% 4px;
+        }
+        .pulse-marker {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 180, 171, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 180, 171, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 180, 171, 0); }
+        }
+    </style>
+</head>
+<body class="bg-[#0B0F14] text-on-surface h-screen w-screen overflow-hidden font-body-md flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 border-r border-[#232B34] bg-surface-container dark:bg-surface-container flex flex-col z-40">
+<div class="px-container-padding py-6 border-b border-[#232B34]">
+<h1 class="font-display-id text-display-id text-primary uppercase">IBVAP</h1>
+<p class="font-label-xs text-label-xs text-on-surface-variant mt-2">Border Surveillance</p>
+</div>
+<div class="flex-1 overflow-y-auto py-unit">
+<ul class="space-y-1">
+<li><a class="flex items-center px-container-padding py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#"><span class="material-symbols-outlined mr-3">videocam</span> Live View</a></li>
+<li><a class="flex items-center px-container-padding py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#"><span class="material-symbols-outlined mr-3">warning</span> Alerts</a></li>
+<li><a class="flex items-center px-container-padding py-3 bg-secondary-container text-on-secondary-container border-l-2 border-primary" href="#"><span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">map</span> Map</a></li>
+<li><a class="flex items-center px-container-padding py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#"><span class="material-symbols-outlined mr-3">emergency</span> Incidents</a></li>
+<li><a class="flex items-center px-container-padding py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#"><span class="material-symbols-outlined mr-3">health_and_safety</span> Camera Health</a></li>
+<li><a class="flex items-center px-container-padding py-3 text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#"><span class="material-symbols-outlined mr-3">search</span> Search</a></li>
+</ul>
+</div>
+<div class="p-container-padding border-t border-[#232B34]">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded bg-[#1C232B] flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<span class="font-label-xs text-label-xs text-on-surface">Operator Profile</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="ml-64 flex-1 flex flex-col h-screen pt-12 pb-8">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 flex justify-between items-center px-container-padding z-30 bg-surface-container-low dark:bg-surface-container-low h-12 border-b border-[#232B34]">
+<div class="font-headline-sm text-headline-sm text-primary font-bold">Map</div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-on-surface transition-opacity"><span class="material-symbols-outlined">videocam_off</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-opacity"><span class="material-symbols-outlined">notifications_active</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-opacity"><span class="material-symbols-outlined">schedule</span></button>
+<div class="h-4 w-px bg-[#232B34]"></div>
+<span class="font-label-xs text-label-xs text-on-surface">Operator Profile</span>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Map Canvas -->
+<div class="flex-1 relative bg-[#0B0F14]">
+<!-- Simulated Map Image -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40" data-alt="A dark, high-contrast satellite map view of a rugged border terrain at night, rendered in a highly technical, tactical style with deep slate and obsidian tones. The map features minimal topographical lines and a stark, grid-like overlay, illuminated only by subtle UI markers." data-location="Border Sector 7" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')"></div>
+<!-- Map Overlays / Markers -->
+<div class="absolute top-[20%] left-[30%] flex flex-col items-center group cursor-pointer">
+<span class="material-symbols-outlined text-[#81c995] bg-[#141A21] p-1 border border-[#232B34] rounded">videocam</span>
+<span class="mt-1 font-data-mono text-data-mono text-[#81c995] bg-[#0B0F14]/80 px-1 hidden group-hover:block border border-[#232B34]">CAM-A01</span>
+</div>
+<div class="absolute top-[50%] left-[45%] flex flex-col items-center group cursor-pointer pulse-marker">
+<span class="material-symbols-outlined text-error bg-[#141A21] p-1 border border-error rounded" style="font-variation-settings: 'FILL' 1;">videocam</span>
+<span class="mt-1 font-data-mono text-data-mono text-error bg-[#0B0F14]/80 px-1 border border-[#232B34]">CAM-B12 [ALERT]</span>
+</div>
+<div class="absolute top-[70%] left-[20%] flex flex-col items-center group cursor-pointer">
+<span class="material-symbols-outlined text-outline-variant bg-[#141A21] p-1 border border-[#232B34] rounded">videocam</span>
+<span class="mt-1 font-data-mono text-data-mono text-outline-variant bg-[#0B0F14]/80 px-1 hidden group-hover:block border border-[#232B34]">CAM-C05</span>
+</div>
+<div class="absolute top-[48%] left-[48%] flex flex-col items-center group cursor-pointer pulse-marker">
+<span class="material-symbols-outlined text-error text-2xl" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<!-- Map Controls -->
+<div class="absolute bottom-4 right-4 flex flex-col space-y-2">
+<button class="bg-[#141A21] border border-[#232B34] text-on-surface p-2 hover:bg-[#1C232B] transition-colors"><span class="material-symbols-outlined">add</span></button>
+<button class="bg-[#141A21] border border-[#232B34] text-on-surface p-2 hover:bg-[#1C232B] transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<button class="bg-[#141A21] border border-[#232B34] text-on-surface p-2 hover:bg-[#1C232B] transition-colors mt-4"><span class="material-symbols-outlined">layers</span></button>
+<button class="bg-[#141A21] border border-[#232B34] text-on-surface p-2 hover:bg-[#1C232B] transition-colors mt-4"><span class="material-symbols-outlined">center_focus_strong</span></button>
+</div>
+<!-- Coordinates overlay -->
+<div class="absolute top-4 left-4 bg-[#0B0F14]/40 backdrop-blur-md border border-[#232B34] p-2 font-data-mono text-data-mono text-primary">
+                    32.5401° N, 116.9200° W | ELEV: 142m
+                </div>
+</div>
+<!-- Side Panel (Right) -->
+<aside class="w-80 bg-[#141A21] border-l border-[#232B34] flex flex-col">
+<div class="p-container-padding border-b border-[#232B34]">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Directory</h2>
+</div>
+<div class="p-container-padding border-b border-[#232B34]">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1.5 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-[#1C232B] border-none border-b border-[#232B34] focus:border-primary focus:ring-0 pl-8 py-1.5 font-data-mono text-data-mono text-on-surface placeholder-on-surface-variant" placeholder="Search ID or Sector..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Active Incidents -->
+<div class="p-container-padding">
+<h3 class="font-label-xs text-label-xs text-error uppercase mb-2">Active Incidents</h3>
+<div class="bg-[#1C232B] border-l-4 border-error p-3 mb-4 scanline cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="font-data-mono text-data-mono text-error">INC-8992</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">00:14:22</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-2">Motion detected in Zone B. Possible intrusion.</p>
+<button class="bg-[#232B34] text-on-surface font-label-xs text-label-xs uppercase px-2 py-1 hover:bg-surface-variant transition-colors flex items-center"><span class="material-symbols-outlined text-sm mr-1">my_location</span> Center Map</button>
+</div>
+</div>
+<!-- Camera List -->
+<div class="p-container-padding pt-0">
+<h3 class="font-label-xs text-label-xs text-on-surface-variant uppercase mb-2">Sector Alpha</h3>
+<div class="space-y-1">
+<div class="flex items-center justify-between p-2 hover:bg-[#1C232B] border border-transparent hover:border-[#232B34] transition-colors cursor-pointer group">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-[#81c995] mr-2"></div>
+<span class="font-data-mono text-data-mono text-on-surface">CAM-A01</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-primary hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-sm">open_in_new</span></button>
+</div>
+<div class="flex items-center justify-between p-2 hover:bg-[#1C232B] border border-transparent hover:border-[#232B34] transition-colors cursor-pointer group">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-[#81c995] mr-2"></div>
+<span class="font-data-mono text-data-mono text-on-surface">CAM-A02</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-primary hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-sm">open_in_new</span></button>
+</div>
+</div>
+<h3 class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-4 mb-2">Sector Bravo</h3>
+<div class="space-y-1">
+<div class="flex items-center justify-between p-2 bg-[#1C232B] border border-error cursor-pointer">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-error mr-2 pulse-marker"></div>
+<span class="font-data-mono text-data-mono text-error">CAM-B12</span>
+</div>
+<button class="text-error hover:text-on-error-container transition-colors"><span class="material-symbols-outlined text-sm">open_in_new</span></button>
+</div>
+<div class="flex items-center justify-between p-2 hover:bg-[#1C232B] border border-transparent hover:border-[#232B34] transition-colors cursor-pointer group">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-outline-variant mr-2"></div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">CAM-B13</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-primary hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-sm">open_in_new</span></button>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 right-0 left-64 flex items-center justify-between px-gutter z-20 bg-surface-container-lowest dark:bg-surface-container-lowest h-8 border-t border-[#232B34]">
+<div class="flex items-center space-x-4">
+<span class="font-label-xs text-label-xs text-secondary">System Status: Nominal | Recent Events Ticker</span>
+</div>
+<div class="flex space-x-4">
+<a class="font-data-mono text-data-mono text-on-surface-variant hover:text-tertiary-fixed transition-colors" href="#">Event Log</a>
+<a class="font-data-mono text-data-mono text-on-surface-variant hover:text-tertiary-fixed transition-colors" href="#">System Health</a>
+<a class="font-data-mono text-data-mono text-on-surface-variant hover:text-tertiary-fixed transition-colors" href="#">Audit Trail</a>
+</div>
+</footer>
+</div>
+</body></html>

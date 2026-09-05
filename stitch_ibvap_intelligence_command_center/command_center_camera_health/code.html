@@ -1,0 +1,339 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>IBVAP - Camera Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#4b5563",
+                        "on-surface": "#e4e2e3",
+                        "on-background": "#e4e2e3",
+                        "surface-dim": "#131314",
+                        "tertiary-container": "#62523a",
+                        "on-primary-fixed-variant": "#3e4755",
+                        "surface-bright": "#39393a",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e4e2e3",
+                        "on-secondary-fixed-variant": "#3f4751",
+                        "on-secondary-fixed": "#141c25",
+                        "tertiary-fixed-dim": "#d9c3a5",
+                        "surface": "#131314",
+                        "on-primary": "#27313e",
+                        "secondary": "#bfc7d3",
+                        "on-tertiary-fixed": "#251a06",
+                        "background": "#131314",
+                        "on-secondary": "#29313a",
+                        "inverse-primary": "#555f6d",
+                        "outline-variant": "#44474c",
+                        "primary-fixed": "#d9e3f4",
+                        "surface-container-lowest": "#0e0e0f",
+                        "tertiary-fixed": "#f6dfc0",
+                        "inverse-on-surface": "#303031",
+                        "on-tertiary-container": "#dcc6a8",
+                        "secondary-fixed": "#dbe3ef",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#53442d",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2b",
+                        "surface-variant": "#353536",
+                        "tertiary": "#d9c3a5",
+                        "surface-container-low": "#1b1b1c",
+                        "surface-container-highest": "#353536",
+                        "secondary-container": "#3f4751",
+                        "on-surface-variant": "#c5c6cc",
+                        "on-primary-fixed": "#121c28",
+                        "primary-fixed-dim": "#bdc7d8",
+                        "secondary-fixed-dim": "#bfc7d3",
+                        "primary": "#bdc7d8",
+                        "on-tertiary": "#3c2e19",
+                        "on-secondary-container": "#aeb6c1",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#bfcada",
+                        "surface-container": "#1f1f20",
+                        "surface-tint": "#bdc7d8",
+                        "outline": "#8f9196"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "8px",
+                        "panel-gap": "1px",
+                        "container-padding": "12px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "display-id": ["JetBrains Mono"],
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-xs": ["JetBrains Mono"],
+                        "data-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-id": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-xs": ["11px", { "lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #0B0F14; }
+        .bg-level-0 { background-color: #0B0F14; }
+        .bg-level-1 { background-color: #141A21; }
+        .bg-level-2 { background-color: #1C232B; }
+        .border-panel { border-color: #232B34; }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        /* Custom scrollbar for density */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0F14; }
+        ::-webkit-scrollbar-thumb { background: #232B34; }
+        ::-webkit-scrollbar-thumb:hover { background: #44474c; }
+        
+        .status-online { color: #81C995; border-color: #137333; background: rgba(129, 201, 149, 0.1); }
+        .status-offline { color: #F28B82; border-color: #C5221F; background: rgba(242, 139, 130, 0.1); }
+        .status-degraded { color: #FDE293; border-color: #E27200; background: rgba(253, 226, 147, 0.1); }
+    </style>
+</head>
+<body class="text-on-surface bg-level-0 antialiased h-screen w-screen overflow-hidden font-body-md flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col z-40 bg-level-1 text-primary border-r border-panel w-64 pt-4">
+<div class="px-container-padding mb-8 flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A highly detailed, futuristic emblem representing a border surveillance unit. The logo features a stylized eagle eye over a radar grid, executed in stark white and subtle blue tones against a dark background. The design is utilitarian, modern, and sharp, suitable for a high-stakes tactical dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUAuYjsE5y2AS1ytNlsYWUUa5UB7xiQJpFa3rDvsYKdKa6Hfo6lqDRbg5orLPnPbXfwELbSJi_WfJpsJbPb7DLQZ75m0r1jEhlMtJoqg_uX80QQ1L3gcmODyunvJinj9R-IwypFZUc7B_BsZR-hzkYk1lXz3Bl7O1NhNK820qsOI5Ra54Sqn18Zk3sEkKmWRr_C0ouyjnCgbhggJ40oU6TCFTvE3U82xrBdslQyQr3IySc_BN0kPDy">
+<div>
+<div class="font-display-id text-display-id text-primary uppercase leading-tight">IBVAP</div>
+<div class="font-label-xs text-label-xs text-on-surface-variant">Border Surveillance</div>
+</div>
+</div>
+<ul class="flex-1 flex flex-col gap-1 px-2 font-body-md text-body-md">
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">videocam</span>
+                    Live View
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">warning</span>
+                    Alerts
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">map</span>
+                    Map
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">emergency</span>
+                    Incidents
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container border-l-2 border-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+                    Camera Health
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+                    Search
+                </a>
+</li>
+</ul>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 flex justify-between items-center px-container-padding z-30 bg-level-1 text-primary font-label-xs text-label-xs h-12 border-b border-panel">
+<div class="font-display-id text-display-id text-on-surface hidden">IBVAP</div> <!-- Hidden per design, text in sidebar -->
+<div class="flex-1 font-headline-sm text-headline-sm text-on-surface tracking-tight">CAMERA HEALTH DIAGNOSTICS</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined hover:text-on-surface cursor-pointer transition-opacity" style="font-variation-settings: 'FILL' 0;">videocam_off</span>
+<span class="material-symbols-outlined hover:text-on-surface cursor-pointer transition-opacity" style="font-variation-settings: 'FILL' 0;">notifications_active</span>
+<span class="material-symbols-outlined hover:text-on-surface cursor-pointer transition-opacity" style="font-variation-settings: 'FILL' 0;">schedule</span>
+</div>
+<div class="flex items-center gap-2 pl-4 border-l border-panel">
+<span class="text-primary font-bold">Operator Profile</span>
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-12 mb-8 p-gutter w-full h-[calc(100vh-5rem)] overflow-y-auto">
+<div class="flex justify-between items-end mb-unit pb-2 border-b border-panel">
+<div class="flex gap-4">
+<div class="bg-level-1 px-3 py-1.5 border border-panel text-on-surface font-label-xs text-label-xs flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#81C995]"></div> TOTAL ONLINE: 142
+                </div>
+<div class="bg-level-1 px-3 py-1.5 border border-panel text-on-surface font-label-xs text-label-xs flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#F28B82]"></div> TOTAL OFFLINE: 3
+                </div>
+<div class="bg-level-1 px-3 py-1.5 border border-panel text-on-surface font-label-xs text-label-xs flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#FDE293]"></div> TOTAL DEGRADED: 5
+                </div>
+</div>
+<div class="flex gap-2">
+<button class="bg-[#232B34] text-on-surface font-label-xs text-label-xs px-3 py-1.5 uppercase hover:bg-surface-bright transition-colors border border-panel">Filter</button>
+<button class="bg-[#232B34] text-on-surface font-label-xs text-label-xs px-3 py-1.5 uppercase hover:bg-surface-bright transition-colors border border-panel">Export Log</button>
+</div>
+</div>
+<!-- Density Data Table -->
+<div class="w-full border border-panel bg-level-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-level-2 font-label-xs text-label-xs text-on-surface-variant uppercase border-b border-panel">
+<tr>
+<th class="p-2 border-r border-panel w-24">Status</th>
+<th class="p-2 border-r border-panel">Camera ID</th>
+<th class="p-2 border-r border-panel">Location</th>
+<th class="p-2 border-r border-panel">Type</th>
+<th class="p-2 border-r border-panel text-right">FPS</th>
+<th class="p-2 border-r border-panel text-right">Latency</th>
+<th class="p-2 border-r border-panel text-right">Uptime</th>
+<th class="p-2 border-r border-panel">Last Frame</th>
+<th class="p-2 w-24 text-center">Action</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono text-on-surface">
+<!-- Row 1: Online -->
+<tr class="border-b border-panel transition-colors hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2 border-r border-panel">
+<div class="status-online border px-1 py-0.5 text-[10px] text-center inline-block w-full uppercase">Online</div>
+</td>
+<td class="p-2 border-r border-panel text-primary">CAM-A01</td>
+<td class="p-2 border-r border-panel">Sector 4, Node Alpha</td>
+<td class="p-2 border-r border-panel">Thermal</td>
+<td class="p-2 border-r border-panel text-right">30.0</td>
+<td class="p-2 border-r border-panel text-right">45ms</td>
+<td class="p-2 border-r border-panel text-right">99.9%</td>
+<td class="p-2 border-r border-panel text-on-surface-variant">02:14:55.120</td>
+<td class="p-2 text-center">
+<button class="material-symbols-outlined text-primary hover:text-white" style="font-size: 18px;">visibility</button>
+</td>
+</tr>
+<!-- Row 2: Online -->
+<tr class="border-b border-panel transition-colors hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2 border-r border-panel">
+<div class="status-online border px-1 py-0.5 text-[10px] text-center inline-block w-full uppercase">Online</div>
+</td>
+<td class="p-2 border-r border-panel text-primary">CAM-A02</td>
+<td class="p-2 border-r border-panel">Sector 4, Node Bravo</td>
+<td class="p-2 border-r border-panel">Optical</td>
+<td class="p-2 border-r border-panel text-right">60.0</td>
+<td class="p-2 border-r border-panel text-right">22ms</td>
+<td class="p-2 border-r border-panel text-right">99.8%</td>
+<td class="p-2 border-r border-panel text-on-surface-variant">02:14:55.115</td>
+<td class="p-2 text-center">
+<button class="material-symbols-outlined text-primary hover:text-white" style="font-size: 18px;">visibility</button>
+</td>
+</tr>
+<!-- Row 3: Degraded -->
+<tr class="border-b border-panel transition-colors bg-[#1f1911] hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2 border-r border-panel">
+<div class="status-degraded border px-1 py-0.5 text-[10px] text-center inline-block w-full uppercase">Degraded</div>
+</td>
+<td class="p-2 border-r border-panel text-primary">CAM-B12</td>
+<td class="p-2 border-r border-panel">Zone Delta, Perim 1</td>
+<td class="p-2 border-r border-panel">PTZ</td>
+<td class="p-2 border-r border-panel text-right text-[#FDE293]">15.2</td>
+<td class="p-2 border-r border-panel text-right text-[#FDE293]">450ms</td>
+<td class="p-2 border-r border-panel text-right">92.4%</td>
+<td class="p-2 border-r border-panel text-on-surface-variant">02:14:54.800</td>
+<td class="p-2 text-center">
+<button class="material-symbols-outlined text-primary hover:text-white" style="font-size: 18px;">visibility</button>
+</td>
+</tr>
+<!-- Row 4: Offline -->
+<tr class="border-b border-panel transition-colors bg-[#251515] hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2 border-r border-panel">
+<div class="status-offline border px-1 py-0.5 text-[10px] text-center inline-block w-full uppercase">Offline</div>
+</td>
+<td class="p-2 border-r border-panel text-primary">CAM-C04</td>
+<td class="p-2 border-r border-panel">Valley Pass, Gate 2</td>
+<td class="p-2 border-r border-panel">Thermal</td>
+<td class="p-2 border-r border-panel text-right text-[#F28B82]">0.0</td>
+<td class="p-2 border-r border-panel text-right text-[#F28B82]">---</td>
+<td class="p-2 border-r border-panel text-right text-[#F28B82]">85.2%</td>
+<td class="p-2 border-r border-panel text-[#F28B82]">01:45:12.000</td>
+<td class="p-2 text-center">
+<button class="material-symbols-outlined text-on-surface-variant opacity-50 cursor-not-allowed" style="font-size: 18px;">visibility_off</button>
+</td>
+</tr>
+<!-- Row 5: Online -->
+<tr class="border-b border-panel transition-colors hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2 border-r border-panel">
+<div class="status-online border px-1 py-0.5 text-[10px] text-center inline-block w-full uppercase">Online</div>
+</td>
+<td class="p-2 border-r border-panel text-primary">CAM-D99</td>
+<td class="p-2 border-r border-panel">Ridge Line, Mast 4</td>
+<td class="p-2 border-r border-panel">Optical</td>
+<td class="p-2 border-r border-panel text-right">30.0</td>
+<td class="p-2 border-r border-panel text-right">55ms</td>
+<td class="p-2 border-r border-panel text-right">99.7%</td>
+<td class="p-2 border-r border-panel text-on-surface-variant">02:14:55.050</td>
+<td class="p-2 text-center">
+<button class="material-symbols-outlined text-primary hover:text-white" style="font-size: 18px;">visibility</button>
+</td>
+</tr>
+<!-- Row 6: Online -->
+<tr class="border-b border-panel transition-colors hover:bg-surface-bright cursor-pointer duration-300">
+<td class="p-2 border-r border-panel">
+<div class="status-online border px-1 py-0.5 text-[10px] text-center inline-block w-full uppercase">Online</div>
+</td>
+<td class="p-2 border-r border-panel text-primary">CAM-E11</td>
+<td class="p-2 border-r border-panel">Sector 1, River xing</td>
+<td class="p-2 border-r border-panel">Thermal</td>
+<td class="p-2 border-r border-panel text-right">29.9</td>
+<td class="p-2 border-r border-panel text-right">62ms</td>
+<td class="p-2 border-r border-panel text-right">99.5%</td>
+<td class="p-2 border-r border-panel text-on-surface-variant">02:14:55.100</td>
+<td class="p-2 text-center">
+<button class="material-symbols-outlined text-primary hover:text-white" style="font-size: 18px;">visibility</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 right-0 left-64 flex items-center px-gutter z-20 h-8 border-t border-panel bg-[#0e0e0f] text-tertiary font-data-mono text-data-mono">
+<div class="flex-1 overflow-hidden relative">
+<div class="whitespace-nowrap animate-marquee flex items-center gap-8">
+<span class="">System Status: Nominal | Recent Events Ticker</span>
+<span class="text-on-surface-variant">LOG-0992: Handshake OK</span>
+<span class="text-on-surface-variant">LOG-0993: Sector 4 Ping (45ms)</span>
+<span class="text-[#F28B82]">ALERT: CAM-C04 Heartbeat Lost</span>
+<span class="text-on-surface-variant">SYS: Diagnostic sweep complete.</span>
+</div>
+</div>
+<div class="flex gap-4 pl-4 border-l border-panel text-on-surface-variant text-[11px] font-label-xs uppercase">
+<a class="hover:text-tertiary-fixed transition-colors" href="#">Event Log</a>
+<a class="hover:text-tertiary-fixed transition-colors" href="#">System Health</a>
+<a class="hover:text-tertiary-fixed transition-colors" href="#">Audit Trail</a>
+</div>
+</footer>
+
+
+</body></html>

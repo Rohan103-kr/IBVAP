@@ -1,0 +1,19 @@
+{
+  "weights": {
+    "fence_crossed": 30,
+    "restricted_zone": 25,
+    "night_time": 20,
+    "toward_border": 15,
+    "loitering": 10,
+    "multi_camera": 15,
+    "confidence_factor": 10
+  },
+  "severity_thresholds": {
+    "INFO": [0, 30],
+    "WARNING": [31, 60],
+    "HIGH": [61, 80],
+    "CRITICAL": [81, 100]
+  },
+  "persistence_min_frames": 3,
+  "incident_timeout_sec": 45.0
+}

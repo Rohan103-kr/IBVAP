@@ -1,0 +1,30 @@
+[
+  {
+    "incident_id": "EVT-1788587382-2a3d5f",
+    "feedback_type": "DISMISS",
+    "operator_notes": "DISMISS INCIDENT",
+    "operator_id": "Op-Cmd-01",
+    "timestamp": "2026-09-05T05:50:53Z"
+  },
+  {
+    "incident_id": "EVT-1788436311-2d14aa",
+    "feedback_type": "DISMISS",
+    "operator_notes": "DISMISS INCIDENT",
+    "operator_id": "Op-Cmd-01",
+    "timestamp": "2026-09-03T11:52:00Z"
+  },
+  {
+    "incident_id": "EVT-1788436056-d30311",
+    "feedback_type": "DISMISS",
+    "operator_notes": "DISMISS INCIDENT",
+    "operator_id": "Op-Cmd-01",
+    "timestamp": "2026-09-03T11:47:49Z"
+  },
+  {
+    "incident_id": "INC-1788019457-445154",
+    "feedback_type": "VALID_INCIDENT",
+    "operator_notes": "Patrol team dispatched to North Gate",
+    "operator_id": "Op-Alpha",
+    "timestamp": "2026-08-29T16:14:03Z"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "camera_id": "CAM-01",
+    "name": "Mobile Watchtower CAM-01",
+    "location": "Sector Alpha",
+    "stream_url": "http://192.0.0.4:8080/video",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-02",
+    "name": "Mobile Watchtower CAM-02",
+    "location": "Sector Alpha",
+    "stream_url": "https://10.194.120.46:8080/video",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "camera_id": "CAM-03",
+    "name": "West Perimeter Electric Fence",
+    "location": "Sector 3, West Fence Ridge",
+    "stream_url": "demo/videos/electric_fence_intrusion.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-04",
+    "name": "Night Vision CCTV Surveillance",
+    "location": "Sector 2, Night Thermal Post",
+    "stream_url": "demo/videos/night_cctv_surveillance.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-05",
+    "name": "Border Sector Crowd Tensions",
+    "location": "Sector 1, Outpost Delta",
+    "stream_url": "demo/videos/border_breach_crowd.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  {
+    "camera_id": "CAM-06",
+    "name": "Pedestrian Corridor Walkway",
+    "location": "Sector 1, Pathway Echo",
+    "stream_url": "demo/videos/people_walking_corridor.mp4",
+    "status": "ONLINE",
+    "target_fps": 15,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    }
+  }
+]

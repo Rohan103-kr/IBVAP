@@ -1,0 +1,297 @@
+{
+  "CAM-01": {
+    "zones": [
+      {
+        "zone_id": "RESTRICTED-01",
+        "name": "Restricted Area Alpha",
+        "type": "RESTRICTED",
+        "polygon": [
+          [100, 300],
+          [500, 300],
+          [500, 600],
+          [100, 600]
+        ],
+        "color": [0, 0, 220]
+      }
+    ],
+    "fences": [
+      {
+        "fence_id": "FENCE-01",
+        "name": "Perimeter Fence Alpha",
+        "line": [
+          [100, 350],
+          [500, 350]
+        ],
+        "color": [0, 140, 255]
+      }
+    ]
+  },
+  "CAM-02": {
+    "zones": [],
+    "fences": []
+  },
+  "CAM-03": {
+    "zones": [
+      {
+        "zone_id": "RESTRICTED-4852",
+        "name": "Restricted Area 1",
+        "type": "RESTRICTED",
+        "polygon": [
+          [
+            600,
+            98
+          ],
+          [
+            1073,
+            227
+          ],
+          [
+            1176,
+            48
+          ]
+        ],
+        "color": [
+          0,
+          0,
+          220
+        ]
+      },
+      {
+        "zone_id": "RESTRICTED-3636",
+        "name": "Restricted Area 2",
+        "type": "RESTRICTED",
+        "polygon": [
+          [
+            599,
+            263
+          ],
+          [
+            1124,
+            139
+          ],
+          [
+            928,
+            393
+          ]
+        ],
+        "color": [
+          0,
+          0,
+          220
+        ]
+      },
+      {
+        "zone_id": "WATCH-3620",
+        "name": "Watch Area 3",
+        "type": "WATCH",
+        "polygon": [
+          [
+            575,
+            286
+          ],
+          [
+            25,
+            406
+          ],
+          [
+            92,
+            719
+          ],
+          [
+            692,
+            493
+          ],
+          [
+            744,
+            343
+          ],
+          [
+            827,
+            379
+          ],
+          [
+            699,
+            493
+          ],
+          [
+            595,
+            298
+          ],
+          [
+            741,
+            340
+          ],
+          [
+            755,
+            347
+          ],
+          [
+            681,
+            369
+          ],
+          [
+            698,
+            482
+          ]
+        ],
+        "color": [
+          0,
+          220,
+          220
+        ]
+      },
+      {
+        "zone_id": "WATCH-0869",
+        "name": "Watch Area 4",
+        "type": "WATCH",
+        "polygon": [
+          [
+            685,
+            373
+          ],
+          [
+            739,
+            355
+          ],
+          [
+            694,
+            452
+          ]
+        ],
+        "color": [
+          0,
+          220,
+          220
+        ]
+      }
+    ],
+    "fences": [
+      {
+        "fence_id": "FENCE-3819",
+        "name": "Fence Line 1",
+        "line": [
+          [
+            629,
+            147
+          ],
+          [
+            919,
+            362
+          ]
+        ],
+        "color": [
+          0,
+          140,
+          255
+        ]
+      },
+      {
+        "fence_id": "FENCE-9754",
+        "name": "Fence Line 2",
+        "line": [
+          [
+            622,
+            294
+          ],
+          [
+            944,
+            193
+          ]
+        ],
+        "color": [
+          0,
+          140,
+          255
+        ]
+      },
+      {
+        "fence_id": "FENCE-4504",
+        "name": "Fence Line 3",
+        "line": [
+          [
+            636,
+            136
+          ],
+          [
+            920,
+            184
+          ]
+        ],
+        "color": [
+          0,
+          140,
+          255
+        ]
+      },
+      {
+        "fence_id": "FENCE-8852",
+        "name": "Fence Line 4",
+        "line": [
+          [
+            638,
+            296
+          ],
+          [
+            908,
+            369
+          ]
+        ],
+        "color": [
+          0,
+          140,
+          255
+        ]
+      },
+      {
+        "fence_id": "FENCE-5754",
+        "name": "Fence Line 5",
+        "line": [
+          [
+            953,
+            197
+          ],
+          [
+            933,
+            364
+          ]
+        ],
+        "color": [
+          0,
+          140,
+          255
+        ]
+      },
+      {
+        "fence_id": "FENCE-2319",
+        "name": "Fence Line 6",
+        "line": [
+          [
+            629,
+            156
+          ],
+          [
+            615,
+            278
+          ]
+        ],
+        "color": [
+          0,
+          140,
+          255
+        ]
+      }
+    ]
+  },
+  "CAM-04": {
+    "zones": [],
+    "fences": []
+  },
+  "CAM-05": {
+    "zones": [],
+    "fences": []
+  },
+  "CAM-06": {
+    "zones": [],
+    "fences": []
+  }
+}
