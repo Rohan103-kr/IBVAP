@@ -1,0 +1,17 @@
+.git
+.github
+node_modules
+frontend/node_modules
+frontend/dist
+scratch
+*.pyc
+__pycache__
+.pytest_cache
+.coverage
+*.log
+*.tmp*
+data/*.db
+data/snapshots
+demo/snapshots
+demo/videos/VID*
+demo/videos/YTDown*
