@@ -1,5 +1,665 @@
 [
   {
+    "correlation_id": "CORR-1792773099-db744c",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 8,
+        "timestamp": "2026-10-23T16:31:39Z",
+        "timestamp_ts": 1792773099.678653,
+        "risk_score": 82,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:39Z",
+    "last_seen": "2026-10-23T16:31:39Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773098-73faec",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 8,
+        "timestamp": "2026-10-23T16:31:38Z",
+        "timestamp_ts": 1792773098.7803378,
+        "risk_score": 83,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:38Z",
+    "last_seen": "2026-10-23T16:31:38Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773097-3ee2bb",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 8,
+        "timestamp": "2026-10-23T16:31:37Z",
+        "timestamp_ts": 1792773097.271734,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:37Z",
+    "last_seen": "2026-10-23T16:31:37Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773096-fbb2a8",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 8,
+        "timestamp": "2026-10-23T16:31:36Z",
+        "timestamp_ts": 1792773096.795291,
+        "risk_score": 83,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:36Z",
+    "last_seen": "2026-10-23T16:31:36Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773096-c2ca94",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 8,
+        "timestamp": "2026-10-23T16:31:36Z",
+        "timestamp_ts": 1792773096.294126,
+        "risk_score": 82,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:36Z",
+    "last_seen": "2026-10-23T16:31:36Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773095-a4d90f",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:35Z",
+        "timestamp_ts": 1792773095.362602,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:35Z",
+    "last_seen": "2026-10-23T16:31:35Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773095-fd080a",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:35Z",
+        "timestamp_ts": 1792773095.180665,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:35Z",
+    "last_seen": "2026-10-23T16:31:35Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773093-9a66d2",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:33Z",
+        "timestamp_ts": 1792773093.206379,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:33Z",
+    "last_seen": "2026-10-23T16:31:33Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773093-c3ebe4",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:33Z",
+        "timestamp_ts": 1792773093.032906,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:33Z",
+    "last_seen": "2026-10-23T16:31:33Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773092-d428df",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:32Z",
+        "timestamp_ts": 1792773092.6226702,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:32Z",
+    "last_seen": "2026-10-23T16:31:32Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773092-19189e",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:32Z",
+        "timestamp_ts": 1792773092.457171,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:32Z",
+    "last_seen": "2026-10-23T16:31:32Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773092-5b139f",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:32Z",
+        "timestamp_ts": 1792773092.211493,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:32Z",
+    "last_seen": "2026-10-23T16:31:32Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773092-5a6d1f",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:32Z",
+        "timestamp_ts": 1792773092.0412102,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:32Z",
+    "last_seen": "2026-10-23T16:31:32Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773091-0414e5",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:31Z",
+        "timestamp_ts": 1792773091.644962,
+        "risk_score": 100,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:31Z",
+    "last_seen": "2026-10-23T16:31:31Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773090-724919",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 3,
+        "timestamp": "2026-10-23T16:31:30Z",
+        "timestamp_ts": 1792773090.978652,
+        "risk_score": 84,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:30Z",
+    "last_seen": "2026-10-23T16:31:30Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773090-85030d",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:30Z",
+        "timestamp_ts": 1792773090.8127308,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:30Z",
+    "last_seen": "2026-10-23T16:31:30Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773090-f5657c",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 3,
+        "timestamp": "2026-10-23T16:31:30Z",
+        "timestamp_ts": 1792773090.6083531,
+        "risk_score": 84,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:30Z",
+    "last_seen": "2026-10-23T16:31:30Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773090-28c56b",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 3,
+        "timestamp": "2026-10-23T16:31:30Z",
+        "timestamp_ts": 1792773090.437118,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:30Z",
+    "last_seen": "2026-10-23T16:31:30Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773089-c7c278",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:29Z",
+        "timestamp_ts": 1792773089.221539,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:29Z",
+    "last_seen": "2026-10-23T16:31:29Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773089-004678",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:29Z",
+        "timestamp_ts": 1792773089.042181,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:29Z",
+    "last_seen": "2026-10-23T16:31:29Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773088-4b2e32",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:28Z",
+        "timestamp_ts": 1792773088.879852,
+        "risk_score": 0,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:28Z",
+    "last_seen": "2026-10-23T16:31:28Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
+    "correlation_id": "CORR-1792773088-342ecf",
+    "object_type": "person",
+    "camera_chain": [
+      "CAM-01"
+    ],
+    "time_deltas": [
+      0.0
+    ],
+    "total_cameras": 1,
+    "linked_anpr_plate": null,
+    "route": [
+      {
+        "camera_id": "CAM-01",
+        "track_id": 2,
+        "timestamp": "2026-10-23T16:31:28Z",
+        "timestamp_ts": 1792773088.739926,
+        "risk_score": 82,
+        "time_delta_sec": 0.0
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:28Z",
+    "last_seen": "2026-10-23T16:31:28Z",
+    "summary": "Cross-camera movement initiated on CAM-01",
+    "spatial_fence_status": "MONITORED_APPROACH",
+    "spatial_alert_level": "NORMAL",
+    "tactical_assessment": "Target tracked in outer approach corridor.",
+    "spatial_breach_depth": 1,
+    "spatial_chain": "CAM-01 [APPROACH]"
+  },
+  {
     "correlation_id": "CORR-1792771703-25998e",
     "object_type": "person",
     "camera_chain": [
@@ -3642,666 +4302,6 @@
     ],
     "first_seen": "2026-09-11T10:30:21Z",
     "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-b8ebab",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.538917,
-        "risk_score": 76,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-e88256",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.513809,
-        "risk_score": 100,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-bd6041",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.471693,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-697496",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.4314828,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-c01e29",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.3886561,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-88bd18",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.3687701,
-        "risk_score": 100,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-d8420c",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.312347,
-        "risk_score": 77,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-cfaa41",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.274668,
-        "risk_score": 77,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-3ca411",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.245054,
-        "risk_score": 77,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122621-832e2b",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:21Z",
-        "timestamp_ts": 1789122621.216295,
-        "risk_score": 100,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:21Z",
-    "last_seen": "2026-09-11T10:30:21Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-81ba78",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.5710452,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-811342",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.527136,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-4676a5",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.487351,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-69fe11",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.471461,
-        "risk_score": 100,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-56ce03",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.414003,
-        "risk_score": 77,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-349298",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.3790169,
-        "risk_score": 77,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-5ff12d",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.350105,
-        "risk_score": 77,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-b685e4",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.318623,
-        "risk_score": 100,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-01337b",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.270238,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-397f52",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.238366,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-781d2e",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.194528,
-        "risk_score": 75,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
-    "summary": "Cross-camera movement initiated on CAM-01",
-    "spatial_fence_status": "MONITORED_APPROACH",
-    "spatial_alert_level": "NORMAL",
-    "tactical_assessment": "Target tracked in outer approach corridor.",
-    "spatial_breach_depth": 1,
-    "spatial_chain": "CAM-01 [APPROACH]"
-  },
-  {
-    "correlation_id": "CORR-1789122620-c21407",
-    "object_type": "vehicle",
-    "camera_chain": [
-      "CAM-01"
-    ],
-    "time_deltas": [
-      0.0
-    ],
-    "total_cameras": 1,
-    "linked_anpr_plate": null,
-    "route": [
-      {
-        "camera_id": "CAM-01",
-        "track_id": 10,
-        "timestamp": "2026-09-11T10:30:20Z",
-        "timestamp_ts": 1789122620.17226,
-        "risk_score": 100,
-        "time_delta_sec": 0.0
-      }
-    ],
-    "first_seen": "2026-09-11T10:30:20Z",
-    "last_seen": "2026-09-11T10:30:20Z",
     "summary": "Cross-camera movement initiated on CAM-01",
     "spatial_fence_status": "MONITORED_APPROACH",
     "spatial_alert_level": "NORMAL",

@@ -1,0 +1,24 @@
+{
+  "head_hash": "fada6d6e082627b666e70afb8f217b26edf69a0018b6ab337d3ff1599cd183ad",
+  "total_events": 2,
+  "chain_history": [
+    {
+      "event_id": "EVT-1792773088-40ad7f",
+      "chain_index": 1,
+      "filename": "EVT-1792773088-40ad7f_snapshot.jpg",
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "sha256_hash": "00e88b4bb1b7868b55f23210354a656c8a7c58bfb4fd18a2d23c4af181cb3b21",
+      "tamper_proof": true,
+      "timestamp": "2026-10-23T16:31:28Z"
+    },
+    {
+      "event_id": "EVT-1792773099-a358d1",
+      "chain_index": 2,
+      "filename": "EVT-1792773099-a358d1_snapshot.jpg",
+      "prev_hash": "00e88b4bb1b7868b55f23210354a656c8a7c58bfb4fd18a2d23c4af181cb3b21",
+      "sha256_hash": "fada6d6e082627b666e70afb8f217b26edf69a0018b6ab337d3ff1599cd183ad",
+      "tamper_proof": true,
+      "timestamp": "2026-10-23T16:31:39Z"
+    }
+  ]
+}

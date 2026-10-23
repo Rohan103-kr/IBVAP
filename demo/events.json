@@ -1,57 +1,40 @@
 [
   {
-    "event_id": "EVT-1792771703-e98e41",
-    "event_type": "FENCE_CROSSING",
-    "severity": "CRITICAL",
-    "risk_score": 95,
-    "camera_id": "CAM-TEST",
-    "track_id": 502,
-    "object_type": "person",
-    "timestamp": "2026-10-23T16:08:23Z",
-    "reasons": [
-      "test"
-    ],
-    "zone_id": null,
-    "fence_id": null,
-    "snapshot": "EVT-1792771703-e98e41_snapshot.jpg",
-    "is_escalation": false,
-    "acknowledged": false
-  },
-  {
-    "event_id": "EVT-1792771703-04bffe",
+    "event_id": "EVT-1792773099-a358d1",
     "event_type": "ZONE_ENTRY",
     "severity": "HIGH",
     "risk_score": 80,
-    "camera_id": "CAM-TEST",
-    "track_id": 501,
+    "camera_id": "CAM-01",
+    "track_id": 14,
     "object_type": "person",
-    "timestamp": "2026-10-23T16:08:23Z",
+    "timestamp": "2026-10-23T16:31:39Z",
     "reasons": [
-      "test"
+      "Unauthorized entry into restricted buffer 'Restricted-Zone-CAM-01'",
+      "Target type: PERSON"
     ],
-    "zone_id": null,
+    "zone_id": "zone-1788891702409",
     "fence_id": null,
-    "snapshot": "EVT-1792771703-04bffe_snapshot.jpg",
+    "snapshot": "EVT-1792773099-a358d1_snapshot.jpg",
     "is_escalation": false,
     "acknowledged": false
   },
   {
-    "event_id": "EVT-1789122627-753df2",
-    "event_type": "ZONE_ENTRY",
-    "severity": "HIGH",
+    "event_id": "EVT-1792773088-40ad7f",
+    "event_type": "VIOLENT_SKIRMISH",
+    "severity": "CRITICAL",
     "risk_score": 100,
     "camera_id": "CAM-01",
-    "track_id": 1,
-    "object_type": "vehicle",
-    "timestamp": "2026-09-11T10:30:27Z",
+    "track_id": 2,
+    "object_type": "person",
+    "timestamp": "2026-10-23T16:31:28Z",
     "reasons": [
-      "Unauthorized entry into restricted buffer 'Restricted-Zone-CAM-01'",
-      "Target type: VEHICLE"
+      "Physical altercation / skirmish detected in surveillance sector"
     ],
-    "zone_id": "zone-1788891702409",
+    "zone_id": null,
     "fence_id": null,
-    "snapshot": "EVT-1789122627-753df2_snapshot.jpg",
+    "snapshot": "EVT-1792773088-40ad7f_snapshot.jpg",
     "is_escalation": false,
-    "acknowledged": false
+    "acknowledged": true,
+    "acknowledged_at": "2026-10-23T16:31:38Z"
   }
 ]

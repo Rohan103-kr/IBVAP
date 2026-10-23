@@ -1,5 +1,12 @@
 [
   {
+    "incident_id": "EVT-1792773088-40ad7f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-10-23T16:31:38Z"
+  },
+  {
     "incident_id": "EVT-1789122516-50947d",
     "feedback_type": "ACKNOWLEDGED",
     "operator_notes": "Operator acknowledged via UI",

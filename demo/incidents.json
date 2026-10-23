@@ -1,1606 +1,269 @@
 [
   {
-    "incident_id": "INC-1792771703-1b507c",
+    "incident_id": "INC-1792773096-09d8a1",
     "camera_id": "CAM-01",
-    "track_id": 99,
+    "track_id": 8,
     "object_type": "person",
-    "primary_event_type": "FENCE_CROSSING",
+    "primary_event_type": "VIOLENT_SKIRMISH",
     "highest_severity": "CRITICAL",
-    "max_risk_score": 92,
-    "explanation": "CRITICAL Incident: Person entering restricted zone and breaching border perimeter line.",
-    "ai_summary": "CRITICAL Incident (92/100) on CAM-01 involving Unrecognized person (Track #99). Primary indicators: Primary border fence line crossed + Unauthorized presence in restricted zone + Night-time low visibility.",
-    "sop_recommendation": "Deploy Quick Reaction Force (QRF) to boundary perimeter, sound border horn, illuminate sector spotlights.",
+    "max_risk_score": 83,
+    "explanation": "CRITICAL risk event (Score: 82/100) triggered by: Violent skirmish / physical fight detected between Track #8 & #9 (Kinetic Flux: 117.7 mF, IoU: 0.09) + AI Behavior Model detected CRITICAL pattern (92.0% confidence)",
+    "ai_summary": "CRITICAL Incident (83/100) on CAM-01 involving Unrecognized person (Track #8). Primary indicators: Violent skirmish / physical fight detected between Track #8 & #9 (Kinetic Flux: 117.7 mF, IoU: 0.09) + AI Behavior Model detected CRITICAL pattern (92.0% confidence) + Violent skirmish / physical fight detected between Track #8 & #10 (Kinetic Flux: 120.5 mF, IoU: 0.00) + Low confidence detection noise (< 0.45) \u2014 Suppressed + Violent skirmish / physical fight detected between Track #8 & #12 (Kinetic Flux: 127.0 mF, IoU: 0.25) + Violent skirmish / physical fight detected between Track #8 & #13 (Kinetic Flux: 127.7 mF, IoU: 0.14).",
+    "sop_recommendation": "Maintain visual tracking and log target telemetry in station duty register.",
     "reasons": [
-      "Primary border fence line crossed (+30)",
-      "Unauthorized presence in restricted zone (+25)",
-      "Night-time low visibility (+20)"
+      "Violent skirmish / physical fight detected between Track #8 & #9 (Kinetic Flux: 117.7 mF, IoU: 0.09)",
+      "AI Behavior Model detected CRITICAL pattern (92.0% confidence) (+18)",
+      "Violent skirmish / physical fight detected between Track #8 & #10 (Kinetic Flux: 120.5 mF, IoU: 0.00)",
+      "Low confidence detection noise (< 0.45) \u2014 Suppressed",
+      "Violent skirmish / physical fight detected between Track #8 & #12 (Kinetic Flux: 127.0 mF, IoU: 0.25)",
+      "Violent skirmish / physical fight detected between Track #8 & #13 (Kinetic Flux: 127.7 mF, IoU: 0.14)"
     ],
     "point_breakdown": {
-      "Primary border fence line crossed": 30,
-      "Unauthorized presence in restricted zone": 25,
-      "Night-time low visibility": 20
+      "Physical Altercation": 60,
+      "Detection Confidence": 5,
+      "ML Behavioral Anomaly": 18,
+      "Low Confidence Noise": 0
     },
     "identity_status": "UNRECOGNIZED",
     "snapshots": [],
     "timeline": [
       {
-        "timestamp": "2026-10-23T16:08:23Z",
-        "event_type": "FENCE_CROSSING",
+        "timestamp": "2026-10-23T16:31:36Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
-        "risk_score": 92,
-        "description": "Incident initiated: CRITICAL Incident: Person entering restricted zone and breaching border perimeter line."
+        "risk_score": 82,
+        "description": "Incident initiated: CRITICAL risk event (Score: 82/100) triggered by: Violent skirmish / physical fight detected between Track #8 & #9 (Kinetic Flux: 117.7 mF, IoU: 0.09) + AI Behavior Model detected CRITICAL pattern (92.0% confidence)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:36Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 83,
+        "description": "Track #8 triggered VIOLENT_SKIRMISH (Risk Score: 83)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:37Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 0,
+        "description": "Track #8 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:38Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 83,
+        "description": "Track #8 triggered VIOLENT_SKIRMISH (Risk Score: 83)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:39Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 82,
+        "description": "Track #8 triggered VIOLENT_SKIRMISH (Risk Score: 82)"
       }
     ],
-    "first_seen": "2026-10-23T16:08:23Z",
-    "last_seen": "2026-10-23T16:08:23Z",
+    "first_seen": "2026-10-23T16:31:36Z",
+    "last_seen": "2026-10-23T16:31:39Z",
     "status": "ESCALATED",
     "operator_notes": ""
   },
   {
-    "incident_id": "INC-1789122627-2d04d6",
+    "incident_id": "INC-1792773090-c5dc85",
     "camera_id": "CAM-01",
-    "track_id": 1,
-    "object_type": "vehicle",
-    "primary_event_type": "ZONE_ENTRY",
+    "track_id": 3,
+    "object_type": "person",
+    "primary_event_type": "VIOLENT_SKIRMISH",
     "highest_severity": "CRITICAL",
-    "max_risk_score": 100,
-    "explanation": "CRITICAL risk event (Score: 100/100) triggered by: High-energy kinetic motion / disturbance detected + Unauthorized intrusion in restricted zone + Unrecognized person in restricted zone",
-    "ai_summary": "CRITICAL Incident (100/100) on CAM-01 involving Cleared vehicle (Track #1). Primary indicators: High-energy kinetic motion / disturbance detected + Unauthorized intrusion in restricted zone + Unrecognized person in restricted zone + Trajectory heading toward sensitive perimeter + Low confidence detection noise (< 0.45) \u2014 Suppressed + Persistent loitering dwell time (5.0s) + Persistent loitering dwell time (5.1s) + Persistent loitering dwell time (5.2s) + Persistent loitering dwell time (5.3s) + Persistent loitering dwell time (5.4s) + Persistent loitering dwell time (5.5s) + Persistent loitering dwell time (5.6s) + Persistent loitering dwell time (5.8s) + Persistent loitering dwell time (5.9s) + Persistent loitering dwell time (6.0s) + Persistent loitering dwell time (6.1s) + Persistent loitering dwell time (6.2s) + Persistent loitering dwell time (6.4s) + Persistent loitering dwell time (6.5s) + Persistent loitering dwell time (6.6s) + Persistent loitering dwell time (6.7s) + Persistent loitering dwell time (6.9s) + Persistent loitering dwell time (7.0s) + Persistent loitering dwell time (7.2s) + Persistent loitering dwell time (7.3s) + Persistent loitering dwell time (7.4s) + Persistent loitering dwell time (7.5s) + Persistent loitering dwell time (7.7s) + Persistent loitering dwell time (7.8s) + Persistent loitering dwell time (7.9s) + Persistent loitering dwell time (8.0s) + Persistent loitering dwell time (8.1s) + Persistent loitering dwell time (8.2s) + Persistent loitering dwell time (8.3s) + Persistent loitering dwell time (8.4s) + Persistent loitering dwell time (8.5s) + Persistent loitering dwell time (8.6s) + Persistent loitering dwell time (8.7s) + Persistent loitering dwell time (8.8s) + Persistent loitering dwell time (8.9s) + Persistent loitering dwell time (9.0s) + Persistent loitering dwell time (9.1s) + Persistent loitering dwell time (9.2s) + Persistent loitering dwell time (9.3s) + Persistent loitering dwell time (9.4s) + Persistent loitering dwell time (9.5s) + Persistent loitering dwell time (9.6s) + Persistent loitering dwell time (9.7s) + Persistent loitering dwell time (9.8s) + Persistent loitering dwell time (9.9s) + Persistent loitering dwell time (10.0s).",
-    "sop_recommendation": "Alert sentry bunker, dispatch tactical intercept team to restricted quadrant.",
+    "max_risk_score": 84,
+    "explanation": "CRITICAL risk event (Score: 84/100) triggered by: Violent skirmish / physical fight detected between Track #3 & #5 (Kinetic Flux: 112.7 mF, IoU: 0.00) + AI Behavior Model detected CRITICAL pattern (92.0% confidence)",
+    "ai_summary": "CRITICAL Incident (84/100) on CAM-01 involving Unrecognized person (Track #3). Primary indicators: Low confidence detection noise (< 0.45) \u2014 Suppressed + Violent skirmish / physical fight detected between Track #3 & #5 (Kinetic Flux: 112.7 mF, IoU: 0.00) + AI Behavior Model detected CRITICAL pattern (92.0% confidence) + Violent skirmish / physical fight detected between Track #3 & #5 (Kinetic Flux: 109.1 mF, IoU: 0.00).",
+    "sop_recommendation": "Maintain visual tracking and log target telemetry in station duty register.",
     "reasons": [
-      "High-energy kinetic motion / disturbance detected (+40)",
-      "Unauthorized intrusion in restricted zone (+55)",
-      "Unrecognized person in restricted zone (+15)",
-      "Trajectory heading toward sensitive perimeter (+15)",
       "Low confidence detection noise (< 0.45) \u2014 Suppressed",
-      "Persistent loitering dwell time (5.0s) (+25)",
-      "Persistent loitering dwell time (5.1s) (+25)",
-      "Persistent loitering dwell time (5.2s) (+25)",
-      "Persistent loitering dwell time (5.3s) (+25)",
-      "Persistent loitering dwell time (5.4s) (+25)",
-      "Persistent loitering dwell time (5.5s) (+25)",
-      "Persistent loitering dwell time (5.6s) (+25)",
-      "Persistent loitering dwell time (5.8s) (+25)",
-      "Persistent loitering dwell time (5.9s) (+25)",
-      "Persistent loitering dwell time (6.0s) (+25)",
-      "Persistent loitering dwell time (6.1s) (+25)",
-      "Persistent loitering dwell time (6.2s) (+25)",
-      "Persistent loitering dwell time (6.4s) (+25)",
-      "Persistent loitering dwell time (6.5s) (+25)",
-      "Persistent loitering dwell time (6.6s) (+25)",
-      "Persistent loitering dwell time (6.7s) (+25)",
-      "Persistent loitering dwell time (6.9s) (+25)",
-      "Persistent loitering dwell time (7.0s) (+25)",
-      "Persistent loitering dwell time (7.2s) (+25)",
-      "Persistent loitering dwell time (7.3s) (+25)",
-      "Persistent loitering dwell time (7.4s) (+25)",
-      "Persistent loitering dwell time (7.5s) (+25)",
-      "Persistent loitering dwell time (7.7s) (+25)",
-      "Persistent loitering dwell time (7.8s) (+25)",
-      "Persistent loitering dwell time (7.9s) (+25)",
-      "Persistent loitering dwell time (8.0s) (+25)",
-      "Persistent loitering dwell time (8.1s) (+25)",
-      "Persistent loitering dwell time (8.2s) (+25)",
-      "Persistent loitering dwell time (8.3s) (+25)",
-      "Persistent loitering dwell time (8.4s) (+25)",
-      "Persistent loitering dwell time (8.5s) (+25)",
-      "Persistent loitering dwell time (8.6s) (+25)",
-      "Persistent loitering dwell time (8.7s) (+25)",
-      "Persistent loitering dwell time (8.8s) (+25)",
-      "Persistent loitering dwell time (8.9s) (+25)",
-      "Persistent loitering dwell time (9.0s) (+25)",
-      "Persistent loitering dwell time (9.1s) (+25)",
-      "Persistent loitering dwell time (9.2s) (+25)",
-      "Persistent loitering dwell time (9.3s) (+25)",
-      "Persistent loitering dwell time (9.4s) (+25)",
-      "Persistent loitering dwell time (9.5s) (+25)",
-      "Persistent loitering dwell time (9.6s) (+25)",
-      "Persistent loitering dwell time (9.7s) (+25)",
-      "Persistent loitering dwell time (9.8s) (+25)",
-      "Persistent loitering dwell time (9.9s) (+25)",
-      "Persistent loitering dwell time (10.0s) (+25)"
+      "Violent skirmish / physical fight detected between Track #3 & #5 (Kinetic Flux: 112.7 mF, IoU: 0.00)",
+      "AI Behavior Model detected CRITICAL pattern (92.0% confidence) (+18)",
+      "Violent skirmish / physical fight detected between Track #3 & #5 (Kinetic Flux: 109.1 mF, IoU: 0.00)"
     ],
     "point_breakdown": {
-      "High Kinetic Anomaly": 40,
-      "Restricted Zone": 55,
-      "Detection Confidence": 7,
-      "Unrecognized Identity": 15,
-      "Direction Toward Border": 15,
+      "Low Confidence Noise": 0,
+      "Physical Altercation": 60,
+      "Detection Confidence": 6,
+      "ML Behavioral Anomaly": 18
+    },
+    "identity_status": "UNRECOGNIZED",
+    "snapshots": [],
+    "timeline": [
+      {
+        "timestamp": "2026-10-23T16:31:30Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 0,
+        "description": "Incident initiated: INFO: Low confidence noise suppressed"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:30Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 84,
+        "description": "Track #3 triggered VIOLENT_SKIRMISH (Risk Score: 84)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:30Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 84,
+        "description": "Track #3 triggered VIOLENT_SKIRMISH (Risk Score: 84)"
+      }
+    ],
+    "first_seen": "2026-10-23T16:31:30Z",
+    "last_seen": "2026-10-23T16:31:30Z",
+    "status": "ESCALATED",
+    "operator_notes": ""
+  },
+  {
+    "incident_id": "INC-1792773088-ed9096",
+    "camera_id": "CAM-01",
+    "track_id": 2,
+    "object_type": "person",
+    "primary_event_type": "VIOLENT_SKIRMISH",
+    "highest_severity": "CRITICAL",
+    "max_risk_score": 100,
+    "explanation": "CRITICAL risk event (Score: 82/100) triggered by: Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 126.5 mF, IoU: 0.13) + AI Behavior Model detected CRITICAL pattern (92.0% confidence)",
+    "ai_summary": "CRITICAL Incident (100/100) on CAM-01 involving Unrecognized person (Track #2). Primary indicators: Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 126.5 mF, IoU: 0.13) + AI Behavior Model detected CRITICAL pattern (92.0% confidence) + Low confidence detection noise (< 0.45) \u2014 Suppressed + Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 113.5 mF, IoU: 0.00) + Persistent loitering dwell time (6.9s) + Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 118.2 mF, IoU: 0.00) + Persistent loitering dwell time (7.3s) + Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 119.2 mF, IoU: 0.00) + Persistent loitering dwell time (7.6s) + Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 117.6 mF, IoU: 0.01) + Persistent loitering dwell time (7.8s) + Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 118.4 mF, IoU: 0.06) + Persistent loitering dwell time (8.2s) + Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 119.1 mF, IoU: 0.03) + Persistent loitering dwell time (8.4s) + Violent skirmish / physical fight detected between Track #2 & #8 (Kinetic Flux: 127.1 mF, IoU: 0.17) + Persistent loitering dwell time (10.4s).",
+    "sop_recommendation": "Maintain visual tracking and log target telemetry in station duty register.",
+    "reasons": [
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 126.5 mF, IoU: 0.13)",
+      "AI Behavior Model detected CRITICAL pattern (92.0% confidence) (+18)",
+      "Low confidence detection noise (< 0.45) \u2014 Suppressed",
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 113.5 mF, IoU: 0.00)",
+      "Persistent loitering dwell time (6.9s) (+25)",
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 118.2 mF, IoU: 0.00)",
+      "Persistent loitering dwell time (7.3s) (+25)",
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 119.2 mF, IoU: 0.00)",
+      "Persistent loitering dwell time (7.6s) (+25)",
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 117.6 mF, IoU: 0.01)",
+      "Persistent loitering dwell time (7.8s) (+25)",
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 118.4 mF, IoU: 0.06)",
+      "Persistent loitering dwell time (8.2s) (+25)",
+      "Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 119.1 mF, IoU: 0.03)",
+      "Persistent loitering dwell time (8.4s) (+25)",
+      "Violent skirmish / physical fight detected between Track #2 & #8 (Kinetic Flux: 127.1 mF, IoU: 0.17)",
+      "Persistent loitering dwell time (10.4s) (+25)"
+    ],
+    "point_breakdown": {
+      "Physical Altercation": 60,
+      "Detection Confidence": 6,
+      "ML Behavioral Anomaly": 18,
       "Low Confidence Noise": 0,
       "Loitering": 25
     },
-    "identity_status": "CLEARED",
+    "identity_status": "UNRECOGNIZED",
     "snapshots": [
-      "EVT-1789122627-753df2_snapshot.jpg"
+      "EVT-1792773088-40ad7f_snapshot.jpg"
     ],
     "timeline": [
       {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:28Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Incident initiated: CRITICAL risk event (Score: 100/100) triggered by: High-energy kinetic motion / disturbance detected + Unauthorized intrusion in restricted zone + Unrecognized person in restricted zone"
+        "risk_score": 82,
+        "description": "Incident initiated: CRITICAL risk event (Score: 82/100) triggered by: Violent skirmish / physical fight detected between Track #2 & #3 (Kinetic Flux: 126.5 mF, IoU: 0.13) + AI Behavior Model detected CRITICAL pattern (92.0% confidence)"
       },
       {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:27Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 74,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 74)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 77,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 77)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 77,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 77)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:28Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 77,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 77)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 75,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 75)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 76,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 76)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:29Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 91,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 91)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 91,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 91)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 91,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 91)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 91,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 91)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 90,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 90)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 90,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 90)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 90,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 90)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:28Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
         "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
       },
       {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:29Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
         "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
       },
       {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:29Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
         "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
       },
       {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:30Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
         "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
       },
       {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:31Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:32Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:32Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
         "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
       },
       {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
+        "timestamp": "2026-10-23T16:31:32Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:32Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:33Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:33Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:35Z",
+        "event_type": "VIOLENT_SKIRMISH",
+        "camera_id": "CAM-01",
+        "risk_score": 100,
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 100)"
+      },
+      {
+        "timestamp": "2026-10-23T16:31:35Z",
+        "event_type": "VIOLENT_SKIRMISH",
         "camera_id": "CAM-01",
         "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 89,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 89)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 89,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 89)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 89,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 89)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:30Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:31Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:32Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 0,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 0)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:33Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:34Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 99,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 99)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
-      },
-      {
-        "timestamp": "2026-09-11T10:30:35Z",
-        "event_type": "ZONE_ENTRY",
-        "camera_id": "CAM-01",
-        "risk_score": 100,
-        "description": "Track #1 triggered ZONE_ENTRY (Risk Score: 100)"
+        "description": "Track #2 triggered VIOLENT_SKIRMISH (Risk Score: 0)"
       }
     ],
-    "first_seen": "2026-09-11T10:30:27Z",
-    "last_seen": "2026-09-11T10:30:35Z",
+    "first_seen": "2026-10-23T16:31:28Z",
+    "last_seen": "2026-10-23T16:31:35Z",
     "status": "ESCALATED",
     "operator_notes": ""
   }
