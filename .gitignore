@@ -33,13 +33,36 @@ build/
 *.swp
 *.swo
 
-# Large Project Archives & Databases
-*.zip
-*.tar.gz
-*.rar
+# Databases & Cache
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
 data/*.db
 data/*.sqlite
 data/*.sqlite3
+demo/*.db
 
-# Large generated demo video outputs
+# Snapshots & Runtime Captures
+data/snapshots/
+demo/snapshots/
+snapshots/
+
+# Temporary and Scratch Files
+scratch/
+*.tmp
+*.tmp.*
+*.tmp_*
+demo/*.tmp*
+
+# Heavy demo video recordings and download dumps
 demo/output_*.mp4
+demo/videos/VID*
+demo/videos/YTDown*
+demo/videos/uploaded_*
+demo/videos/video_generate_kro.mp4
+demo/videos/fight.mp4
+demo/videos/gun1.mp4
+demo/videos/robery1.mp4
+

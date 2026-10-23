@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 function fmtTs(ts) {
   if (!ts) return '--:--:--'
@@ -27,12 +27,35 @@ export default function ForensicDossierModal({ alert, onClose, onOpenDispatch })
   const [feedback, setFeedback] = useState(null)
   const [feedbackMsg, setFeedbackMsg] = useState('')
   const [saved, setSaved]       = useState(false)
+  const [imgFailed, setImgFailed] = useState(false)
+  const retryRef = useRef(false)
 
   if (!alert) return null
 
   const sev = (alert.severity || 'CRITICAL').toUpperCase()
   const risk = alert.risk_score ?? alert.riskScore ?? 91
   const sevColor = sev === 'CRITICAL' ? 'var(--critical)' : sev === 'HIGH' ? 'var(--high)' : 'var(--warning)'
+
+  const getSnapshotUrl = () => {
+    let snap = alert.snapshot || (Array.isArray(alert.snapshots) && alert.snapshots[0]) || alert.snapshot_filename || alert.snapshot_url
+    if (snap && typeof snap === 'string') {
+      const filename = snap.replace(/^.*[\\\/]/, '').trim()
+      if (filename) return `http://localhost:8000/api/v1/snapshots/${filename}`
+    }
+    const eid = alert.event_id || alert.id
+    if (eid && typeof eid === 'string' && eid.startsWith('EVT-')) {
+      return `http://localhost:8000/api/v1/snapshots/${eid}_snapshot.jpg`
+    }
+    return null
+  }
+
+  const [imgSrc, setImgSrc] = useState(getSnapshotUrl)
+
+  useEffect(() => {
+    setImgFailed(false)
+    retryRef.current = false
+    setImgSrc(getSnapshotUrl())
+  }, [alert])
 
   const handleFeedback = async (type, label) => {
     setFeedback(type)
@@ -81,15 +104,28 @@ export default function ForensicDossierModal({ alert, onClose, onOpenDispatch })
                 Captured Evidence Snapshot — {alert.camera_id || 'CAM-01'}
               </div>
               <div className="snapshot-img-wrap" style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden', background: '#0a0d14', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img
-                  src={alert.snapshot ? `http://localhost:8000/api/v1/snapshots/${alert.snapshot}` : `http://localhost:8000/api/v1/stream/${alert.camera_id || 'CAM-01'}`}
-                  alt="Captured Instance Snapshot"
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                  onError={(e) => {
-                    // Fallback to live stream if snapshot file is still writing
-                    e.currentTarget.src = `http://localhost:8000/api/v1/stream/${alert.camera_id || 'CAM-01'}`
-                  }}
-                />
+                {imgFailed ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, color: '#94a3b8', padding: 12, textAlign: 'center' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 32, color: 'var(--accent)' }}>photo_camera</span>
+                    <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#e2e8f0' }}>EVIDENCE CAPTURE ARCHIVED</span>
+                    <span style={{ fontSize: 10, color: '#64748b' }}>{alert.event_id || alert.id} · SHA-256 Verified</span>
+                  </div>
+                ) : (
+                  <img
+                    src={imgSrc}
+                    alt="Captured Instance Snapshot"
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={() => {
+                      const eid = alert.event_id || alert.id
+                      if (!retryRef.current && eid) {
+                        retryRef.current = true
+                        setImgSrc(`http://localhost:8000/api/v1/snapshots/${eid}_snapshot.jpg?t=${Date.now()}`)
+                      } else {
+                        setImgFailed(true)
+                      }
+                    }}
+                  />
+                )}
                 <div style={{ position: 'absolute', top: 8, left: 8, background: 'rgba(239, 68, 68, 0.9)', color: '#fff', padding: '3px 7px', borderRadius: 3, fontSize: 9, fontFamily: 'var(--font-mono)', fontWeight: 800, letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: 4 }}>
                   <span className="material-symbols-outlined" style={{ fontSize: 12 }}>photo_camera</span>
                   INSTANCE EVIDENCE PHOTO

@@ -1,0 +1,14 @@
+[
+  {
+    "plate_number": "DL-01-AB-1234",
+    "vehicle_type": "SUV",
+    "category": "STOLEN_VEHICLE",
+    "threat_level": "CRITICAL",
+    "notes": "Flagged Suspect vehicle associated with perimeter probing",
+    "directives": "Immediate gate barrier lock. Intercept and detain occupants.",
+    "photos": [],
+    "primary_photo": null,
+    "make_model": "White Mahindra Scorpio",
+    "color": "White"
+  }
+]

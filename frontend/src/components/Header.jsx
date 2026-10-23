@@ -3,7 +3,9 @@ import React, { useState, useEffect, useRef } from 'react'
 const TABS = [
   { id: 'live',      label: 'Live Feeds',      icon: 'videocam' },
   { id: 'alerts',    label: 'Alerts & Map',    icon: 'warning', showBadge: true },
+  { id: 'vehicles',  label: 'Vehicles & ANPR', icon: 'directions_car' },
   { id: 'analytics', label: 'Analytics & Intel', icon: 'bar_chart' },
+  { id: 'admin',     label: 'Admin Panel',     icon: 'admin_panel_settings' },
 ]
 
 export default function Header({
@@ -51,11 +53,16 @@ export default function Header({
       {/* Brand */}
       <div className="header-brand">
         <div className="header-brand-icon">
-          <span className="material-symbols-outlined icon-fill" style={{ fontSize: 20 }}>shield</span>
+          <span className="material-symbols-outlined icon-fill" style={{ fontSize: 18 }}>shield</span>
         </div>
-        <div>
-          <div className="header-brand-text">IBVAP — BORDER INTEL</div>
-          <div className="header-brand-sub">TACTICAL COMMAND CENTER</div>
+        <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span className="header-brand-text">IBVAP</span>
+            <span style={{ fontSize: 9, fontWeight: 800, color: 'var(--accent)', background: 'var(--accent-bg)', border: '1px solid var(--accent-bd)', padding: '1px 5px', borderRadius: 3, letterSpacing: '0.04em' }}>
+              BORDER INTEL
+            </span>
+          </div>
+          <span className="header-brand-sub">TACTICAL COMMAND</span>
         </div>
         <div className="header-live-dot" title="AI Inference Loop Active" />
       </div>
@@ -66,11 +73,11 @@ export default function Header({
           <button
             key={tab.id}
             id={`tab-${tab.id}`}
-            className={`tab-btn${activeTab === tab.id ? ' active' : ''}`}
+            className={`header-tab-btn${activeTab === tab.id ? ' active' : ''}`}
             onClick={() => onTabChange(tab.id)}
           >
-            <span className="material-symbols-outlined tab-icon">{tab.icon}</span>
-            {tab.label}
+            <span className="material-symbols-outlined tab-icon" style={{ fontSize: 16 }}>{tab.icon}</span>
+            <span>{tab.label}</span>
             {tab.showBadge && criticalCount > 0 && (
               <span className="tab-badge">{criticalCount}</span>
             )}
@@ -92,10 +99,10 @@ export default function Header({
             className={`icon-btn${toolsOpen ? ' active-accent' : ''}`}
             onClick={() => setToolsOpen(!toolsOpen)}
             title="System Tools & Demo Scenarios"
-            style={{ width: 'auto', padding: '0 8px', gap: 4, borderRadius: 6, border: '1px solid var(--border-color)', background: 'rgba(15,23,42,0.8)' }}
+            style={{ width: 'auto', padding: '0 8px', gap: 4, borderRadius: 6, border: '1px solid var(--border)', background: 'var(--bg-surface)' }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: 16, color: 'var(--accent)' }}>tune</span>
-            <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-main)' }}>Tools</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-primary)' }}>Tools</span>
             <span className="material-symbols-outlined" style={{ fontSize: 14, color: 'var(--text-muted)' }}>
               {toolsOpen ? 'expand_less' : 'expand_more'}
             </span>
@@ -158,7 +165,16 @@ export default function Header({
                 onClick={() => { onOpenKnownFacesModal && onOpenKnownFacesModal(); setToolsOpen(false); }}
               >
                 <span className="material-symbols-outlined">badge</span>
-                <span>Known Personnel Database</span>
+                <span>Quick Faces Uploader</span>
+              </button>
+
+              <button
+                className="dropdown-item-btn"
+                onClick={() => { onTabChange('admin'); setToolsOpen(false); }}
+                style={{ color: 'var(--accent)', fontWeight: 700 }}
+              >
+                <span className="material-symbols-outlined" style={{ color: 'var(--accent)' }}>admin_panel_settings</span>
+                <span>Admin Clearance & FRS</span>
               </button>
             </div>
           )}
@@ -171,7 +187,7 @@ export default function Header({
           title={`Theme: ${theme.toUpperCase()}`}
         >
           <span className="material-symbols-outlined" style={{ fontSize: 18 }}>
-            {theme === 'midnight' ? 'dark_mode' : theme === 'thermal' ? 'device_thermostat' : 'wb_sunny'}
+            {theme === 'light' ? 'light_mode' : theme === 'midnight' ? 'dark_mode' : theme === 'thermal' ? 'device_thermostat' : 'wb_sunny'}
           </span>
         </button>
 

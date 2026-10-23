@@ -7,6 +7,22 @@ const API_BASE = 'http://localhost:8000'
 
 const SEV_ORDER = { CRITICAL: 0, HIGH: 1, WARNING: 2, INFO: 3 }
 
+const EVENT_META = {
+  FENCE_CROSSING:           { icon: 'fence',          label: 'Fence Breach',       color: '#f43f5e' },
+  ZONE_ENTRY:               { icon: 'do_not_enter',   label: 'Zone Violation',      color: '#f43f5e' },
+  ANPR_ALERT:               { icon: 'directions_car', label: 'ANPR Hit',            color: '#fb923c' },
+  ANPR_WATCHLIST_MATCH:     { icon: 'directions_car', label: 'Watchlist Vehicle',   color: '#f43f5e' },
+  SUSPICIOUS_LOITERING:     { icon: 'person_pin',     label: 'Loitering',           color: '#facc15' },
+  LOITERING:                { icon: 'person_pin',     label: 'Loitering',           color: '#facc15' },
+  CROWD_SURGE:              { icon: 'groups',         label: 'Crowd Surge',         color: '#fb923c' },
+  FACE_MATCH:               { icon: 'face',           label: 'Face Match',          color: '#fb923c' },
+  MULTI_CAMERA_CORRELATION: { icon: 'hub',            label: 'Cross-Cam Chain',     color: '#f43f5e' },
+  NIGHT_INFILTRATION:       { icon: 'nights_stay',    label: 'Night Infiltration',  color: '#f43f5e' },
+  COVERAGE_GAP_WARNING:     { icon: 'videocam_off',   label: 'Blind Zone',          color: '#facc15' },
+  EDGE_OFFLINE_SYNC:        { icon: 'sync_problem',   label: 'Edge Offline',        color: '#facc15' },
+  AUTHORIZED_PATROL:        { icon: 'security',       label: 'Friendly Patrol',     color: '#10b981' },
+}
+
 function fmtTs(ts) {
   if (!ts) return '--:--:--'
   try {
@@ -26,26 +42,15 @@ function fmtRelative(ts) {
   } catch { return '' }
 }
 
-function RiskGauge({ value = 0, color }) {
-  const r = 14
-  const circ = 2 * Math.PI * r
-  const dash = (value / 100) * circ
-  return (
-    <svg width="38" height="38" viewBox="0 0 38 38" style={{ flexShrink: 0 }}>
-      <circle cx="19" cy="19" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3" />
-      <circle
-        cx="19" cy="19" r={r} fill="none"
-        stroke={color} strokeWidth="3"
-        strokeDasharray={`${dash} ${circ}`}
-        strokeLinecap="round"
-        transform="rotate(-90 19 19)"
-        style={{ transition: 'stroke-dasharray 0.6s ease' }}
-      />
-      <text x="19" y="23" textAnchor="middle" fill={color} fontSize="9" fontFamily="'JetBrains Mono', monospace" fontWeight="800">
-        {value}
-      </text>
-    </svg>
-  )
+function DwellTimer({ timestamp }) {
+  const [elapsed, setElapsed] = useState(0)
+  useEffect(() => {
+    const start = timestamp ? new Date(timestamp).getTime() : Date.now()
+    const t = setInterval(() => setElapsed(Math.floor((Date.now() - start) / 1000)), 1000)
+    return () => clearInterval(t)
+  }, [timestamp])
+  const m = Math.floor(elapsed / 60), s = elapsed % 60
+  return <span>{m > 0 ? `${m}m ` : ''}{s}s</span>
 }
 
 function PulsingDot({ color }) {
@@ -68,12 +73,19 @@ function formatCleanDesc(raw) {
   return parts.slice(0, 2).join(' · ')
 }
 
-function StatCard({ label, value, color, icon, sublabel }) {
+function StatCard({ label, value, color, icon, sublabel, pulsing }) {
   return (
     <div className="alert-stat-card" style={{ borderColor: color + '44' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
         <span className="material-symbols-outlined icon-fill" style={{ fontSize: 16, color }}>{icon}</span>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 800, color }}>{value}</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 800, color }}>
+          {value}
+          {pulsing && value > 0 && <span style={{
+            display: 'inline-block', width: 7, height: 7, borderRadius: '50%',
+            background: color, marginLeft: 5, verticalAlign: 'middle',
+            animation: 'alert-pulse 1.5s ease-out infinite'
+          }} />}
+        </span>
       </div>
       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</div>
       {sublabel && <div style={{ fontSize: 9, color, marginTop: 2, opacity: 0.8 }}>{sublabel}</div>}
@@ -81,16 +93,13 @@ function StatCard({ label, value, color, icon, sublabel }) {
   )
 }
 
-function AlertCard({ alert, onInvestigate, onOpenDispatch, onAcknowledge, acknowledged }) {
-  const sev = (alert.severity || 'INFO').toUpperCase()
-  const risk = alert.risk_score ?? alert.riskScore ?? 0
-  const [relative, setRelative] = useState(fmtRelative(alert.timestamp))
+function IncidentClusterCard({ cluster, onInvestigate, onOpenDispatch, onAcknowledgeCluster }) {
+  const sev = cluster.maxSeverity || 'INFO'
+  const risk = cluster.maxRisk || 0
   const [expanded, setExpanded] = useState(false)
-
-  useEffect(() => {
-    const t = setInterval(() => setRelative(fmtRelative(alert.timestamp)), 5000)
-    return () => clearInterval(t)
-  }, [alert.timestamp])
+  const [showSubEvents, setShowSubEvents] = useState(false)
+  const alert = cluster.primaryEvent || cluster.events[0]
+  const acknowledged = cluster.allAcknowledged
 
   const COLOR = { CRITICAL: '#ef4444', HIGH: '#f97316', WARNING: '#eab308', INFO: '#0ea5e9' }
   const color = COLOR[sev] || '#0ea5e9'
@@ -102,101 +111,185 @@ function AlertCard({ alert, onInvestigate, onOpenDispatch, onAcknowledge, acknow
     INFO: 'rgba(14,165,233,0.07)'
   }
 
-  const eventTypeIcon = {
-    FENCE_CROSSING: 'fence',
-    ZONE_ENTRY: 'workspaces',
-    ANPR_ALERT: 'directions_car',
-    LOITERING: 'person_pin',
-    CROWD_SURGE: 'groups',
-    FACE_MATCH: 'face',
-    MULTI_CAMERA_CORRELATION: 'hub',
-  }
-  const icon = eventTypeIcon[alert.event_type] || 'warning'
+  const meta = EVENT_META[alert.event_type] || { icon: 'warning', label: (alert.event_type || 'ALERT').replace(/_/g, ' '), color }
+  const isAnpr = cluster.eventTypes.some(t => t === 'ANPR_ALERT' || t === 'ANPR_WATCHLIST_MATCH')
+  const isMultiCam = cluster.eventTypes.includes('MULTI_CAMERA_CORRELATION')
+  const isCritical = sev === 'CRITICAL'
+  const needsDispatch = isCritical || (risk >= 80 && isAnpr) || isMultiCam
+  const numEvents = cluster.events.length
 
   return (
     <div
       className="alert-card-v2"
       style={{
-        background: acknowledged ? 'rgba(18,27,43,0.5)' : BG[sev],
+        background: acknowledged ? 'var(--bg-surface)' : BG[sev],
         borderColor: acknowledged ? 'var(--border-light)' : color + '55',
-        opacity: acknowledged ? 0.55 : 1,
+        opacity: acknowledged ? 0.6 : 1,
       }}
     >
       {/* Left accent bar */}
       <div style={{
-        position: 'absolute', left: 0, top: 0, bottom: 0, width: 3,
+        position: 'absolute', left: 0, top: 0, bottom: 0, width: 4,
         background: acknowledged ? 'var(--border-light)' : color,
         borderRadius: '6px 0 0 6px'
       }} />
 
       {/* Critical pulse dot */}
-      {!acknowledged && sev === 'CRITICAL' && (
+      {!acknowledged && isCritical && (
         <div style={{ position: 'absolute', top: 12, left: 9 }}>
           <PulsingDot color={color} />
         </div>
       )}
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingLeft: (sev === 'CRITICAL' && !acknowledged) ? 14 : 8 }}>
-        {/* Speedometer Gauge Dial Meter */}
-        <SpeedometerGauge value={risk} size={80} showLabel={false} />
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, paddingLeft: (isCritical && !acknowledged) ? 14 : 8 }}>
+        {/* Speedometer Gauge & Snapshot Preview */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+          <SpeedometerGauge value={risk} size={80} showLabel={false} />
+          {cluster.snapshot && (
+            <div
+              style={{
+                width: 72,
+                height: 46,
+                borderRadius: 4,
+                overflow: 'hidden',
+                border: `1px solid ${color}55`,
+                background: '#090d16',
+                cursor: 'pointer',
+                position: 'relative'
+              }}
+              onClick={() => onInvestigate && onInvestigate(alert)}
+              title="Inspect evidence snapshot in Forensic Dossier"
+            >
+              <img
+                src={`http://localhost:8000/api/v1/snapshots/${cluster.snapshot.replace(/^.*[\\\/]/, '')}`}
+                alt="Evidence"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => { e.target.parentElement.style.display = 'none' }}
+              />
+              <span style={{
+                position: 'absolute', bottom: 1, right: 2,
+                fontSize: 7.5, fontFamily: 'var(--font-mono)',
+                background: 'rgba(0,0,0,0.8)', padding: '0 3px', borderRadius: 2,
+                color: '#38bdf8', fontWeight: 700
+              }}>SNAP</span>
+            </div>
+          )}
+        </div>
 
         {/* Main content */}
         <div style={{ flex: 1, minWidth: 0 }}>
           {/* Header row */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5, flexWrap: 'wrap' }}>
-            <span className="material-symbols-outlined icon-fill" style={{ fontSize: 13, color: acknowledged ? 'var(--text-muted)' : color }}>{icon}</span>
+            <span className="material-symbols-outlined icon-fill" style={{ fontSize: 16, color: acknowledged ? 'var(--text-muted)' : meta.color }}>{meta.icon}</span>
+            <span style={{
+              fontFamily: 'var(--font-mono)', fontSize: 9.5, fontWeight: 900,
+              color: meta.color, background: `${meta.color}18`,
+              border: `1px solid ${meta.color}40`, padding: '2px 7px', borderRadius: 3,
+              textTransform: 'uppercase'
+            }}>{meta.label}</span>
             <span className={`alert-severity-tag tag-${sev.toLowerCase()}`} style={acknowledged ? { opacity: 0.4 } : {}}>
               {sev}
-            </span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700, color: acknowledged ? 'var(--text-muted)' : 'var(--text-primary)' }}>
-              {alert.id || alert.event_id || 'EVT-????'}
             </span>
             <span style={{
               fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--accent)',
               background: 'var(--accent-bg)', padding: '1px 6px', borderRadius: 3,
-              border: '1px solid var(--accent-bd)'
+              border: '1px solid var(--accent-bd)', fontWeight: 700
             }}>
-              {alert.camera_id || 'CAM-??'}
+              {cluster.camera_id}
             </span>
-            {alert.track_id && (
+            {cluster.track_id && (
               <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)',
-                background: 'var(--bg-surface)', padding: '1px 6px', borderRadius: 3,
-                border: '1px solid var(--border)'
+                fontFamily: 'var(--font-mono)', fontSize: 9.5, color: '#38bdf8',
+                background: 'rgba(56,189,248,0.12)', padding: '1px 6px', borderRadius: 3,
+                border: '1px solid rgba(56,189,248,0.35)', fontWeight: 800
               }}>
-                TRK-{alert.track_id}
+                TARGET #TRK-{cluster.track_id}
               </span>
             )}
+
+            {/* Fusion Badge */}
+            {numEvents > 1 && (
+              <span style={{
+                fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 800,
+                color: '#f59e0b', background: 'rgba(245,158,11,0.14)',
+                border: '1px solid rgba(245,158,11,0.4)', padding: '1px 6px', borderRadius: 4,
+                display: 'inline-flex', alignItems: 'center', gap: 3
+              }}>
+                <span className="material-symbols-outlined icon-fill" style={{ fontSize: 11 }}>auto_awesome</span>
+                {numEvents} Events Fused
+              </span>
+            )}
+
             {acknowledged && (
               <span style={{
                 fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--success)',
                 background: 'rgba(16,185,129,0.1)', padding: '1px 6px', borderRadius: 3,
-                border: '1px solid rgba(16,185,129,0.3)'
+                border: '1px solid rgba(16,185,129,0.3)', fontWeight: 700
               }}>
-                ✓ ACK
+                ✓ ACKNOWLEDGED
               </span>
             )}
           </div>
 
           {/* Description */}
-          <div style={{ fontSize: 12, color: acknowledged ? 'var(--text-muted)' : 'var(--text-primary)', lineHeight: 1.4, marginBottom: 4 }}>
+          <div style={{ fontSize: 12.5, color: acknowledged ? 'var(--text-muted)' : 'var(--text-primary)', lineHeight: 1.4, marginBottom: 6, fontWeight: 500 }}>
             {formatCleanDesc(alert.description || alert.event_type)}
           </div>
 
-          {/* 2-Second Explainable XAI Checkmarks */}
+          {/* Contextual Badges */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 6 }}>
+            {/* ANPR Plate */}
+            {cluster.license_plate && (
+              <span style={{
+                fontFamily: 'var(--font-mono)', fontSize: 9.5, fontWeight: 800,
+                background: 'rgba(251,146,60,0.15)', color: '#fb923c',
+                border: '1px solid rgba(251,146,60,0.4)', padding: '2px 7px', borderRadius: 4,
+                display: 'inline-flex', alignItems: 'center', gap: 3
+              }}>
+                <span className="material-symbols-outlined icon-fill" style={{ fontSize: 10 }}>directions_car</span>
+                PLATE: {cluster.license_plate}
+              </span>
+            )}
+
+            {/* Dwell duration */}
+            <span style={{
+              fontFamily: 'var(--font-mono)', fontSize: 9,
+              background: 'var(--bg-surface)', color: 'var(--text-secondary)',
+              border: '1px solid var(--border-light)', padding: '2px 7px', borderRadius: 4,
+              display: 'inline-flex', alignItems: 'center', gap: 3
+            }}>
+              <span className="material-symbols-outlined" style={{ fontSize: 10 }}>schedule</span>
+              First Seen: {fmtTs(cluster.firstSeen)} · Active: {fmtTs(cluster.lastSeen)}
+            </span>
+
+            {/* Multi-Cam Chain */}
+            {isMultiCam && (
+              <span style={{
+                fontFamily: 'var(--font-mono)', fontSize: 9.5, fontWeight: 700,
+                background: 'rgba(56,189,248,0.12)', color: 'var(--accent)',
+                border: '1px solid rgba(56,189,248,0.35)', padding: '2px 7px', borderRadius: 4,
+                display: 'inline-flex', alignItems: 'center', gap: 3
+              }}>
+                <span className="material-symbols-outlined" style={{ fontSize: 10 }}>hub</span>
+                Cross-Camera Target Chain
+              </span>
+            )}
+          </div>
+
+          {/* Reasons */}
           {alert.reasons && alert.reasons.length > 0 && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, margin: '4px 0 6px' }}>
               {alert.reasons.slice(0, expanded ? undefined : 3).map((r, i) => (
                 <span key={i} style={{
                   fontFamily: 'var(--font-mono)', fontSize: 9.5,
-                  color: sev === 'CRITICAL' ? '#fca5a5' : 'var(--text-mono)',
-                  background: sev === 'CRITICAL' ? 'rgba(239,68,68,0.12)' : 'var(--bg-surface)',
+                  color: sev === 'CRITICAL' ? 'var(--critical)' : 'var(--text-mono)',
+                  background: sev === 'CRITICAL' ? 'var(--critical-bg)' : 'var(--bg-surface)',
                   padding: '2px 7px', borderRadius: 4,
-                  border: `1px solid ${sev === 'CRITICAL' ? 'rgba(239,68,68,0.3)' : 'var(--border-light)'}`,
+                  border: `1px solid ${sev === 'CRITICAL' ? 'var(--critical-bd)' : 'var(--border-light)'}`,
                   display: 'inline-flex', alignItems: 'center', gap: 4
                 }}>
-                  <span style={{ color: sev === 'CRITICAL' ? '#ef4444' : 'var(--success)', fontWeight: 800 }}>✓</span>
-                  {r}
+                  <span style={{ color: sev === 'CRITICAL' ? 'var(--critical)' : 'var(--success)', fontWeight: 800 }}>✓</span>
+                  {r.replace(/\s*\(\+\d+\)/g, '').replace(/\s*\(-\d+\)/g, '')}
                 </span>
               ))}
               {alert.reasons.length > 3 && (
@@ -208,49 +301,77 @@ function AlertCard({ alert, onInvestigate, onOpenDispatch, onAcknowledge, acknow
                     padding: '0 4px', display: 'inline-flex', alignItems: 'center'
                   }}
                 >
-                  {expanded ? 'Hide extra' : `+${alert.reasons.length - 3} more`}
+                  {expanded ? 'Show less' : `+${alert.reasons.length - 3} more`}
                 </button>
               )}
             </div>
           )}
 
-          {/* Footer meta */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--text-muted)' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
-              <span className="material-symbols-outlined" style={{ fontSize: 10 }}>schedule</span>
-              {fmtTs(alert.timestamp)}
-            </span>
-            <span style={{ color: 'var(--border-light)' }}>•</span>
-            <span>{relative}</span>
-            {alert.event_type && (
-              <>
-                <span style={{ color: 'var(--border-light)' }}>•</span>
-                <span style={{ color: 'var(--text-mono)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  {alert.event_type.replace(/_/g, ' ')}
+          {/* Sub-Events Collapsible History */}
+          {numEvents > 1 && (
+            <div style={{ marginTop: 6 }}>
+              <button
+                onClick={() => setShowSubEvents(s => !s)}
+                style={{
+                  background: 'none', border: 'none', color: 'var(--accent)',
+                  fontFamily: 'var(--font-mono)', fontSize: 10, cursor: 'pointer',
+                  padding: '2px 0', display: 'inline-flex', alignItems: 'center', gap: 4,
+                  fontWeight: 700
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 13 }}>
+                  {showSubEvents ? 'expand_less' : 'expand_more'}
                 </span>
-              </>
-            )}
-          </div>
+                {showSubEvents ? 'Hide Sub-Events Breakdown' : `View ${numEvents} Sub-Events Breakdown`}
+              </button>
+
+              {showSubEvents && (
+                <div style={{
+                  marginTop: 6, display: 'flex', flexDirection: 'column', gap: 4,
+                  background: 'var(--bg-surface)', padding: 8, borderRadius: 6,
+                  border: '1px solid var(--border-light)'
+                }}>
+                  {cluster.events.map((e, idx) => (
+                    <div key={e.id || e.event_id || idx} style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                      fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)',
+                      padding: '3px 6px', borderBottom: idx < numEvents - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{ color: color, fontWeight: 700 }}>#{idx + 1}</span>
+                        <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{(e.event_type || '').replace(/_/g, ' ')}</span>
+                        <span style={{ opacity: 0.6 }}>({e.id || e.event_id})</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ color: ((e.risk_score || 0) >= 80 ? '#ef4444' : '#f59e0b'), fontWeight: 800 }}>Risk: {e.risk_score}</span>
+                        <span>{fmtTs(e.timestamp)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Action buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, flexShrink: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0 }}>
           <button
             className="alert-action-btn"
             onClick={e => { e.stopPropagation(); onInvestigate && onInvestigate(alert) }}
             title="Open Forensic Dossier"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: 12 }}>open_in_new</span>
+            <span className="material-symbols-outlined" style={{ fontSize: 13 }}>open_in_new</span>
             Dossier
           </button>
 
-          {sev === 'CRITICAL' && (
+          {needsDispatch && !acknowledged && (
             <button
               className="alert-action-btn alert-action-btn--dispatch"
               onClick={e => { e.stopPropagation(); onOpenDispatch && onOpenDispatch(alert) }}
-              title="Dispatch Quick Reaction Force"
+              title="Dispatch Quick Reaction Force [D]"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: 12 }}>e911_emergency</span>
+              <span className="material-symbols-outlined" style={{ fontSize: 13 }}>e911_emergency</span>
               Dispatch QRF
             </button>
           )}
@@ -258,11 +379,14 @@ function AlertCard({ alert, onInvestigate, onOpenDispatch, onAcknowledge, acknow
           {!acknowledged && (
             <button
               className="alert-action-btn alert-action-btn--ack"
-              onClick={e => { e.stopPropagation(); onAcknowledge && onAcknowledge(alert.id || alert.event_id) }}
-              title="Acknowledge this alert"
+              onClick={e => {
+                e.stopPropagation()
+                onAcknowledgeCluster && onAcknowledgeCluster(cluster)
+              }}
+              title="Acknowledge all events for this target"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: 12 }}>check</span>
-              Acknowledge
+              <span className="material-symbols-outlined" style={{ fontSize: 13 }}>check_circle</span>
+              {numEvents > 1 ? 'Ack All' : 'ACK'}
             </button>
           )}
         </div>
@@ -274,24 +398,36 @@ function AlertCard({ alert, onInvestigate, onOpenDispatch, onAcknowledge, acknow
 export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch, onClearAll }) {
   const [filter, setFilter]           = useState('ALL')
   const [search, setSearch]           = useState('')
-  const [sortBy, setSortBy]           = useState('severity')
-  const [acknowledged, setAcknowledged] = useState(new Set())
+  const [sortBy, setSortBy]           = useState('time')
+  const [viewMode, setViewMode]       = useState('clusters') // 'clusters' (fused) | 'raw'
+  const [acknowledged, setAcknowledged] = useState(() => {
+    try {
+      const raw = localStorage.getItem('ibvap_acknowledged_alerts')
+      return raw ? new Set(JSON.parse(raw)) : new Set()
+    } catch {
+      return new Set()
+    }
+  })
   const [showAcked, setShowAcked]     = useState(false)
-  const tickerRef = useRef(null)
+  const [refreshCountdown, setRefreshCountdown] = useState(3)
 
   // ── Clock & Date / Time Filters ──
-  const [timeRange, setTimeRange]     = useState('ALL') // 'ALL', '15m', '1h', '6h', '24h', 'custom'
+  const [timeRange, setTimeRange]     = useState('ALL')
   const [customStartTime, setCustomStartTime] = useState('00:00')
   const [customEndTime, setCustomEndTime]     = useState('23:59')
-  const [datePreset, setDatePreset]   = useState('ALL') // 'ALL', 'TODAY', 'YESTERDAY', '7DAYS', 'CUSTOM'
+  const [datePreset, setDatePreset]   = useState('ALL')
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10))
   const [isReportModalOpen, setIsReportModalOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState(new Date())
   const [activeTargets, setActiveTargets] = useState([])
+  const [lastAlertTime, setLastAlertTime] = useState(null)
 
-  // Live ticking clock & targets poll
+  // Live ticking clock, targets poll & refresh countdown
   useEffect(() => {
-    const t = setInterval(() => setCurrentTime(new Date()), 1000)
+    const t = setInterval(() => {
+      setCurrentTime(new Date())
+      setRefreshCountdown(c => c <= 1 ? 3 : c - 1)
+    }, 1000)
     const fetchTargets = async () => {
       try {
         const res = await fetch(`${API_BASE}/api/v1/targets/active`)
@@ -307,34 +443,73 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
     }
   }, [])
 
-  /* ── Ticker animation ── */
+  // Track last alert timestamp
   useEffect(() => {
-    const el = tickerRef.current
-    if (!el) return
-    let frame, pos = 0
-    const step = () => {
-      pos -= 0.4
-      if (pos < -(el.scrollWidth / 2)) pos = 0
-      el.style.transform = `translateX(${pos}px)`
-      frame = requestAnimationFrame(step)
+    if (alerts.length > 0) {
+      const latest = alerts.reduce((best, a) => {
+        const ts = new Date(a.timestamp || 0).getTime()
+        return ts > best ? ts : best
+      }, 0)
+      if (latest > 0) setLastAlertTime(new Date(latest))
     }
-    frame = requestAnimationFrame(step)
-    return () => cancelAnimationFrame(frame)
   }, [alerts])
 
   const handleAcknowledge = useCallback((id) => {
     if (!id) return
-    setAcknowledged(prev => new Set([...prev, id]))
+    setAcknowledged(prev => {
+      const next = new Set([...prev, id])
+      try {
+        localStorage.setItem('ibvap_acknowledged_alerts', JSON.stringify(Array.from(next).slice(-500)))
+      } catch {}
+      return next
+    })
+    fetch(`${API_BASE}/api/v1/alerts/acknowledge`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ alert_id: id })
+    }).catch(() => {})
+  }, [])
+
+  const handleAcknowledgeCluster = useCallback((cluster) => {
+    if (!cluster || !cluster.events) return
+    const ids = cluster.events.map(e => e.id || e.event_id).filter(Boolean)
+    setAcknowledged(prev => {
+      const next = new Set([...prev, ...ids])
+      try {
+        localStorage.setItem('ibvap_acknowledged_alerts', JSON.stringify(Array.from(next).slice(-500)))
+      } catch {}
+      return next
+    })
+    ids.forEach(id => {
+      fetch(`${API_BASE}/api/v1/alerts/acknowledge`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alert_id: id })
+      }).catch(() => {})
+    })
   }, [])
 
   const handleAcknowledgeAll = () => {
     const ids = alerts.map(a => a.id || a.event_id).filter(Boolean)
-    setAcknowledged(prev => new Set([...prev, ...ids]))
+    setAcknowledged(prev => {
+      const next = new Set([...prev, ...ids])
+      try {
+        localStorage.setItem('ibvap_acknowledged_alerts', JSON.stringify(Array.from(next).slice(-500)))
+      } catch {}
+      return next
+    })
+    ids.forEach(id => {
+      fetch(`${API_BASE}/api/v1/alerts/acknowledge`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alert_id: id })
+      }).catch(() => {})
+    })
   }
 
   const handleExportCSV = () => {
     const rows = [
-      ['ID', 'Severity', 'Camera', 'Track', 'Risk', 'EventType', 'Description', 'Timestamp'],
+      ['ID', 'Severity', 'Camera', 'Track', 'Risk', 'EventType', 'LicensePlate', 'Description', 'Timestamp'],
       ...filtered.map(a => [
         a.id || a.event_id || '',
         a.severity || '',
@@ -342,6 +517,7 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
         a.track_id || '',
         a.risk_score ?? '',
         a.event_type || '',
+        a.license_plate || '',
         (a.description || '').replace(/,/g, ';'),
         a.timestamp || ''
       ])
@@ -375,7 +551,7 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
       list = list.filter(a => (a.timestamp || '').startsWith(selectedDate))
     }
 
-    // 2. Filter by Time Window / Clock Range
+    // 2. Filter by Time Window
     if (timeRange === '15m') {
       list = list.filter(a => new Date(a.timestamp || 0).getTime() >= now - 15 * 60 * 1000)
     } else if (timeRange === '1h') {
@@ -407,9 +583,10 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
       list = list.filter(a =>
         (a.description || '').toLowerCase().includes(q) ||
         (a.camera_id || '').toLowerCase().includes(q) ||
-        (a.track_id || '').toLowerCase().includes(q) ||
+        (a.track_id || '').toString().toLowerCase().includes(q) ||
         (a.id || '').toLowerCase().includes(q) ||
-        (a.event_type || '').toLowerCase().includes(q)
+        (a.event_type || '').toLowerCase().includes(q) ||
+        (a.license_plate || '').toLowerCase().includes(q)
       )
     }
 
@@ -427,35 +604,170 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
     return list
   }, [alerts, datePreset, selectedDate, timeRange, customStartTime, customEndTime, filter, search, sortBy, showAcked, acknowledged])
 
-  /* ── Derived counts from filtered window ── */
-  const counts = useMemo(() => ({
-    CRITICAL: filtered.filter(a => (a.severity || '').toUpperCase() === 'CRITICAL').length,
-    HIGH:     filtered.filter(a => (a.severity || '').toUpperCase() === 'HIGH').length,
-    WARNING:  filtered.filter(a => (a.severity || '').toUpperCase() === 'WARNING').length,
-    INFO:     filtered.filter(a => (a.severity || '').toUpperCase() === 'INFO').length,
-    TOTAL:    filtered.length,
-    UNACKED:  filtered.filter(a => { const id = a.id || a.event_id; return id && !acknowledged.has(id) }).length,
-  }), [filtered, acknowledged])
+  /* ── Multi-Event Clustering & Aggregation (Noise Elimination) ── */
+  const clusters = useMemo(() => {
+    if (viewMode === 'raw') {
+      return filtered.map(a => ({
+        key: a.id || a.event_id,
+        primaryEvent: a,
+        events: [a],
+        camera_id: a.camera_id,
+        track_id: a.track_id,
+        license_plate: a.license_plate,
+        maxRisk: a.risk_score ?? a.riskScore ?? 0,
+        maxSeverity: (a.severity || 'INFO').toUpperCase(),
+        eventTypes: [a.event_type],
+        firstSeen: a.timestamp,
+        lastSeen: a.timestamp,
+        allAcknowledged: acknowledged.has(a.id || a.event_id),
+        snapshot: a.snapshot || a.snapshot_filename
+      }))
+    }
 
-  const criticals = filtered.filter(a => (a.severity || '').toUpperCase() === 'CRITICAL').slice(0, 8)
+    // O(N) Hash Map clustering by camera + track / plate
+    const map = new Map()
+    for (const a of filtered) {
+      const aid = a.id || a.event_id
+      const clusterKey = a.track_id
+        ? `${a.camera_id}_TRK-${a.track_id}`
+        : a.license_plate
+          ? `${a.camera_id}_PLT-${a.license_plate}`
+          : `${a.camera_id}_${aid}`
+
+      const risk = a.risk_score ?? a.riskScore ?? 0
+      const sev = (a.severity || 'INFO').toUpperCase()
+      const sevRank = SEV_ORDER[sev] ?? 4
+      const isAck = acknowledged.has(aid)
+
+      if (!map.has(clusterKey)) {
+        map.set(clusterKey, {
+          key: clusterKey,
+          primaryEvent: a,
+          events: [a],
+          camera_id: a.camera_id,
+          track_id: a.track_id,
+          license_plate: a.license_plate,
+          maxRisk: risk,
+          maxSeverity: sev,
+          bestSevRank: sevRank,
+          eventTypes: [a.event_type],
+          firstSeen: a.timestamp,
+          lastSeen: a.timestamp,
+          allAcknowledged: isAck,
+          snapshot: a.snapshot || a.snapshot_filename
+        })
+      } else {
+        const c = map.get(clusterKey)
+        c.events.push(a)
+        if (!c.eventTypes.includes(a.event_type)) {
+          c.eventTypes.push(a.event_type)
+        }
+        if (risk > c.maxRisk) {
+          c.maxRisk = risk
+        }
+        if (sevRank < c.bestSevRank) {
+          c.bestSevRank = sevRank
+          c.maxSeverity = sev
+          c.primaryEvent = a
+        }
+        if (new Date(a.timestamp || 0) < new Date(c.firstSeen || 0)) {
+          c.firstSeen = a.timestamp
+        }
+        if (new Date(a.timestamp || 0) > new Date(c.lastSeen || 0)) {
+          c.lastSeen = a.timestamp
+        }
+        if (!isAck) {
+          c.allAcknowledged = false
+        }
+        if (!c.snapshot && (a.snapshot || a.snapshot_filename)) {
+          c.snapshot = a.snapshot || a.snapshot_filename
+        }
+      }
+    }
+
+    return Array.from(map.values())
+  }, [filtered, viewMode, acknowledged])
+
+  /* ── Derived counts ── */
+  const counts = useMemo(() => ({
+    CRITICAL: clusters.filter(c => (c.maxSeverity || '').toUpperCase() === 'CRITICAL').length,
+    HIGH:     clusters.filter(c => (c.maxSeverity || '').toUpperCase() === 'HIGH').length,
+    WARNING:  clusters.filter(c => (c.maxSeverity || '').toUpperCase() === 'WARNING').length,
+    INFO:     clusters.filter(c => (c.maxSeverity || '').toUpperCase() === 'INFO').length,
+    TOTAL:    clusters.length,
+    RAW_TOTAL: filtered.length,
+    UNACKED:  clusters.filter(c => !c.allAcknowledged).length,
+  }), [clusters, filtered])
+
+  const lastAlertAgo = lastAlertTime ? fmtRelative(lastAlertTime.toISOString()) : null
 
   return (
     <div className="view alerts-view-v2" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
 
-      {/* ═══ Clean Top Summary Bar ═══ */}
-      <div className="alert-stats-bar" style={{ padding: '8px 16px', gap: 12 }}>
-        <StatCard label="Critical Threats"  value={counts.CRITICAL} color="#ef4444" icon="crisis_alert"   sublabel={counts.CRITICAL > 0 ? '🔴 Immediate Action Required' : 'All clear'} />
-        <StatCard label="High Risk"         value={counts.HIGH}     color="#f97316" icon="priority_high"  sublabel="Require sentry monitoring" />
-        <StatCard label="Total Active"      value={counts.TOTAL}    color="var(--accent)" icon="event_list" sublabel={`${counts.UNACKED} unacknowledged`} />
+      {/* ═══ 5-Card Summary Stats Bar ═══ */}
+      <div className="alert-stats-bar" style={{ padding: '8px 16px', gap: 10, gridTemplateColumns: 'repeat(5,1fr)' }}>
+        <StatCard
+          label="Critical Threats" value={counts.CRITICAL} color="#ef4444" icon="crisis_alert" pulsing
+          sublabel={counts.CRITICAL > 0 ? 'Immediate Action' : 'All clear'}
+        />
+        <StatCard
+          label="High Risk" value={counts.HIGH} color="#f97316" icon="priority_high"
+          sublabel="Sentry monitoring req."
+        />
+        <StatCard
+          label="Warnings" value={counts.WARNING} color="#eab308" icon="warning"
+          sublabel="Environmental/Zone alerts"
+        />
+        <StatCard
+          label="Unacknowledged" value={counts.UNACKED} color="var(--accent)" icon="notifications_active" pulsing
+          sublabel={counts.UNACKED > 0 ? 'Pending operator review' : 'All reviewed'}
+        />
+        <StatCard
+          label="Active Incidents" value={counts.TOTAL} color="var(--text-muted)" icon="event_list"
+          sublabel={viewMode === 'clusters' && counts.RAW_TOTAL > counts.TOTAL ? `${counts.RAW_TOTAL} raw events fused` : (lastAlertAgo ? `Last alert: ${lastAlertAgo}` : 'No alerts yet')}
+        />
       </div>
 
       {/* ═══ Unified Single Toolbar ═══ */}
-      <div className="view-toolbar" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6px 16px', flexWrap: 'wrap', gap: 8 }}>
+      <div className="view-toolbar" style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '6px 16px', flexWrap: 'wrap', gap: 8, height: 'auto', minHeight: 42 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <span className="toolbar-title" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
             <span className="material-symbols-outlined icon-fill" style={{ fontSize: 16, color: 'var(--critical)' }}>notifications_active</span>
             Security Incidents Feed
           </span>
+          {/* Live refresh indicator */}
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--success)',
+            background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)',
+            padding: '1px 7px', borderRadius: 10,
+            display: 'inline-flex', alignItems: 'center', gap: 4
+          }}>
+            <span style={{
+              width: 5, height: 5, borderRadius: '50%', background: 'var(--success)',
+              animation: 'pulse-dot 1.2s infinite'
+            }} />
+            LIVE · {refreshCountdown}s
+          </span>
+        </div>
+
+        {/* View Mode (Incident Fusion vs Raw Log) */}
+        <div className="toolbar-group">
+          <button
+            className={`toolbar-btn${viewMode === 'clusters' ? ' active' : ''}`}
+            onClick={() => setViewMode('clusters')}
+            title="Fuse repeated detections per target to eliminate sentry alert fatigue (Recommended)"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 12, verticalAlign: 'middle', marginRight: 3 }}>auto_awesome</span>
+            Fused Incidents ({viewMode === 'clusters' ? counts.TOTAL : clusters.length})
+          </button>
+          <button
+            className={`toolbar-btn${viewMode === 'raw' ? ' active' : ''}`}
+            onClick={() => setViewMode('raw')}
+            title="Display every individual raw event"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 12, verticalAlign: 'middle', marginRight: 3 }}>list</span>
+            Raw Log ({filtered.length})
+          </button>
         </div>
 
         {/* Severity Filter Chips */}
@@ -472,13 +784,25 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
           ))}
         </div>
 
+        {/* Sort */}
+        <div className="toolbar-group">
+          <span style={{ fontSize: 9, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Sort:</span>
+          {[['time', 'Newest'], ['severity', 'Severity'], ['risk', 'Risk']].map(([val, label]) => (
+            <button
+              key={val}
+              className={`toolbar-btn${sortBy === val ? ' active' : ''}`}
+              onClick={() => setSortBy(val)}
+            >{label}</button>
+          ))}
+        </div>
+
         {/* Search & Actions */}
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
           <div style={{ position: 'relative' }}>
             <span className="material-symbols-outlined" style={{ position: 'absolute', left: 7, top: '50%', transform: 'translateY(-50%)', fontSize: 13, color: 'var(--text-muted)', pointerEvents: 'none' }}>search</span>
             <input
               type="text"
-              placeholder="Search camera, track, event..."
+              placeholder="Search camera, track, plate, event..."
               value={search}
               onChange={e => setSearch(e.target.value)}
               style={{
@@ -488,6 +812,11 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
               }}
             />
           </div>
+
+          <button className="toolbar-btn" onClick={() => setShowAcked(v => !v)} style={{ fontSize: 10, borderColor: showAcked ? 'var(--accent-bd)' : undefined, color: showAcked ? 'var(--accent)' : undefined }}>
+            <span className="material-symbols-outlined" style={{ fontSize: 12, verticalAlign: 'middle' }}>{showAcked ? 'visibility' : 'visibility_off'}</span>
+            {showAcked ? 'Hide Acked' : 'Show Acked'}
+          </button>
 
           {counts.UNACKED > 0 && (
             <button className="toolbar-btn" onClick={handleAcknowledgeAll} style={{ fontSize: 10, borderColor: 'var(--success-bd)', color: 'var(--success)' }}>
@@ -509,10 +838,10 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
       </div>
 
       {/* ═══ Spacious Alert Cards List ═══ */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {filtered.length === 0 ? (
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {clusters.length === 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', padding: 60 }}>
-            <span className="material-symbols-outlined icon-fill" style={{ fontSize: 48, color: 'var(--success)', marginBottom: 12, display: 'block' }}>verified_user</span>
+            <span className="material-symbols-outlined icon-fill" style={{ fontSize: 52, color: 'var(--success)', marginBottom: 12, display: 'block' }}>verified_user</span>
             <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em', marginBottom: 6 }}>
               ALL CLEAR — NO ACTIVE THREATS
             </div>
@@ -521,14 +850,13 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
             </div>
           </div>
         ) : (
-          filtered.map(a => (
-            <AlertCard
-              key={a.id || a.event_id}
-              alert={a}
+          clusters.map(c => (
+            <IncidentClusterCard
+              key={c.key}
+              cluster={c}
               onInvestigate={onInvestigate}
               onOpenDispatch={onOpenDispatch}
-              onAcknowledge={handleAcknowledge}
-              acknowledged={acknowledged.has(a.id || a.event_id)}
+              onAcknowledgeCluster={handleAcknowledgeCluster}
             />
           ))
         )}
@@ -548,4 +876,3 @@ export default function AlertsView({ alerts = [], onInvestigate, onOpenDispatch,
     </div>
   )
 }
-

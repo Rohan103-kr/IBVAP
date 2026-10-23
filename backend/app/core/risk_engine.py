@@ -49,6 +49,30 @@ class RiskEngine:
         reasons = []
         applied_weights = {}
 
+        # 0. Wildlife / Cattle False-Alarm Suppression (SSB Problem Statement 26187 Requirement)
+        wildlife_types = {"cow", "sheep", "horse", "dog", "cat", "bird", "animal", "wildlife", "elephant", "bear"}
+        if object_type.lower() in wildlife_types or features.get("is_wildlife", False):
+            return {
+                "score": 0,
+                "severity": "INFO",
+                "reasons": ["Wildlife / cattle activity near perimeter — False Alarm Suppressed"],
+                "weights_applied": {"Wildlife Suppression": 0},
+                "point_breakdown": {"Wildlife Suppression": 0},
+                "explanation": "INFO: Wildlife / grazing animal activity — Alarm Suppressed"
+            }
+
+        # 0b. Violent Physical Altercation / Tactical Skirmish (+60)
+        if features.get("is_fight_detected", False):
+            w = 60
+            score += w
+            applied_weights["Physical Altercation"] = w
+            reasons.append(features.get("fight_reason", f"Violent physical fight / skirmish detected (+{w})"))
+        elif features.get("scene_kinetic_anomaly", False):
+            w = 40
+            score += w
+            applied_weights["High Kinetic Anomaly"] = w
+            reasons.append(f"High-energy kinetic motion / disturbance detected (+{w})")
+
         # 1. Fence Crossing (+35)
         if features.get("fence_crossed", False):
             w = max(self.weights.get("fence_crossed", 35), 35)
@@ -77,9 +101,9 @@ class RiskEngine:
             applied_weights["Direction Toward Border"] = w
             reasons.append(f"Trajectory heading toward sensitive perimeter (+{w})")
 
-        # 5. Loitering (+10)
+        # 5. Loitering (+25)
         if features.get("is_loitering", False):
-            w = self.weights.get("loitering", 10)
+            w = max(self.weights.get("loitering", 25), 25)
             duration = features.get("loitering_duration", 0.0)
             score += w
             applied_weights["Loitering"] = w
@@ -107,7 +131,14 @@ class RiskEngine:
             applied_weights["ML Behavioral Anomaly"] = ml_w
             reasons.append(f"AI Behavior Model detected {ml_cat} pattern ({ml_score:.1f}% confidence) (+{ml_w})")
 
-        # 9. Identity Intelligence Context (+30 / +15 / -20)
+        # 9. ANPR Watchlist Hit (+40)
+        if features.get("anpr_watchlist_hit", False) or features.get("is_watchlist_vehicle", False):
+            w = 40
+            score += w
+            applied_weights["ANPR Watchlist Match"] = w
+            reasons.append(f"Vehicle plate matched border watchlist registry (+{w})")
+
+        # 10. Identity Intelligence Context (+30 / +15 / -20)
         ident_status = features.get("identity_status", "UNRECOGNIZED")
         if ident_status == "UNAUTHORIZED":
             w = 30
@@ -125,7 +156,7 @@ class RiskEngine:
             applied_weights["Authorized Friendly Patrol"] = w
             reasons.append(f"Recognized authorized friendly patrol (-20)")
 
-        # 10. Object Specific Threats (Drones, Unattended Bags, Robots)
+        # 11. Object Specific Threats (Drones, Unattended Bags, Robots)
         if object_type == "drone":
             w = 35
             score += w
@@ -171,12 +202,12 @@ class RiskEngine:
         # Clamp score between 0 and 100
         score = max(0, min(score, 100))
 
-        # Severity Mapping (WARNING strictly for risk score > 50)
-        if score >= 81:
+        # Severity Mapping (Graduated threat scale)
+        if score >= 80:
             severity = "CRITICAL"
-        elif score >= 61:
+        elif score >= 60:
             severity = "HIGH"
-        elif score > 50:
+        elif score >= 35:
             severity = "WARNING"
         else:
             severity = "INFO"

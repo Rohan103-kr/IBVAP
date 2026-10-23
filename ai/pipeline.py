@@ -83,8 +83,30 @@ class FinalPipeline:
                 chips = [self.face_detector.extract_face_chip(frame, fd["bbox"]) for fd in face_detections]
                 bboxes = [fd["bbox"] for fd in face_detections]
                 frs_results = self.frs.recognize_batch(chips, bboxes)
-            # Annotate frame with face boxes & FRS labels
-            frame = self.face_detector.draw_face_boxes(frame, face_detections, frs_results)
+                person_tracks = [t for t in tracked_objects if t.get("object_type") == "person"]
+                for p_track in person_tracks:
+                    px1, py1, px2, py2 = p_track.get("bbox", [0, 0, 0, 0])
+                    matched_res = None
+                    matched_fd = None
+                    for fd, frs_res in zip(face_detections, frs_results):
+                        fx1, fy1, fx2, fy2 = fd["bbox"]
+                        fcx, fcy = (fx1 + fx2) / 2.0, (fy1 + fy2) / 2.0
+                        if (px1 - 15) <= fcx <= (px2 + 15) and (py1 - 15) <= fcy <= (py2 + 15):
+                            matched_fd = fd
+                            matched_res = frs_res
+                            break
+
+                    if matched_fd and matched_res and matched_fd.get("quality_passed", False) and matched_res.get("is_known", False):
+                        p_track["face_bbox"] = matched_fd["bbox"]
+                        name = matched_res.get("identity", "OFFICER")
+                        is_friendly = ("OFFICER" in name.upper() or "CAPTAIN" in name.upper() or "PATROL" in name.upper() or "AUTHORIZED" in name.upper() or "SUSPECT" not in name.upper())
+                        p_track["identity_status"] = "AUTHORIZED" if is_friendly else "UNAUTHORIZED"
+                        p_track["identity_name"] = name
+                    else:
+                        p_track["identity_status"] = "UNRECOGNIZED"
+                        p_track["identity_name"] = None
+                        if matched_fd:
+                            p_track["face_bbox"] = matched_fd["bbox"]
 
             # 4. Process Tracked Objects
             for track in tracked_objects:
@@ -93,7 +115,15 @@ class FinalPipeline:
 
                 # ANPR OCR for Vehicle detections
                 if track["object_type"] in ["vehicle", "car", "truck", "bus"]:
-                    self.anpr_engine.process_vehicle(frame, track["bbox"], self.camera_id, track["track_id"])
+                    anpr_rec = self.anpr_engine.process_vehicle(
+                        frame, track["bbox"], self.camera_id, track["track_id"], vehicle_type=track["object_type"]
+                    )
+                    if anpr_rec:
+                        track["license_plate"] = anpr_rec["plate_number"]
+                        track["is_watchlist_vehicle"] = anpr_rec.get("is_watchlist", False)
+                        track["watchlist_reason"] = anpr_rec.get("watchlist_reason")
+                        track["plate_confidence"] = anpr_rec.get("confidence", 0.9)
+                        track["consensus_ratio"] = anpr_rec.get("consensus_ratio", "1/1")
 
                 # Spatial Zone Containment & Fence Crossing
                 matched_zones = self.zone_engine.check_point_in_zones(curr_centroid, self.camera_id)

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINEL AI // Multi-Camera Re-ID & Journey Tracker</title>
+    <meta name="description" content="Cross-Camera Person & Face Detection, Re-Identification, and Continuous Spatio-Temporal Journey Tracking System">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dark-theme">
+
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+        <div class="brand-section">
+            <div class="brand-logo">
+                <div class="radar-scan"></div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12h20M12 2v20M12 12a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/>
+                    <circle cx="12" cy="12" r="4"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <h1>SENTINEL<span>AI</span></h1>
+                <p class="subtitle">MULTI-CAMERA RE-ID // SPATIO-TEMPORAL JOURNEY TRACKER</p>
+            </div>
+        </div>
+
+        <div class="system-telemetry">
+            <div class="telemetry-pill">
+                <span class="telemetry-dot live"></span>
+                <span class="label">CAMERAS ONLINE:</span>
+                <span class="value" id="stat-cameras-count">3</span>
+            </div>
+            <div class="telemetry-pill active-warning">
+                <span class="telemetry-dot pulse"></span>
+                <span class="label">UNDER CCTV NOW:</span>
+                <span class="value highlight" id="stat-active-count">0</span>
+            </div>
+            <div class="telemetry-pill">
+                <span class="label">TOTAL DETECTED:</span>
+                <span class="value" id="stat-total-persons">0</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button id="btn-export-csv" class="btn btn-secondary" title="Export Spatio-Temporal Sighting Logs as CSV">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Export CSV
+            </button>
+            <button id="btn-add-camera" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Camera
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="dashboard-layout">
+
+        <!-- Top Section: Multi-Camera Live Grid -->
+        <section class="section-card camera-grid-section">
+            <div class="section-header">
+                <div class="title-with-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    <h2>Live Multi-CCTV Feeds & Real-Time AI Overlays</h2>
+                </div>
+                <div class="view-controls">
+                    <span class="status-badge" id="cctv-status-badge">● 3 STREAMS SYNCHRONIZED</span>
+                    <button class="icon-btn" id="btn-toggle-layout" title="Toggle Grid Layout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Camera Grid -->
+            <div class="cctv-grid" id="cctv-grid-container">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Lower Section: Split View (Active Under CCTV Radar + Journey History Explorer) -->
+        <div class="dashboard-split-columns">
+            
+            <!-- Column 1: Live "Under CCTV Right Now" Monitor -->
+            <section class="section-card active-monitor-card">
+                <div class="section-header">
+                    <div class="title-with-icon">
+                        <span class="pulsing-radar-icon"></span>
+                        <h2>Currently Under CCTV Coverage</h2>
+                    </div>
+                    <span class="count-badge" id="live-active-badge">0 Active</span>
+                </div>
+                <p class="section-description">
+                    Real-time monitoring of individuals currently visible under any CCTV camera with dwell timers and biometric snapshots.
+                </p>
+
+                <div class="active-persons-list" id="active-persons-container">
+                    <div class="empty-state">
+                        <div class="empty-icon">📡</div>
+                        <p>No persons currently in camera field of view.</p>
+                        <span>Persons will appear here automatically when detected by any CCTV.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Column 2: Spatio-Temporal Journey & Sighting Explorer -->
+            <section class="section-card journey-explorer-card">
+                <div class="section-header">
+                    <div class="title-with-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <h2>Cross-Camera Journey & Timeline History</h2>
+                    </div>
+                    <div class="search-box">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="person-search-input" placeholder="Search Person ID (e.g. Person_1)...">
+                    </div>
+                </div>
+                <p class="section-description">
+                    Complete trail of movements: <code>Person X [Start Time ➔ End Time] from Camera A to Camera B</code>.
+                </p>
+
+                <div class="all-persons-table-container">
+                    <table class="data-table" id="persons-table">
+                        <thead>
+                            <tr>
+                                <th>Subject ID</th>
+                                <th>Biometric / Face</th>
+                                <th>Current Status</th>
+                                <th>First Seen</th>
+                                <th>Last Seen</th>
+                                <th>Cameras Visited</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="persons-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal: Complete Spatio-Temporal Journey Details -->
+    <div class="modal-backdrop" id="journey-modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-title-area">
+                    <h3 id="modal-person-title">Person 1 — Movement Journey Log</h3>
+                    <span class="status-badge" id="modal-person-status">UNDER_CCTV</span>
+                </div>
+                <button class="modal-close-btn" id="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Subject Summary Card -->
+                <div class="subject-summary-banner" id="modal-subject-banner">
+                    <!-- Dynamic details -->
+                </div>
+
+                <!-- Step by Step Visual Timeline -->
+                <h4 class="timeline-title">Continuous Spatio-Temporal Breadcrumb Trail</h4>
+                <div class="journey-timeline" id="modal-timeline-container">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-close-modal-footer">Close</button>
+                <button class="btn btn-primary" id="btn-export-single-person">Export Person Report</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Video File Uploader for Direct Camera Replacement -->
+    <input type="file" id="camera-file-uploader" accept="video/mp4,video/avi,video/mov,video/mkv,video/webm" style="display: none;">
+
+    <!-- Modal: Add or Upload Camera Feed -->
+    <div class="modal-backdrop" id="add-camera-modal">
+        <div class="modal-dialog small-dialog">
+            <div class="modal-header">
+                <h3>Connect or Upload Camera Feed</h3>
+                <button class="modal-close-btn" id="btn-close-camera-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Tab Selector -->
+                <div class="modal-tabs">
+                    <button class="tab-btn active" id="tab-upload-video" type="button">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                        Upload Video File
+                    </button>
+                    <button class="tab-btn" id="tab-stream-source" type="button">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+                        Webcam / RTSP Stream
+                    </button>
+                </div>
+
+                <!-- Option 1: Upload Video Form -->
+                <form id="upload-camera-form">
+                    <div class="form-group">
+                        <label for="upload-target-select">Apply To Camera Feed</label>
+                        <select id="upload-target-select" class="form-select">
+                            <option value="new">+ Create New Camera Feed</option>
+                            <!-- Existing camera options populated by JS -->
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="group-new-cam-meta">
+                        <label for="upload-cam-name">Camera Name</label>
+                        <input type="text" id="upload-cam-name" placeholder="e.g. South Lobby (CAM-04)">
+                    </div>
+
+                    <!-- Drag & Drop Zone -->
+                    <div class="upload-dropzone" id="upload-dropzone">
+                        <div class="dropzone-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                        </div>
+                        <p class="dropzone-text">Drag & drop your CCTV video file here</p>
+                        <span class="dropzone-sub">Supports MP4, AVI, MOV, MKV, WEBM (up to 500MB)</span>
+                        <button type="button" class="btn btn-secondary" id="btn-browse-file" style="margin-top: 10px;">
+                            Browse Computer Files
+                        </button>
+                        <input type="file" id="modal-file-input" accept="video/mp4,video/avi,video/mov,video/mkv,video/webm" style="display: none;">
+                        <div class="selected-file-name" id="selected-file-name" style="display: none;"></div>
+                    </div>
+
+                    <!-- Upload Progress -->
+                    <div class="upload-progress-container" id="upload-progress-container" style="display: none;">
+                        <div class="progress-bar-fill" id="upload-progress-bar"></div>
+                        <span class="progress-status" id="upload-progress-status">Uploading video and starting stream...</span>
+                    </div>
+
+                    <div class="modal-footer" style="padding: 16px 0 0 0;">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-upload">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-upload" disabled>
+                            Start Surveillance Stream
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Option 2: RTSP / Webcam Form -->
+                <form id="add-camera-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="cam-id-input">Camera ID</label>
+                        <input type="text" id="cam-id-input" placeholder="e.g. cam_4" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cam-name-input">Camera Name</label>
+                        <input type="text" id="cam-name-input" placeholder="e.g. Lobby Entrance (CAM-04)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cam-location-input">Location Zone</label>
+                        <input type="text" id="cam-location-input" placeholder="e.g. South Corridor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cam-source-input">Video Source</label>
+                        <input type="text" id="cam-source-input" placeholder="0 (Webcam), RTSP URL, or video path" required>
+                        <small class="form-hint">Use <code>0</code> for default Mac webcam, <code>rtsp://...</code> for IP camera, or a path to an <code>.mp4</code> file.</small>
+                    </div>
+                    <div class="modal-footer" style="padding: 16px 0 0 0;">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-cam">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Connect Stream</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-notification" class="toast-notification"></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

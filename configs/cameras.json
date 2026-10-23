@@ -1,9 +1,10 @@
 [
   {
     "camera_id": "CAM-01",
-    "name": "Mobile Watchtower CAM-01",
+    "name": "Live Stream CAM-01",
     "location": "Sector Alpha",
-    "stream_url": "http://192.0.0.4:8080/video",
+    "role": "WIDE_SURVEILLANCE",
+    "stream_url": "/Users/rohankumarvaishya/Desktop/sih1/demo/videos/uploaded_CAM-01_uploaded_CAM-01_cartoll1.mp4",
     "status": "ONLINE",
     "target_fps": 15,
     "resolution": {
@@ -13,9 +14,10 @@
   },
   {
     "camera_id": "CAM-02",
-    "name": "Mobile Watchtower CAM-02",
+    "name": "Live Stream CAM-02",
     "location": "Sector Alpha",
-    "stream_url": "https://10.194.120.46:8080/video",
+    "role": "IDENTIFICATION_CHOKEPOINT",
+    "stream_url": "/Users/rohankumarvaishya/Desktop/sih1/demo/videos/fight.mp4",
     "status": "ONLINE",
     "target_fps": 15,
     "resolution": {
@@ -25,9 +27,10 @@
   },
   {
     "camera_id": "CAM-03",
-    "name": "West Perimeter Electric Fence",
-    "location": "Sector 3, West Fence Ridge",
-    "stream_url": "demo/videos/electric_fence_intrusion.mp4",
+    "name": "Live Stream CAM-03",
+    "location": "Sector Alpha",
+    "role": "WIDE_SURVEILLANCE",
+    "stream_url": "/Users/rohankumarvaishya/Desktop/sih1/demo/videos/VID20260908174220.mp4",
     "status": "ONLINE",
     "target_fps": 15,
     "resolution": {
@@ -37,9 +40,10 @@
   },
   {
     "camera_id": "CAM-04",
-    "name": "Night Vision CCTV Surveillance",
-    "location": "Sector 2, Night Thermal Post",
-    "stream_url": "demo/videos/night_cctv_surveillance.mp4",
+    "name": "Live Stream CAM-04",
+    "location": "Sector Alpha",
+    "role": "WIDE_SURVEILLANCE",
+    "stream_url": "/Users/rohankumarvaishya/Desktop/sih1/demo/videos/gun1.mp4",
     "status": "ONLINE",
     "target_fps": 15,
     "resolution": {
@@ -51,7 +55,8 @@
     "camera_id": "CAM-05",
     "name": "Border Sector Crowd Tensions",
     "location": "Sector 1, Outpost Delta",
-    "stream_url": "demo/videos/border_breach_crowd.mp4",
+    "role": "WIDE_SURVEILLANCE",
+    "stream_url": "/Users/rohankumarvaishya/Desktop/sih1/demo/videos/uploaded_CAM-05_VID20260908180252.mp4",
     "status": "ONLINE",
     "target_fps": 15,
     "resolution": {
@@ -63,8 +68,9 @@
     "camera_id": "CAM-06",
     "name": "Pedestrian Corridor Walkway",
     "location": "Sector 1, Pathway Echo",
-    "stream_url": "demo/videos/people_walking_corridor.mp4",
-    "status": "ONLINE",
+    "role": "WIDE_SURVEILLANCE",
+    "stream_url": "",
+    "status": "STANDBY",
     "target_fps": 15,
     "resolution": {
       "width": 1280,

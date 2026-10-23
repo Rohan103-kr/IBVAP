@@ -1,5 +1,1727 @@
 [
   {
+    "incident_id": "EVT-1789122516-50947d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-11T10:28:43Z"
+  },
+  {
+    "incident_id": "EVT-1789122516-f1161c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-11T10:28:42Z"
+  },
+  {
+    "incident_id": "EVT-1789122454-b67569",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-11T10:27:49Z"
+  },
+  {
+    "incident_id": "EVT-1789122454-55664a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-11T10:27:48Z"
+  },
+  {
+    "incident_id": "EVT-1789122423-9dad29",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-11T10:27:12Z"
+  },
+  {
+    "incident_id": "EVT-1788933810-8daf2b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T06:04:15Z"
+  },
+  {
+    "incident_id": "EVT-1788933765-9cf58e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T06:02:57Z"
+  },
+  {
+    "incident_id": "EVT-1788933682-f7922b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T06:01:34Z"
+  },
+  {
+    "incident_id": "EVT-1788933489-dad501",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:58:15Z"
+  },
+  {
+    "incident_id": "EVT-1788933262-99fd43",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:54:26Z"
+  },
+  {
+    "incident_id": "EVT-1788933194-29b359",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:53:25Z"
+  },
+  {
+    "incident_id": "EVT-1788933194-57defe",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:53:25Z"
+  },
+  {
+    "incident_id": "EVT-1788933142-9e8169",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:53:07Z"
+  },
+  {
+    "incident_id": "EVT-1788933172-ada2fc",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:53:05Z"
+  },
+  {
+    "incident_id": "EVT-1788933174-1683d2",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:53:04Z"
+  },
+  {
+    "incident_id": "EVT-1788933154-7cc07e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:52:52Z"
+  },
+  {
+    "incident_id": "EVT-1788933140-3aa90a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:52:51Z"
+  },
+  {
+    "incident_id": "EVT-1788933139-d3b968",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:52:31Z"
+  },
+  {
+    "incident_id": "EVT-1788932650-da2f60",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-09T05:44:31Z"
+  },
+  {
+    "incident_id": "EVT-1788932650-f66323",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:44:20Z"
+  },
+  {
+    "incident_id": "EVT-1788932606-feab3c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:43:30Z"
+  },
+  {
+    "incident_id": "EVT-1788932581-99be2f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:43:24Z"
+  },
+  {
+    "incident_id": "EVT-1788932563-8487f4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T05:42:53Z"
+  },
+  {
+    "incident_id": "EVT-1788927356-95bdef",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T04:16:07Z"
+  },
+  {
+    "incident_id": "EVT-1788926841-99c683",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T04:07:31Z"
+  },
+  {
+    "incident_id": "EVT-1788926621-16cafe",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T04:03:46Z"
+  },
+  {
+    "incident_id": "EVT-1788924866-baa838",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T03:35:34Z"
+  },
+  {
+    "incident_id": "EVT-1788924216-1ecdd9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T03:23:40Z"
+  },
+  {
+    "incident_id": "EVT-1788924162-1e604b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T03:22:54Z"
+  },
+  {
+    "incident_id": "EVT-1788924092-be2896",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T03:21:40Z"
+  },
+  {
+    "incident_id": "EVT-1788921287-d4f4bd",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T02:35:05Z"
+  },
+  {
+    "incident_id": "EVT-1788920410-2bdcb9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T02:20:15Z"
+  },
+  {
+    "incident_id": "EVT-1788920410-66bb73",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T02:20:14Z"
+  },
+  {
+    "incident_id": "EVT-1788920282-da2575",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T02:18:09Z"
+  },
+  {
+    "incident_id": "EVT-1788891797-408023",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T02:12:33Z"
+  },
+  {
+    "incident_id": "EVT-1788891802-ae6212",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-09T02:12:32Z"
+  },
+  {
+    "incident_id": "EVT-1788891738-8521f0",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T18:23:14Z"
+  },
+  {
+    "incident_id": "EVT-1788891724-644d53",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T18:22:16Z"
+  },
+  {
+    "incident_id": "EVT-1788891712-52f912",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T18:22:03Z"
+  },
+  {
+    "incident_id": "EVT-1788889725-1bc13f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:49:07Z"
+  },
+  {
+    "incident_id": "EVT-1788889687-cf6562",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:48:14Z"
+  },
+  {
+    "incident_id": "EVT-1788889426-72cb67",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:43:49Z"
+  },
+  {
+    "incident_id": "EVT-1788889163-3d6312",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:39:59Z"
+  },
+  {
+    "incident_id": "EVT-1788887680-50b33c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:14:45Z"
+  },
+  {
+    "incident_id": "EVT-1788887518-c54281",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:12:05Z"
+  },
+  {
+    "incident_id": "EVT-1788886808-3f1dac",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T17:00:14Z"
+  },
+  {
+    "incident_id": "EVT-1788885002-b6d032",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T16:30:12Z"
+  },
+  {
+    "incident_id": "EVT-1788884993-ceccf5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T16:29:57Z"
+  },
+  {
+    "incident_id": "EVT-1788884609-cac22c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T16:23:40Z"
+  },
+  {
+    "incident_id": "EVT-1788884189-a30572",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T16:18:10Z"
+  },
+  {
+    "incident_id": "EVT-1788882785-2699c4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:53:09Z"
+  },
+  {
+    "incident_id": "EVT-1788882750-8c3796",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:52:42Z"
+  },
+  {
+    "incident_id": "EVT-1788882073-f3723a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:52:12Z"
+  },
+  {
+    "incident_id": "EVT-1788882076-ff47ff",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:52:12Z"
+  },
+  {
+    "incident_id": "EVT-1788882709-e6b598",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:52:10Z"
+  },
+  {
+    "incident_id": "EVT-1788882688-9cee6a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:51:39Z"
+  },
+  {
+    "incident_id": "EVT-1788882091-3f0b16",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:42:32Z"
+  },
+  {
+    "incident_id": "EVT-1788882049-038c8e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:41:01Z"
+  },
+  {
+    "incident_id": "EVT-1788881577-4bb959",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:40:32Z"
+  },
+  {
+    "incident_id": "EVT-1788880716-5ebf82",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T15:18:48Z"
+  },
+  {
+    "incident_id": "EVT-1788873238-2ba2fd",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T13:14:15Z"
+  },
+  {
+    "incident_id": "EVT-1788873001-a812f6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T13:10:12Z"
+  },
+  {
+    "incident_id": "EVT-1788872989-aa20db",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T13:10:00Z"
+  },
+  {
+    "incident_id": "EVT-1788872935-c5c022",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T13:09:10Z"
+  },
+  {
+    "incident_id": "EVT-1788858443-9cc0a6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T12:27:55Z"
+  },
+  {
+    "incident_id": "EVT-1788850421-a1460b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T12:27:55Z"
+  },
+  {
+    "incident_id": "EVT-1788858409-fb2e7b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T09:07:03Z"
+  },
+  {
+    "incident_id": "EVT-1788858340-b0f1e1",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T09:05:51Z"
+  },
+  {
+    "incident_id": "EVT-1788850258-b906eb",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-08T06:51:41Z"
+  },
+  {
+    "incident_id": "EVT-1788850189-8fd7b5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T06:50:36Z"
+  },
+  {
+    "incident_id": "EVT-1788850082-f2e229",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T06:48:25Z"
+  },
+  {
+    "incident_id": "EVT-1788849896-babce0",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T06:45:13Z"
+  },
+  {
+    "incident_id": "EVT-1788846463-0b017f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T05:47:48Z"
+  },
+  {
+    "incident_id": "EVT-1788845869-c1c348",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-08T05:38:43Z"
+  },
+  {
+    "incident_id": "EVT-1788845828-d51b6a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-08T05:38:42Z"
+  },
+  {
+    "incident_id": "EVT-1788845793-dd103b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T05:36:54Z"
+  },
+  {
+    "incident_id": "EVT-1788845772-8e86af",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T05:36:32Z"
+  },
+  {
+    "incident_id": "EVT-1788845760-8d96ba",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T05:36:12Z"
+  },
+  {
+    "incident_id": "EVT-1788841612-475946",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T05:34:44Z"
+  },
+  {
+    "incident_id": "EVT-1788841312-9e0083",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T04:22:04Z"
+  },
+  {
+    "incident_id": "EVT-1788839553-cdeed9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:54:09Z"
+  },
+  {
+    "incident_id": "EVT-1788839556-f57380",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:54:08Z"
+  },
+  {
+    "incident_id": "EVT-1788839469-9eed5e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:52:23Z"
+  },
+  {
+    "incident_id": "EVT-1788839539-1a77cd",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:52:22Z"
+  },
+  {
+    "incident_id": "EVT-1788839462-a744d0",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:52:19Z"
+  },
+  {
+    "incident_id": "EVT-1788839529-0daf68",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:52:17Z"
+  },
+  {
+    "incident_id": "EVT-1788839450-0fe5c7",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:50:58Z"
+  },
+  {
+    "incident_id": "EVT-1788839393-47ea17",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:50:26Z"
+  },
+  {
+    "incident_id": "EVT-1788839299-eb4d4e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:48:41Z"
+  },
+  {
+    "incident_id": "EVT-1788839252-a9aefe",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:48:17Z"
+  },
+  {
+    "incident_id": "EVT-1788839252-35d6c3",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:48:16Z"
+  },
+  {
+    "incident_id": "EVT-1788839253-21c5bc",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:48:13Z"
+  },
+  {
+    "incident_id": "EVT-1788839126-3caa84",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:45:34Z"
+  },
+  {
+    "incident_id": "EVT-1788838958-5e950d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:44:17Z"
+  },
+  {
+    "incident_id": "EVT-1788838956-173fcc",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:44:13Z"
+  },
+  {
+    "incident_id": "EVT-1788838833-08b6f6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:40:43Z"
+  },
+  {
+    "incident_id": "EVT-1788838743-0352e3",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:39:11Z"
+  },
+  {
+    "incident_id": "EVT-1788809007-ac9348",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-08T03:39:03Z"
+  },
+  {
+    "incident_id": "EVT-1788808963-9974ad",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T19:23:23Z"
+  },
+  {
+    "incident_id": "EVT-1788807526-7af78f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T18:59:31Z"
+  },
+  {
+    "incident_id": "EVT-1788807513-5a7642",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T18:58:42Z"
+  },
+  {
+    "incident_id": "EVT-1788807423-d0610b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T18:57:31Z"
+  },
+  {
+    "incident_id": "EVT-1788807416-e6c7bc",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T18:57:17Z"
+  },
+  {
+    "incident_id": "EVT-1788806026-b1a958",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T18:33:54Z"
+  },
+  {
+    "incident_id": "EVT-1788803747-0e578b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-07T18:13:36Z"
+  },
+  {
+    "incident_id": "EVT-1788803748-35b1d9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-07T18:13:35Z"
+  },
+  {
+    "incident_id": "EVT-1788803571-9fd8c6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-07T18:13:35Z"
+  },
+  {
+    "incident_id": "EVT-1788803764-0b2534",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-07T18:13:35Z"
+  },
+  {
+    "incident_id": "EVT-1788803743-d1c477",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T17:55:49Z"
+  },
+  {
+    "incident_id": "EVT-1788801986-ac6a1e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T17:26:39Z"
+  },
+  {
+    "incident_id": "EVT-1788800694-c326c8",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T17:26:26Z"
+  },
+  {
+    "incident_id": "EVT-1788801790-aaed0f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T17:24:28Z"
+  },
+  {
+    "incident_id": "EVT-1788800605-e0768f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T17:03:38Z"
+  },
+  {
+    "incident_id": "EVT-1788799515-fc9ee6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T16:45:31Z"
+  },
+  {
+    "incident_id": "EVT-1788799469-4fdfb8",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T16:44:57Z"
+  },
+  {
+    "incident_id": "EVT-1788798048-895c0e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T16:25:25Z"
+  },
+  {
+    "incident_id": "EVT-1788786818-b03f0d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:13:46Z"
+  },
+  {
+    "incident_id": "EVT-1788786784-53c673",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:13:11Z"
+  },
+  {
+    "incident_id": "EVT-1788786752-bf327e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:12:37Z"
+  },
+  {
+    "incident_id": "EVT-1788786740-6f5a1d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:12:32Z"
+  },
+  {
+    "incident_id": "EVT-1788786727-d0544c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:12:15Z"
+  },
+  {
+    "incident_id": "EVT-1788786432-49daa6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:07:20Z"
+  },
+  {
+    "incident_id": "EVT-1788786007-093ada",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T13:00:23Z"
+  },
+  {
+    "incident_id": "EVT-1788785993-b7b2cd",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:59:59Z"
+  },
+  {
+    "incident_id": "EVT-1788785978-3f4ec1",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:59:47Z"
+  },
+  {
+    "incident_id": "EVT-1788785966-070815",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:59:38Z"
+  },
+  {
+    "incident_id": "EVT-1788785853-290f9e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:58:00Z"
+  },
+  {
+    "incident_id": "EVT-1788785838-ed0e40",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:57:28Z"
+  },
+  {
+    "incident_id": "EVT-1788785822-a8310e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:57:11Z"
+  },
+  {
+    "incident_id": "EVT-1788784650-c75416",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:37:41Z"
+  },
+  {
+    "incident_id": "EVT-1788784456-c806b0",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:34:26Z"
+  },
+  {
+    "incident_id": "EVT-1788784338-f72a16",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:32:28Z"
+  },
+  {
+    "incident_id": "EVT-1788783463-e587b2",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:17:55Z"
+  },
+  {
+    "incident_id": "EVT-1788783411-54a0a3",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:17:03Z"
+  },
+  {
+    "incident_id": "EVT-1788783372-56bab1",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:16:16Z"
+  },
+  {
+    "incident_id": "EVT-1788783323-30c6cf",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:16:08Z"
+  },
+  {
+    "incident_id": "EVT-1788783278-bd7928",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:14:50Z"
+  },
+  {
+    "incident_id": "EVT-1788783243-c694a1",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:14:18Z"
+  },
+  {
+    "incident_id": "EVT-1788783204-cb58bf",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:13:50Z"
+  },
+  {
+    "incident_id": "EVT-1788783161-5e4daf",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:13:15Z"
+  },
+  {
+    "incident_id": "EVT-1788783140-f4b960",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:12:32Z"
+  },
+  {
+    "incident_id": "EVT-1788783076-adb7cb",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:11:20Z"
+  },
+  {
+    "incident_id": "EVT-1788783064-7b2e66",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:11:15Z"
+  },
+  {
+    "incident_id": "EVT-1788783010-37f24a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:10:23Z"
+  },
+  {
+    "incident_id": "EVT-1788782988-9b636d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T12:09:54Z"
+  },
+  {
+    "incident_id": "EVT-1788781993-78f1f6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:53:42Z"
+  },
+  {
+    "incident_id": "EVT-1788781916-eaa287",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:52:07Z"
+  },
+  {
+    "incident_id": "EVT-1788781800-e7fd04",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:51:03Z"
+  },
+  {
+    "incident_id": "EVT-1788781798-dd5b6d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:50:04Z"
+  },
+  {
+    "incident_id": "EVT-1788781617-8aa7c7",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:47:53Z"
+  },
+  {
+    "incident_id": "EVT-1788781502-2310e4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:46:16Z"
+  },
+  {
+    "incident_id": "EVT-1788781561-790686",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:46:15Z"
+  },
+  {
+    "incident_id": "EVT-1788781457-a4c66f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:45:01Z"
+  },
+  {
+    "incident_id": "EVT-1788781402-b138e9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:45:01Z"
+  },
+  {
+    "incident_id": "EVT-1788781444-c33b24",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:44:14Z"
+  },
+  {
+    "incident_id": "EVT-1788781369-48072b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:43:13Z"
+  },
+  {
+    "incident_id": "EVT-1788781376-979dd9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:43:12Z"
+  },
+  {
+    "incident_id": "EVT-1788781241-ffa9af",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:40:55Z"
+  },
+  {
+    "incident_id": "EVT-1788780805-2985e4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:36:07Z"
+  },
+  {
+    "incident_id": "EVT-1788780639-ea1b39",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:32:50Z"
+  },
+  {
+    "incident_id": "EVT-1788780725-9e82f5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:32:19Z"
+  },
+  {
+    "incident_id": "EVT-1788780592-523bde",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T11:30:02Z"
+  },
+  {
+    "incident_id": "EVT-1788778522-cfc191",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T10:57:20Z"
+  },
+  {
+    "incident_id": "EVT-1788774677-744339",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:51:31Z"
+  },
+  {
+    "incident_id": "EVT-1788774551-667b59",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:49:19Z"
+  },
+  {
+    "incident_id": "EVT-1788774424-401622",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:47:12Z"
+  },
+  {
+    "incident_id": "EVT-1788772318-52ab91",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:12:10Z"
+  },
+  {
+    "incident_id": "EVT-1788772234-06e898",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:10:55Z"
+  },
+  {
+    "incident_id": "EVT-1788772191-e00775",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:10:02Z"
+  },
+  {
+    "incident_id": "EVT-1788772129-271acb",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:08:55Z"
+  },
+  {
+    "incident_id": "EVT-1788771979-980172",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T09:06:36Z"
+  },
+  {
+    "incident_id": "EVT-1788757690-3446e9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T05:08:21Z"
+  },
+  {
+    "incident_id": "EVT-1788757524-b446bb",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T05:05:36Z"
+  },
+  {
+    "incident_id": "EVT-1788757379-b9fdf2",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T05:03:11Z"
+  },
+  {
+    "incident_id": "EVT-1788757233-aaa6f5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T05:00:46Z"
+  },
+  {
+    "incident_id": "EVT-1788756782-93c641",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:53:28Z"
+  },
+  {
+    "incident_id": "EVT-1788756770-14f528",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:52:58Z"
+  },
+  {
+    "incident_id": "EVT-1788756752-76a182",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:52:42Z"
+  },
+  {
+    "incident_id": "EVT-1788756649-eaf821",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:51:08Z"
+  },
+  {
+    "incident_id": "EVT-1788756649-432702",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:51:07Z"
+  },
+  {
+    "incident_id": "EVT-1788756582-01a324",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:49:54Z"
+  },
+  {
+    "incident_id": "EVT-1788756514-4f8fc6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:48:42Z"
+  },
+  {
+    "incident_id": "EVT-1788756440-4be7a7",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-07T04:47:27Z"
+  },
+  {
+    "incident_id": "EVT-1788710882-3a15ba",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T16:08:17Z"
+  },
+  {
+    "incident_id": "EVT-1788710869-6724c7",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T16:08:02Z"
+  },
+  {
+    "incident_id": "EVT-1788710635-5801bd",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T16:04:07Z"
+  },
+  {
+    "incident_id": "EVT-1788710620-3c9958",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T16:03:50Z"
+  },
+  {
+    "incident_id": "EVT-1788710409-b12f2e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T16:00:27Z"
+  },
+  {
+    "incident_id": "EVT-1788710372-1d2844",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:59:40Z"
+  },
+  {
+    "incident_id": "EVT-1788710355-3e06e6",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:59:32Z"
+  },
+  {
+    "incident_id": "EVT-1788710293-a4696d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:58:40Z"
+  },
+  {
+    "incident_id": "EVT-1788710258-91dfe4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:58:04Z"
+  },
+  {
+    "incident_id": "EVT-1788710176-158f87",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:56:30Z"
+  },
+  {
+    "incident_id": "EVT-1788709051-703563",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:37:33Z"
+  },
+  {
+    "incident_id": "EVT-1788709037-ed6b6e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:37:30Z"
+  },
+  {
+    "incident_id": "EVT-1788709025-931cc2",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:37:12Z"
+  },
+  {
+    "incident_id": "EVT-1788709025-27f9c7",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:37:11Z"
+  },
+  {
+    "incident_id": "EVT-1788708983-8800df",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:36:28Z"
+  },
+  {
+    "incident_id": "EVT-1788707637-64cbbc",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T15:14:09Z"
+  },
+  {
+    "incident_id": "EVT-1788706005-b8765b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T14:47:00Z"
+  },
+  {
+    "incident_id": "EVT-1788703084-4e53fa",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:58:35Z"
+  },
+  {
+    "incident_id": "EVT-1788703067-d669fc",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:57:59Z"
+  },
+  {
+    "incident_id": "EVT-1788703044-341734",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:57:35Z"
+  },
+  {
+    "incident_id": "EVT-1788702761-1eccd9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:53:19Z"
+  },
+  {
+    "incident_id": "EVT-1788702765-964614",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:53:15Z"
+  },
+  {
+    "incident_id": "EVT-1788702767-9cd146",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:53:09Z"
+  },
+  {
+    "incident_id": "EVT-1788702746-b79e01",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:52:39Z"
+  },
+  {
+    "incident_id": "EVT-1788702743-b698ff",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:52:35Z"
+  },
+  {
+    "incident_id": "EVT-1788702453-9e529a",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:48:00Z"
+  },
+  {
+    "incident_id": "EVT-1788701022-adfaa5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:45:12Z"
+  },
+  {
+    "incident_id": "EVT-1788701020-4ec73b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:45:12Z"
+  },
+  {
+    "incident_id": "EVT-1788701025-5dcdfb",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:45:11Z"
+  },
+  {
+    "incident_id": "EVT-1788701003-d1d1b3",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:23:32Z"
+  },
+  {
+    "incident_id": "EVT-1788700939-46abd3",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T13:22:24Z"
+  },
+  {
+    "incident_id": "EVT-1788686643-076c95",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:24:14Z"
+  },
+  {
+    "incident_id": "EVT-1788686563-860c0f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:23:17Z"
+  },
+  {
+    "incident_id": "EVT-1788686106-a21db9",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:15:17Z"
+  },
+  {
+    "incident_id": "EVT-1788685990-f1c17f",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:13:20Z"
+  },
+  {
+    "incident_id": "EVT-1788685756-b3c92e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:10:26Z"
+  },
+  {
+    "incident_id": "EVT-1788685368-f4260e",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:03:17Z"
+  },
+  {
+    "incident_id": "EVT-1788685311-2d29ef",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:02:17Z"
+  },
+  {
+    "incident_id": "EVT-1788685266-544990",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:01:23Z"
+  },
+  {
+    "incident_id": "EVT-1788685250-f4a646",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T09:01:17Z"
+  },
+  {
+    "incident_id": "EVT-1788685060-33e4d5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:58:17Z"
+  },
+  {
+    "incident_id": "EVT-1788684718-3f5518",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:52:04Z"
+  },
+  {
+    "incident_id": "EVT-1788684646-e833cb",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:50:58Z"
+  },
+  {
+    "incident_id": "EVT-1788684646-6a05a4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:50:55Z"
+  },
+  {
+    "incident_id": "EVT-1788684646-9513f5",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:50:52Z"
+  },
+  {
+    "incident_id": "EVT-1788684575-0212b2",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:49:48Z"
+  },
+  {
+    "incident_id": "EVT-1788684292-7a571d",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:45:02Z"
+  },
+  {
+    "incident_id": "EVT-1788684049-22b5e1",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:42:06Z"
+  },
+  {
+    "incident_id": "EVT-1788683053-3bc467",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T08:24:15Z"
+  },
+  {
+    "incident_id": "EVT-1788675653-b701df",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:39:04Z"
+  },
+  {
+    "incident_id": "EVT-1788675641-097f0b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:39:00Z"
+  },
+  {
+    "incident_id": "EVT-1788676732-4b4d9c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:56Z"
+  },
+  {
+    "incident_id": "EVT-1788675673-855f23",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:46Z"
+  },
+  {
+    "incident_id": "EVT-1788675642-bbf9ce",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:43Z"
+  },
+  {
+    "incident_id": "EVT-1788676703-294f19",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:35Z"
+  },
+  {
+    "incident_id": "EVT-1788676698-82bea4",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:22Z"
+  },
+  {
+    "incident_id": "EVT-1788676694-9b9ce7",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:18Z"
+  },
+  {
+    "incident_id": "EVT-1788676668-466a6b",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:15Z"
+  },
+  {
+    "incident_id": "EVT-1788676670-ab3bda",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:38:03Z"
+  },
+  {
+    "incident_id": "EVT-1788676666-e70521",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Command",
+    "timestamp": "2026-09-06T06:37:50Z"
+  },
+  {
+    "incident_id": "EVT-1788676364-f7d23c",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Officer-Alpha",
+    "timestamp": "2026-09-06T06:37:20Z"
+  },
+  {
+    "incident_id": "EVT-TEST-12345",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-06T06:36:41Z"
+  },
+  {
+    "incident_id": "EVT-TEST-001",
+    "feedback_type": "ACKNOWLEDGED",
+    "operator_notes": "Operator acknowledged via UI",
+    "operator_id": "Operator-Alpha",
+    "timestamp": "2026-09-05T16:37:46Z"
+  },
+  {
     "incident_id": "EVT-1788587382-2a3d5f",
     "feedback_type": "DISMISS",
     "operator_notes": "DISMISS INCIDENT",

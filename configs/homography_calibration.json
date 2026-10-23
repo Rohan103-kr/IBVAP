@@ -1,0 +1,111 @@
+{
+  "CAM-01": {
+    "name": "CAM-01 Calibrated Ground Plane",
+    "src_points": [
+      [
+        57,
+        640
+      ],
+      [
+        1003,
+        627
+      ],
+      [
+        1150,
+        715
+      ],
+      [
+        36,
+        718
+      ]
+    ],
+    "metric_width_m": 12.0,
+    "metric_length_m": 60.0,
+    "barrier_y_m": 2.0,
+    "updated_at": "2026-09-08 23:51:18"
+  },
+  "CAM-02": {
+    "name": "CAM-02 Perimeter Buffer",
+    "src_points": [
+      [
+        450,
+        300
+      ],
+      [
+        850,
+        300
+      ],
+      [
+        1150,
+        700
+      ],
+      [
+        150,
+        700
+      ]
+    ],
+    "metric_width_m": 12.0,
+    "metric_length_m": 45.0,
+    "barrier_y_m": 15.0,
+    "frame_size": [
+      1280,
+      720
+    ]
+  },
+  "CAM-03": {
+    "name": "CAM-03 East Watchtower",
+    "src_points": [
+      [
+        400,
+        280
+      ],
+      [
+        880,
+        280
+      ],
+      [
+        1100,
+        700
+      ],
+      [
+        180,
+        700
+      ]
+    ],
+    "metric_width_m": 15.0,
+    "metric_length_m": 50.0,
+    "barrier_y_m": 20.0,
+    "frame_size": [
+      1280,
+      720
+    ]
+  },
+  "CAM-04": {
+    "name": "CAM-04 Sector South Highway",
+    "src_points": [
+      [
+        350,
+        260
+      ],
+      [
+        920,
+        260
+      ],
+      [
+        1160,
+        710
+      ],
+      [
+        120,
+        710
+      ]
+    ],
+    "metric_width_m": 10.0,
+    "metric_length_m": 40.0,
+    "barrier_y_m": 15.0,
+    "frame_size": [
+      1280,
+      720
+    ]
+  }
+}

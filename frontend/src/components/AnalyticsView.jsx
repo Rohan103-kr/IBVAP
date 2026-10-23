@@ -158,50 +158,50 @@ export default function AnalyticsView() {
     <div className="view" style={{ overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 14, paddingBottom: 30 }}>
 
       {/* ═══ Header & Control Toolbar ═══ */}
-      <div className="view-toolbar" style={{ flexWrap: 'wrap', gap: 10, padding: '10px 16px', background: 'rgba(12,18,30,0.98)' }}>
+      <div className="view-toolbar" style={{ flexWrap: 'nowrap', overflowX: 'auto', gap: 8, padding: '0 16px' }}>
         
         {/* Title */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span className="material-symbols-outlined icon-fill" style={{ fontSize: 20, color: 'var(--accent)' }}>database</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: 13, letterSpacing: '0.05em' }}>
-            SQL ANALYTICS & DEMOGRAPHIC INTELLIGENCE
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+          <span className="material-symbols-outlined icon-fill" style={{ fontSize: 18, color: 'var(--accent)' }}>analytics</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: 12, letterSpacing: '0.04em' }}>
+            DEMOGRAPHIC & TRAFFIC INTEL
           </span>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: 9,
             background: 'var(--bg-surface)', color: 'var(--success)',
-            padding: '2px 6px', borderRadius: 4, border: '1px solid var(--success-bd)'
+            padding: '1px 5px', borderRadius: 3, border: '1px solid var(--success-bd)'
           }}>
-            SQLite WAL Mode · Active
+            SQLITE WAL
           </span>
         </div>
 
         {/* Period Selector Tabs */}
-        <div className="toolbar-group" style={{ marginLeft: 10 }}>
+        <div className="toolbar-group" style={{ marginLeft: 6, flexShrink: 0 }}>
           <button
             className={`toolbar-btn${period === 'hourly' ? ' active' : ''}`}
             onClick={() => setPeriod('hourly')}
           >
             <span className="material-symbols-outlined" style={{ fontSize: 13, marginRight: 3 }}>schedule</span>
-            HOURLY (24H)
+            HOURLY
           </button>
           <button
             className={`toolbar-btn${period === 'daily' ? ' active' : ''}`}
             onClick={() => setPeriod('daily')}
           >
             <span className="material-symbols-outlined" style={{ fontSize: 13, marginRight: 3 }}>calendar_today</span>
-            DAILY (MONTH)
+            DAILY
           </button>
           <button
             className={`toolbar-btn${period === 'monthly' ? ' active' : ''}`}
             onClick={() => setPeriod('monthly')}
           >
             <span className="material-symbols-outlined" style={{ fontSize: 13, marginRight: 3 }}>date_range</span>
-            MONTHLY (YEAR)
+            MONTHLY
           </button>
         </div>
 
         {/* Dynamic Date / Month Pickers */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
           {period === 'hourly' && (
             <input
               type="date"
@@ -253,14 +253,14 @@ export default function AnalyticsView() {
         </div>
 
         {/* Action Buttons */}
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center' }}>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', flexShrink: 0 }}>
           <button
             className="btn-accent"
             onClick={() => setIsReportOpen(true)}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '4px 10px', fontSize: 10 }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '4px 8px', fontSize: 10 }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>summarize</span>
-            EXECUTIVE AUDIT REPORT
+            AUDIT REPORT
           </button>
 
           <button
@@ -286,7 +286,7 @@ export default function AnalyticsView() {
       </div>
 
       {/* ═══ Main Analytics Content ═══ */}
-      <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '12px 16px 40px', display: 'flex', flexDirection: 'column', gap: 14 }}>
 
         {/* ── 4 Top KPI Stat Cards ── */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
@@ -310,7 +310,7 @@ export default function AnalyticsView() {
                 <span>♂ Male: {kpis.male_persons} ({kpis.male_ratio_pct}%)</span>
                 <span>♀ Female: {kpis.female_persons} ({kpis.female_ratio_pct}%)</span>
               </div>
-              <div style={{ width: '100%', height: 4, background: 'rgba(255,255,255,0.06)', borderRadius: 2, overflow: 'hidden', display: 'flex' }}>
+              <div style={{ width: '100%', height: 4, background: 'var(--bg-hover)', borderRadius: 2, overflow: 'hidden', display: 'flex' }}>
                 <div style={{ width: `${kpis.male_ratio_pct}%`, height: '100%', background: 'var(--accent)' }} />
                 <div style={{ width: `${kpis.female_ratio_pct}%`, height: '100%', background: '#ec4899' }} />
               </div>

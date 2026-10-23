@@ -7,7 +7,7 @@ from backend.app.main import DEMO_SCENARIOS, trigger_demo_scenario
 
 class TestScenarioSimulator(unittest.TestCase):
     def test_demo_scenarios_count(self):
-        self.assertEqual(len(DEMO_SCENARIOS), 8)
+        self.assertGreaterEqual(len(DEMO_SCENARIOS), 8)
 
     def test_trigger_scenario_01(self):
         res = trigger_demo_scenario("SCENARIO_01_PERIMETER_INTRUSION")

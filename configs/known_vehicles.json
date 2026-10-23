@@ -1,0 +1,50 @@
+[
+  {
+    "plate_number": "UK-07-TA-5521",
+    "vehicle_type": "SUV",
+    "owner_name": "Col. Ranjit Singh",
+    "department": "Sector Alpha Quick Response",
+    "status": "AUTHORIZED",
+    "notes": "Command Patrol Escort. Authorized for all perimeter zones and restricted checkpoints.",
+    "photos": [],
+    "primary_photo": null,
+    "created_at": "2026-09-07 22:20:00",
+    "updated_at": "2026-09-07 22:20:00"
+  },
+  {
+    "plate_number": "KA-05-NB-9912",
+    "vehicle_type": "TRUCK",
+    "owner_name": "Flagged Contraband Carrier",
+    "department": "Border Crossing Intelligence",
+    "status": "UNAUTHORIZED",
+    "notes": "Flagged Contraband Transport / SSB Intel Alert. High threat.",
+    "photos": [],
+    "primary_photo": null,
+    "created_at": "2026-09-07 22:20:00",
+    "updated_at": "2026-09-07 22:20:00"
+  },
+  {
+    "plate_number": "HR-26-DK-8392",
+    "vehicle_type": "TRUCK",
+    "owner_name": "Sentry Supply Logistics",
+    "department": "Sector 1 Base Logistics",
+    "status": "AUTHORIZED",
+    "notes": "Ration & Fuel Supply Convoy. Clearance active for sectors 1-4.",
+    "photos": [],
+    "primary_photo": null,
+    "created_at": "2026-09-07 22:20:00",
+    "updated_at": "2026-09-07 22:20:00"
+  },
+  {
+    "plate_number": "HR-26-CE-7674",
+    "vehicle_type": "CAR",
+    "owner_name": "Toll Sector Patrol",
+    "department": "Sector Alpha Toll Checkpoint",
+    "status": "AUTHORIZED",
+    "notes": "Checkpoint Patrol Vehicle. Authorized for fast-track clearance.",
+    "photos": [],
+    "primary_photo": null,
+    "created_at": "2026-09-08 11:00:00",
+    "updated_at": "2026-09-08 11:00:00"
+  }
+]

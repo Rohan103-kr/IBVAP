@@ -14,6 +14,8 @@ import ScenarioEvaluationModal from './components/ScenarioEvaluationModal'
 import SystemWatchdogModal from './components/SystemWatchdogModal'
 import KnownFacesModal from './components/KnownFacesModal'
 import TargetContinuityCard from './components/TargetContinuityCard'
+import VehicleAdminView from './components/VehicleAdminView'
+import AdminPanelView from './components/AdminPanelView'
 
 const API = 'http://localhost:8000'
 
@@ -24,29 +26,73 @@ const fetchJSON = async (url) => {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab]       = useState('live')
+  const [activeTab, setActiveTabState] = useState(() => {
+    try {
+      const urlTab = new URLSearchParams(window.location.search).get('tab')
+      if (urlTab) return urlTab
+    } catch {}
+    return 'live'
+  })
+
+  const setActiveTab = (tab) => {
+    setActiveTabState(tab)
+    try {
+      const url = new URL(window.location.href)
+      url.searchParams.set('tab', tab)
+      window.history.replaceState(null, '', url.toString())
+    } catch {}
+  }
   const [alerts, setAlerts]             = useState([])
   const [muted, setMuted]               = useState(false)
   const [voiceAlerts, setVoiceAlerts]   = useState(true)
-  const [theme, setTheme]               = useState('midnight')
+  const [theme, setTheme]               = useState(() => {
+    try {
+      const urlTheme = new URLSearchParams(window.location.search).get('theme')
+      if (urlTheme) return urlTheme
+    } catch {}
+    return localStorage.getItem('ibvap_theme') || 'light'
+  })
   const [modalAlert, setModalAlert]     = useState(null)
   const [dispatchAlert, setDispatchAlert] = useState(null)
   const [bannerAlert, setBannerAlert]   = useState(null)
   const [simBboxes, setSimBboxes]       = useState({})
   const [backendOnline, setBackendOnline] = useState(false)
-  const [feedsOnline]                   = useState(4)
+  const [feedsOnline]                   = useState(8)
   const [isScenarioModalOpen, setIsScenarioModalOpen] = useState(false)
   const [isWatchdogModalOpen, setIsWatchdogModalOpen] = useState(false)
   const [isKnownFacesModalOpen, setIsKnownFacesModalOpen] = useState(false)
   const [activeTargets, setActiveTargets] = useState([])
 
-  // Cameras start paused by default (Tap to play or Upload video to start)
+  // Default CAM-01 active; others in standby until connected or activated
   const [playingState, setPlayingState] = useState({
-    'CAM-01': false,
+    'CAM-01': true,
     'CAM-02': false,
     'CAM-03': false,
     'CAM-04': false,
+    'CAM-05': false,
+    'CAM-06': false,
+    'CAM-07': false,
+    'CAM-08': false,
   })
+
+  const playingStateRef = useRef(playingState)
+  useEffect(() => {
+    playingStateRef.current = playingState
+  }, [playingState])
+
+  const modalAlertRef = useRef(modalAlert)
+  useEffect(() => {
+    modalAlertRef.current = modalAlert
+  }, [modalAlert])
+
+  const setPlay = (id, shouldPlay = true) => {
+    setPlayingState(prev => ({ ...prev, [id]: shouldPlay }))
+    if (shouldPlay) {
+      fetch(`${API}/api/v1/simulation/play/${id}`, { method: 'POST' }).catch(() => {})
+    } else {
+      fetch(`${API}/api/v1/simulation/toggle/${id}`, { method: 'POST' }).catch(() => {})
+    }
+  }
 
   const togglePlay = (id) => {
     setPlayingState(prev => {
@@ -85,41 +131,96 @@ export default function App() {
   }, [muted])
 
   const initialLoadRef = useRef(true)
+  const getPersistedAcknowledged = () => {
+    try {
+      const raw = localStorage.getItem('ibvap_acknowledged_alerts')
+      return raw ? new Set(JSON.parse(raw)) : new Set()
+    } catch {
+      return new Set()
+    }
+  }
+  const acknowledgedAlertsRef = useRef(getPersistedAcknowledged())
   const dismissedAlertsRef = useRef(new Set())
   const snoozedCamsRef = useRef({}) // key: cam_id -> timestamp until which popups are snoozed
+  const snoozedTracksRef = useRef({}) // key: track_id -> timestamp until which popups are snoozed
+  const bannerAlertRef = useRef(bannerAlert)
+  const isBannerHoveredRef = useRef(false)
+  const lastAudioTimeRef = useRef(0) // Rate-limit siren/speech to at most 1 every 25s
+
+  useEffect(() => {
+    bannerAlertRef.current = bannerAlert
+  }, [bannerAlert])
+
+  const persistAcknowledgedId = useCallback((id) => {
+    if (!id) return
+    acknowledgedAlertsRef.current.add(id)
+    dismissedAlertsRef.current.add(id)
+    try {
+      localStorage.setItem(
+        'ibvap_acknowledged_alerts',
+        JSON.stringify(Array.from(acknowledgedAlertsRef.current).slice(-500))
+      )
+    } catch {}
+  }, [])
+
+  const handleAcknowledgeAlert = useCallback((alertOrId) => {
+    const aid = typeof alertOrId === 'string' ? alertOrId : (alertOrId?.id || alertOrId?.event_id)
+    if (!aid) return
+
+    persistAcknowledgedId(aid)
+
+    // Notify backend to register acknowledgement in audit store & extend camera track cooldown
+    fetch(`${API}/api/v1/alerts/acknowledge`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ alert_id: aid, operator_id: 'Operator-Command' })
+    }).catch(() => {})
+
+    // Instantly close banner and modal if they match this alert
+    setBannerAlert(prev => (prev && (prev.id === aid || prev.event_id === aid) ? null : prev))
+    setModalAlert(prev => (prev && (prev.id === aid || prev.event_id === aid) ? null : prev))
+
+    // Mark as acknowledged in main dashboard alerts feed
+    setAlerts(prev => prev.map(a => (a.id === aid || a.event_id === aid) ? { ...a, acknowledged: true } : a))
+  }, [persistAcknowledgedId])
 
   const handleCloseDossier = useCallback(() => {
     if (modalAlert) {
       const aid = modalAlert.id || modalAlert.event_id
-      if (aid) dismissedAlertsRef.current.add(aid)
+      if (aid) handleAcknowledgeAlert(aid)
       const camId = modalAlert.camera_id
       if (camId) {
-        // Snooze auto-popup modal for this camera for 90 seconds once closed/handled
-        snoozedCamsRef.current[camId] = Date.now() + 90000
+        snoozedCamsRef.current[camId] = Date.now() + 180000
+      }
+      if (modalAlert.track_id) {
+        snoozedTracksRef.current[modalAlert.track_id] = Date.now() + 180000
       }
     }
     setModalAlert(null)
-  }, [modalAlert])
+  }, [modalAlert, handleAcknowledgeAlert])
 
   const handleSnoozeBanner = useCallback((alert) => {
     if (alert) {
       const aid = alert.id || alert.event_id
-      if (aid) dismissedAlertsRef.current.add(aid)
+      if (aid) handleAcknowledgeAlert(aid)
       const camId = alert.camera_id
       if (camId) {
-        snoozedCamsRef.current[camId] = Date.now() + 90000
+        snoozedCamsRef.current[camId] = Date.now() + 180000
+      }
+      if (alert.track_id) {
+        snoozedTracksRef.current[alert.track_id] = Date.now() + 180000
       }
     }
     setBannerAlert(null)
-  }, [])
+  }, [handleAcknowledgeAlert])
 
   const handleDismissBanner = useCallback((alert) => {
     if (alert) {
-      const aid = alert.id || alert.event_id
-      if (aid) dismissedAlertsRef.current.add(aid)
+      handleAcknowledgeAlert(alert)
+    } else {
+      setBannerAlert(null)
     }
-    setBannerAlert(null)
-  }, [])
+  }, [handleAcknowledgeAlert])
 
   const handleClearAllAlerts = useCallback(async () => {
     try {
@@ -128,7 +229,17 @@ export default function App() {
     setAlerts([])
     setBannerAlert(null)
     setModalAlert(null)
-    dismissedAlertsRef.current = new Set()
+    acknowledgedAlertsRef.current.clear()
+    dismissedAlertsRef.current.clear()
+    try { localStorage.removeItem('ibvap_acknowledged_alerts') } catch {}
+  }, [])
+
+  const handleClearCameraAlerts = useCallback((camId) => {
+    if (!camId) return
+    setAlerts(prev => prev.filter(a => a.camera_id !== camId))
+    setBannerAlert(prev => prev && prev.camera_id === camId ? null : prev)
+    setModalAlert(prev => prev && prev.camera_id === camId ? null : prev)
+    fetch(`${API}/api/v1/camera/${camId}/clear-events`, { method: 'POST' }).catch(() => {})
   }, [])
 
   // Backend Health check + Event Polling
@@ -157,13 +268,29 @@ export default function App() {
           }
         }
 
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
+          const validBackendIds = new Set(data.map(d => d.event_id || d.id))
+
+          // Instantly dismiss any modal or banner if its underlying event was cleared on backend
+          setBannerAlert(prev => (prev && validBackendIds.has(prev.id || prev.event_id) ? prev : null))
+          setModalAlert(prev => (prev && validBackendIds.has(prev.id || prev.event_id) ? prev : null))
+
           setAlerts(prev => {
-            const existing = new Set(prev.map(a => a.id || a.event_id))
+            // Retain alerts only if they still exist in the backend active events list
+            const activePrev = prev.filter(a => {
+              const aid = a.id || a.event_id
+              return aid && validBackendIds.has(aid)
+            })
+            const activeIds = new Set(activePrev.map(a => a.id || a.event_id))
+
             const fresh = data
               .filter(d => {
                 const eid = d.event_id || d.id
-                return eid && !existing.has(eid)
+                // Filter out any alert already acknowledged by operator (never re-arrive on dashboard)
+                if (d.acknowledged || (eid && acknowledgedAlertsRef.current.has(eid))) {
+                  return false
+                }
+                return eid && !activeIds.has(eid)
               })
               .map(d => ({
                 ...d,
@@ -177,37 +304,67 @@ export default function App() {
                 snapshot: d.snapshot || null,
               }))
 
-            if (fresh.length === 0) return prev
+            if (fresh.length === 0) return activePrev
 
-            // Auto-popup modal & HUD banner for genuine NEW alerts on unsnoozed cameras
+            // Non-intrusive Heads-Up Banner for genuine Level-1 threats on active cameras
             const now = Date.now()
-            const highRisk = fresh.find(a => {
+            const P1_TYPES = new Set(['FENCE_CROSSING', 'ANPR_WATCHLIST_MATCH', 'FRS_SUSPECT_MATCH', 'VIOLENT_SKIRMISH', 'ZONE_ENTRY', 'RESTRICTED_PENETRATION'])
+
+            // Filter all candidate alerts meeting strict priority criteria
+            const candidates = fresh.filter(a => {
               const score = a.risk_score ?? a.riskScore ?? 0
               const aid = a.id || a.event_id
               const camId = a.camera_id
-              const isSnoozed = snoozedCamsRef.current[camId] && snoozedCamsRef.current[camId] > now
+              const trackId = a.track_id
+              const isPlaying = playingStateRef.current[camId] ?? false
+
+              // CRITICAL: NEVER fire alerts for paused / inactive cameras!
+              if (!isPlaying) return false
+
+              // NEVER re-arrive if acknowledged
+              if (a.acknowledged || (aid && acknowledgedAlertsRef.current.has(aid))) return false
+
+              const isCamSnoozed = snoozedCamsRef.current[camId] && snoozedCamsRef.current[camId] > now
+              const isTrackSnoozed = trackId && snoozedTracksRef.current[trackId] && snoozedTracksRef.current[trackId] > now
               const isDismissed = aid && dismissedAlertsRef.current.has(aid)
-              const isZoneBreach = a.event_type === 'ZONE_ENTRY' || a.event_type === 'FENCE_CROSSING' || (a.reasons && a.reasons.some(r => r.includes('zone') || r.includes('fence')))
-              return (score >= 60 || isZoneBreach) && !isDismissed && !isSnoozed
+              const isP1 = P1_TYPES.has(a.event_type) || a.severity === 'CRITICAL'
+
+              // Strictly filter out noise: only pop up banner for genuine P1/P2 breaches with risk >= 75
+              return isP1 && score >= 75 && !isDismissed && !isCamSnoozed && !isTrackSnoozed
             })
 
-            if (highRisk) {
-              const aid = highRisk.id || highRisk.event_id
-              if (aid) dismissedAlertsRef.current.add(aid)
-              const camId = highRisk.camera_id
-              if (camId) snoozedCamsRef.current[camId] = now + 90000
+            if (candidates.length > 0) {
+              // Sort candidates by priority score / risk descending to pick the most urgent threat
+              candidates.sort((a, b) => (b.priority_score || b.risk_score || 0) - (a.priority_score || a.risk_score || 0))
+              const topThreat = candidates[0]
+              const topScore = topThreat.risk_score ?? topThreat.riskScore ?? 0
+              const currentScore = bannerAlertRef.current ? (bannerAlertRef.current.risk_score ?? bannerAlertRef.current.riskScore ?? 0) : 0
 
-              setBannerAlert(highRisk)
-              playSiren()
-              speakAlert(`Security Alert: ${highRisk.description || 'Intrusion detected'} on ${highRisk.camera_id}`)
+              // Anti-noise & anti-interruption: only replace banner if none showing OR incoming is strictly higher risk and not being inspected
+              const canShow = !bannerAlertRef.current || (!isBannerHoveredRef.current && topScore > currentScore)
 
-              // Auto-popup dossier modal only for CRITICAL level intrusions if no modal currently open
-              if ((highRisk.risk_score >= 85 || highRisk.severity === 'CRITICAL') && !modalAlert) {
-                setModalAlert(highRisk)
+              if (canShow) {
+                const aid = topThreat.id || topThreat.event_id
+                if (aid) dismissedAlertsRef.current.add(aid)
+                const camId = topThreat.camera_id
+                if (camId) snoozedCamsRef.current[camId] = now + 60000
+                if (topThreat.track_id) snoozedTracksRef.current[topThreat.track_id] = now + 90000
+
+                // Show tactical HUD banner in top-right corner (unobtrusive, auto-dismissing in 10s)
+                setBannerAlert(topThreat)
+
+                // Rate-limit audio siren & speech synthesis to at most 1 per 25s
+                if (now - lastAudioTimeRef.current > 25000) {
+                  lastAudioTimeRef.current = now
+                  playSiren()
+                  const cleanType = (topThreat.event_type || 'intrusion').replace(/_/g, ' ').toLowerCase()
+                  const cleanCam = (topThreat.camera_id || 'Sector 1').replace('-', ' ')
+                  speakAlert(`Priority alert: ${cleanType} on ${cleanCam}`)
+                }
               }
             }
 
-            return [...fresh, ...prev].slice(0, 100)
+            return [...fresh, ...activePrev].slice(0, 100)
           })
         }
       } catch {}
@@ -218,12 +375,13 @@ export default function App() {
     pollTimer.current = setInterval(() => {
       checkHealth()
       pollEvents()
-    }, 1500)
+    }, 2500)
     return () => clearInterval(pollTimer.current)
-  }, [playSiren, speakAlert, modalAlert])
+  }, [playSiren, speakAlert])
 
   useEffect(() => {
-    document.documentElement.className = `theme-${theme}`
+    localStorage.setItem('ibvap_theme', theme)
+    document.documentElement.className = theme === 'light' ? 'theme-light' : `theme-${theme}`
   }, [theme])
 
   // Glove-Friendly Tactical Keyboard Hotkeys for Sentry Command
@@ -235,14 +393,16 @@ export default function App() {
       if (e.code === 'Space') {
         e.preventDefault()
         // Acknowledge banner or top alert
-        if (bannerAlert) {
-          handleDismissBanner(bannerAlert)
+        if (bannerAlertRef.current) {
+          handleAcknowledgeAlert(bannerAlertRef.current)
+        } else if (modalAlertRef.current) {
+          handleAcknowledgeAlert(modalAlertRef.current)
         } else if (alerts.length > 0) {
-          handleDismissBanner(alerts[0])
+          handleAcknowledgeAlert(alerts[0])
         }
       } else if (e.key === 'd' || e.key === 'D') {
         e.preventDefault()
-        setDispatchAlert(alerts[0] || null)
+        setDispatchAlert(bannerAlertRef.current || alerts[0] || null)
       } else if (e.key === '1') {
         setActiveTab('live')
       } else if (e.key === '2') {
@@ -252,6 +412,9 @@ export default function App() {
       } else if (e.key === '4') {
         setActiveTab('anpr')
       } else if (e.key === 'Escape') {
+        if (bannerAlertRef.current) {
+          handleAcknowledgeAlert(bannerAlertRef.current)
+        }
         setModalAlert(null)
         setDispatchAlert(null)
         setBannerAlert(null)
@@ -263,7 +426,12 @@ export default function App() {
   }, [bannerAlert, alerts, handleDismissBanner])
 
   const cycleTheme = () => {
-    setTheme(prev => (prev === 'midnight' ? 'thermal' : prev === 'thermal' ? 'amber' : 'midnight'))
+    setTheme(prev => {
+      if (prev === 'light') return 'midnight'
+      if (prev === 'midnight') return 'thermal'
+      if (prev === 'thermal') return 'amber'
+      return 'light'
+    })
   }
 
   const criticalCount = alerts.filter(a => (a.severity || '').toUpperCase() === 'CRITICAL').length
@@ -299,6 +467,10 @@ export default function App() {
             onOpenDispatch={(alert) => setDispatchAlert(alert || alerts[0] || null)}
             playingState={playingState}
             onTogglePlay={togglePlay}
+            onSetPlay={setPlay}
+            onAcknowledge={handleAcknowledgeAlert}
+            onClearAll={handleClearAllAlerts}
+            onClearCameraAlerts={handleClearCameraAlerts}
           />
         )}
         {activeTab === 'map' && (
@@ -319,8 +491,10 @@ export default function App() {
         {activeTab === 'investigate' && (
           <InvestigationSearchView onInvestigate={setModalAlert} />
         )}
+        {activeTab === 'vehicles' && <VehicleAdminView />}
         {activeTab === 'cameras' && <CameraStatusView />}
         {activeTab === 'analytics' && <AnalyticsView />}
+        {activeTab === 'admin' && <AdminPanelView onNavigateToFeeds={() => setActiveTab('live')} />}
       </main>
 
       <Footer
@@ -331,15 +505,15 @@ export default function App() {
 
       {scenarioResult && (
         <div className="modal-backdrop">
-          <div className="modal-box" style={{ maxWidth: 420, padding: 20, textAlign: 'center', border: '1px solid var(--success)', background: '#0f172a' }}>
+          <div className="modal-box" style={{ maxWidth: 420, padding: 20, textAlign: 'center', border: '1px solid var(--success)', background: 'var(--bg-panel)' }}>
             <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--success)', marginBottom: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
               <span className="material-symbols-outlined">check_circle</span>
               SCENARIO COMPLETE ✓
             </div>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#f8fafc', marginBottom: 12 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 12 }}>
               {scenarioResult.title || scenarioResult.id || 'Demo Scenario Execution'}
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, textAlign: 'left', background: 'rgba(15,23,42,0.9)', padding: 12, borderRadius: 6, fontSize: 11, fontFamily: 'var(--font-mono)', marginBottom: 16, border: '1px solid #334155' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, textAlign: 'left', background: 'var(--bg-surface)', padding: 12, borderRadius: 6, fontSize: 11, fontFamily: 'var(--font-mono)', marginBottom: 16, border: '1px solid var(--border)' }}>
               <div>Detection: <strong style={{ color: 'var(--success)' }}>PASS</strong></div>
               <div>Tracking: <strong style={{ color: 'var(--success)' }}>PASS</strong></div>
               <div>Context: <strong style={{ color: 'var(--success)' }}>PASS</strong></div>
@@ -367,9 +541,12 @@ export default function App() {
             setDispatchAlert(alert)
             setBannerAlert(null)
           }}
+          onHoverChange={(hovered) => {
+            isBannerHoveredRef.current = hovered
+          }}
           onSnooze={handleSnoozeBanner}
-          onDismiss={handleDismissBanner}
-          onAcknowledge={handleDismissBanner}
+          onDismiss={handleAcknowledgeAlert}
+          onAcknowledge={handleAcknowledgeAlert}
         />
       )}
 

@@ -4,6 +4,8 @@ import time
 import datetime
 import random
 import logging
+import queue
+import threading
 from typing import Dict, Any, List, Optional
 
 logging.basicConfig(level=logging.INFO)
@@ -17,12 +19,93 @@ class AnalyticsDatabase:
     Edge-Native SQLite SQL Analytics Database.
     Persists person traffic (with gender categorization), vehicle traffic (with vehicle types & ANPR number plates),
     and security incidents with support for Hourly, Daily, and Monthly analytical reporting.
+    Features an asynchronous non-blocking worker queue to prevent disk I/O latency in streaming loops.
     """
     def __init__(self, db_path: str = DB_PATH):
         self.db_path = db_path
         os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
         self._init_db()
         self._ensure_seed_data()
+
+        # High-performance asynchronous background write queue
+        self._write_queue: queue.Queue = queue.Queue(maxsize=10000)
+        self._worker_thread = threading.Thread(target=self._async_db_worker, daemon=True)
+        self._worker_thread.start()
+
+    def _async_db_worker(self):
+        """
+        Background worker thread that batches and executes database writes.
+        Completely decouples SQLite disk fsync from real-time video streaming loops.
+        """
+        batch = []
+        last_flush = time.time()
+        while True:
+            try:
+                try:
+                    task = self._write_queue.get(timeout=0.2)
+                    batch.append(task)
+                except queue.Empty:
+                    pass
+
+                now = time.time()
+                if len(batch) >= 25 or (batch and now - last_flush >= 0.4):
+                    self._flush_batch(batch)
+                    batch.clear()
+                    last_flush = now
+            except Exception as e:
+                logger.error(f"Error in async DB worker: {e}")
+                batch.clear()
+
+    def _flush_batch(self, batch: List[Dict[str, Any]]):
+        """Executes a batch of write tasks in a single disk transaction."""
+        if not batch:
+            return
+        try:
+            with self._get_connection() as conn:
+                cur = conn.cursor()
+                for task in batch:
+                    t_type = task.get("type")
+                    if t_type == "person":
+                        cur.execute("""
+                        INSERT INTO person_detections
+                        (camera_id, track_id, gender, age_group, confidence, dwell_time_sec, zone_id, timestamp, date, hour, month)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """, task["args"])
+                    elif t_type == "vehicle":
+                        cur.execute("""
+                        INSERT OR IGNORE INTO vehicle_detections
+                        (camera_id, track_id, vehicle_type, plate_number, confidence, speed_kmh, watchlist_status, timestamp, date, hour, month)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """, task["args"])
+                    elif t_type == "incident":
+                        cur.execute("""
+                        INSERT OR IGNORE INTO security_incidents
+                        (incident_id, camera_id, event_type, severity, risk_score, target_type, details, timestamp, date, hour, month)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """, task["args"])
+                    elif t_type == "update_plate":
+                        camera_id = task["camera_id"]
+                        track_id = task["track_id"]
+                        plate_number = task["plate_number"]
+                        watchlist_status = task["watchlist_status"]
+                        vehicle_type = task["vehicle_type"]
+                        conf = task.get("confidence", 0.92)
+                        cur.execute("""
+                        UPDATE vehicle_detections
+                        SET plate_number = ?, watchlist_status = ?, vehicle_type = ?, confidence = MAX(confidence, ?)
+                        WHERE camera_id = ? AND (track_id = ? OR (plate_number = 'UNASSIGNED' AND timestamp >= datetime('now', '-45 seconds')))
+                        """, (plate_number, watchlist_status, vehicle_type, conf, camera_id, track_id))
+                        if cur.rowcount == 0:
+                            now = datetime.datetime.now()
+                            cur.execute("""
+                            INSERT OR IGNORE INTO vehicle_detections
+                            (camera_id, track_id, vehicle_type, plate_number, confidence, speed_kmh, watchlist_status, timestamp, date, hour, month)
+                            VALUES (?, ?, ?, ?, ?, 35.0, ?, ?, ?, ?, ?)
+                            """, (camera_id, track_id, vehicle_type, plate_number, conf, watchlist_status,
+                                  now.strftime("%Y-%m-%d %H:%M:%S"), now.strftime("%Y-%m-%d"), now.hour, now.strftime("%Y-%m")))
+                conn.commit()
+        except Exception as e:
+            logger.error(f"Error flushing DB write batch of {len(batch)} items: {e}")
 
     def _get_connection(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self.db_path, timeout=10.0)
@@ -69,7 +152,8 @@ class AnalyticsDatabase:
                 timestamp DATETIME NOT NULL,
                 date TEXT NOT NULL,            -- 'YYYY-MM-DD'
                 hour INTEGER NOT NULL,         -- 0 to 23
-                month TEXT NOT NULL            -- 'YYYY-MM'
+                month TEXT NOT NULL,           -- 'YYYY-MM'
+                UNIQUE(camera_id, track_id, date)  -- one record per track per camera per day
             );
             """)
 
@@ -106,65 +190,63 @@ class AnalyticsDatabase:
     def log_person(self, camera_id: str, track_id: int, gender: str = "UNKNOWN",
                    age_group: str = "ADULT", confidence: float = 0.85,
                    dwell_time_sec: float = 0.0, zone_id: Optional[str] = None):
-        """Insert a detected person into SQL database."""
-        now = datetime.datetime.utcnow()
+        """Asynchronously queue person detection for batched SQL insert."""
+        now = datetime.datetime.now()
         date_str = now.strftime("%Y-%m-%d")
         month_str = now.strftime("%Y-%m")
         hour_int = now.hour
         ts_str = now.strftime("%Y-%m-%d %H:%M:%S")
 
+        args = (camera_id, track_id, gender.upper(), age_group.upper(), confidence, dwell_time_sec, zone_id, ts_str, date_str, hour_int, month_str)
         try:
-            with self._get_connection() as conn:
-                conn.execute("""
-                INSERT INTO person_detections
-                (camera_id, track_id, gender, age_group, confidence, dwell_time_sec, zone_id, timestamp, date, hour, month)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (camera_id, track_id, gender.upper(), age_group.upper(), confidence, dwell_time_sec, zone_id, ts_str, date_str, hour_int, month_str))
-                conn.commit()
-        except Exception as e:
-            logger.error(f"Error logging person detection: {e}")
+            self._write_queue.put_nowait({"type": "person", "args": args})
+        except queue.Full:
+            logger.warning("DBAnalytics write queue full; dropping person log")
 
     def log_vehicle(self, camera_id: str, track_id: int, vehicle_type: str = "CAR",
                     plate_number: Optional[str] = None, confidence: float = 0.90,
                     speed_kmh: float = 35.0, watchlist_status: str = "CLEARED"):
-        """Insert a detected vehicle into SQL database."""
-        now = datetime.datetime.utcnow()
+        """Asynchronously queue vehicle detection for batched SQL INSERT OR IGNORE (one per track per day)."""
+        now = datetime.datetime.now()
         date_str = now.strftime("%Y-%m-%d")
         month_str = now.strftime("%Y-%m")
         hour_int = now.hour
         ts_str = now.strftime("%Y-%m-%d %H:%M:%S")
 
+        # In-memory guard: skip if this (camera, track, date) was already logged today
+        dedupe_key = (camera_id, track_id, date_str)
+        if not hasattr(self, "_vehicle_logged_today"):
+            self._vehicle_logged_today: set = set()
+        if dedupe_key in self._vehicle_logged_today:
+            return
+        self._vehicle_logged_today.add(dedupe_key)
+
+        # Prune the set once it gets large (keep today's entries only)
+        if len(self._vehicle_logged_today) > 5000:
+            today = now.strftime("%Y-%m-%d")
+            self._vehicle_logged_today = {k for k in self._vehicle_logged_today if k[2] == today}
+
+        args = (camera_id, track_id, vehicle_type.upper(), (plate_number or "UNASSIGNED").upper(), confidence, speed_kmh, watchlist_status.upper(), ts_str, date_str, hour_int, month_str)
         try:
-            with self._get_connection() as conn:
-                conn.execute("""
-                INSERT INTO vehicle_detections
-                (camera_id, track_id, vehicle_type, plate_number, confidence, speed_kmh, watchlist_status, timestamp, date, hour, month)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (camera_id, track_id, vehicle_type.upper(), (plate_number or "UNASSIGNED").upper(), confidence, speed_kmh, watchlist_status.upper(), ts_str, date_str, hour_int, month_str))
-                conn.commit()
-        except Exception as e:
-            logger.error(f"Error logging vehicle detection: {e}")
+            self._write_queue.put_nowait({"type": "vehicle", "args": args})
+        except queue.Full:
+            logger.warning("DBAnalytics write queue full; dropping vehicle log")
 
     def log_incident(self, incident_id: str, camera_id: str, event_type: str,
                      severity: str, risk_score: int, target_type: str = "person",
                      details: str = ""):
-        """Insert a security incident into SQL database."""
-        now = datetime.datetime.utcnow()
+        """Asynchronously queue security incident for batched SQL insert."""
+        now = datetime.datetime.now()
         date_str = now.strftime("%Y-%m-%d")
         month_str = now.strftime("%Y-%m")
         hour_int = now.hour
         ts_str = now.strftime("%Y-%m-%d %H:%M:%S")
 
+        args = (incident_id, camera_id, event_type, severity.upper(), risk_score, target_type, details, ts_str, date_str, hour_int, month_str)
         try:
-            with self._get_connection() as conn:
-                conn.execute("""
-                INSERT OR IGNORE INTO security_incidents
-                (incident_id, camera_id, event_type, severity, risk_score, target_type, details, timestamp, date, hour, month)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (incident_id, camera_id, event_type, severity.upper(), risk_score, target_type, details, ts_str, date_str, hour_int, month_str))
-                conn.commit()
-        except Exception as e:
-            logger.error(f"Error logging incident: {e}")
+            self._write_queue.put_nowait({"type": "incident", "args": args})
+        except queue.Full:
+            logger.warning("DBAnalytics write queue full; dropping incident log")
 
     def get_summary(self, period: str = "daily", date_str: Optional[str] = None,
                     month_str: Optional[str] = None, camera_id: Optional[str] = None) -> Dict[str, Any]:
@@ -172,7 +254,7 @@ class AnalyticsDatabase:
         Executes analytical SQL queries across Hourly, Daily, or Monthly timebases.
         Returns aggregated counts, gender categorization, vehicle distribution, and time-series trends.
         """
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.now()
         if not date_str:
             date_str = now.strftime("%Y-%m-%d")
         if not month_str:
@@ -388,6 +470,187 @@ class AnalyticsDatabase:
             "recent_plates": plate_records
         }
 
+    def update_vehicle_plate(self, camera_id: str, track_id: int, plate_number: str,
+                             watchlist_status: str = "CLEARED", vehicle_type: str = "CAR",
+                             confidence: float = 0.92):
+        """Asynchronously queue vehicle license plate update with optional confidence refinement."""
+        if not plate_number:
+            return
+        try:
+            self._write_queue.put_nowait({
+                "type": "update_plate",
+                "camera_id": camera_id,
+                "track_id": track_id,
+                "plate_number": plate_number.upper(),
+                "watchlist_status": watchlist_status.upper(),
+                "vehicle_type": vehicle_type.upper(),
+                "confidence": float(confidence)
+            })
+        except queue.Full:
+            logger.warning("DBAnalytics write queue full; dropping plate update")
+
+    def get_vehicles_admin(
+        self,
+        date_from: Optional[str] = None,
+        date_to: Optional[str] = None,
+        date: Optional[str] = None,
+        hour_from: Optional[int] = None,
+        hour_to: Optional[int] = None,
+        time_window: Optional[str] = None,
+        vehicle_type: Optional[str] = None,
+        camera_id: Optional[str] = None,
+        watchlist_status: Optional[str] = None,
+        search: Optional[str] = None,
+        limit: int = 100,
+        offset: int = 0
+    ) -> Dict[str, Any]:
+        """
+        Admin query engine for vehicle registry with comprehensive Day-wise, Time-wise,
+        Classification, Camera, Watchlist, and License Plate search filters.
+        """
+        where_clauses = []
+        params = []
+
+        # ─── 1. DAY-WISE FILTERING ───
+        if date:
+            where_clauses.append("date = ?")
+            params.append(date)
+        else:
+            if date_from and date_to:
+                where_clauses.append("date >= ? AND date <= ?")
+                params.extend([date_from, date_to])
+            elif date_from:
+                where_clauses.append("date >= ?")
+                params.append(date_from)
+            elif date_to:
+                where_clauses.append("date <= ?")
+                params.append(date_to)
+
+        # ─── 2. TIME-WISE FILTERING ───
+        if time_window and time_window != "ALL":
+            tw = time_window.upper()
+            if tw == "MORNING":      # 06:00 to 11:59
+                where_clauses.append("hour >= 6 AND hour < 12")
+            elif tw == "AFTERNOON":  # 12:00 to 17:59
+                where_clauses.append("hour >= 12 AND hour < 18")
+            elif tw == "EVENING":    # 18:00 to 21:59
+                where_clauses.append("hour >= 18 AND hour < 22")
+            elif tw == "NIGHT":      # 22:00 to 05:59 (Overnight shift)
+                where_clauses.append("(hour >= 22 OR hour < 6)")
+        elif hour_from is not None and hour_to is not None:
+            if hour_from <= hour_to:
+                where_clauses.append("hour >= ? AND hour <= ?")
+                params.extend([hour_from, hour_to])
+            else:
+                # Spans midnight e.g. 22 to 4
+                where_clauses.append("(hour >= ? OR hour <= ?)")
+                params.extend([hour_from, hour_to])
+        elif hour_from is not None:
+            where_clauses.append("hour >= ?")
+            params.append(hour_from)
+        elif hour_to is not None:
+            where_clauses.append("hour <= ?")
+            params.append(hour_to)
+
+        # ─── 3. VEHICLE CLASSIFICATION FILTER ───
+        if vehicle_type and vehicle_type != "ALL":
+            vt = vehicle_type.upper()
+            if vt in ["BIKE", "MOTORCYCLE"]:
+                where_clauses.append("vehicle_type IN ('BIKE', 'MOTORCYCLE')")
+            elif vt in ["CYCLE", "BICYCLE"]:
+                where_clauses.append("vehicle_type IN ('CYCLE', 'BICYCLE')")
+            else:
+                where_clauses.append("vehicle_type = ?")
+                params.append(vt)
+
+        # ─── 4. CAMERA FILTER ───
+        if camera_id and camera_id != "ALL":
+            where_clauses.append("camera_id = ?")
+            params.append(camera_id)
+
+        # ─── 5. WATCHLIST STATUS FILTER ───
+        if watchlist_status and watchlist_status != "ALL":
+            where_clauses.append("watchlist_status = ?")
+            params.append(watchlist_status.upper())
+
+        # ─── 6. SEARCH FILTER (Plate, Camera, Track ID) ───
+        if search:
+            q = f"%{search.strip().upper()}%"
+            where_clauses.append("(plate_number LIKE ? OR camera_id LIKE ? OR vehicle_type LIKE ? OR CAST(track_id AS TEXT) LIKE ?)")
+            params.extend([q, q, q, q])
+
+        where_sql = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
+
+        with self._get_connection() as conn:
+            # Total matching count
+            count_sql = f"SELECT COUNT(*) FROM vehicle_detections {where_sql}"
+            total_count = conn.execute(count_sql, params).fetchone()[0]
+
+            # Paginated records
+            query_sql = f"""
+            SELECT id, camera_id, track_id, vehicle_type, plate_number, confidence, speed_kmh, watchlist_status, timestamp, date, hour
+            FROM vehicle_detections
+            {where_sql}
+            ORDER BY id DESC
+            LIMIT ? OFFSET ?
+            """
+            rows = conn.execute(query_sql, params + [limit, offset]).fetchall()
+            records = [dict(r) for r in rows]
+
+            # Aggregate Breakdown KPIs for this filtered subset
+            type_sql = f"SELECT vehicle_type, COUNT(*) as cnt FROM vehicle_detections {where_sql} GROUP BY vehicle_type"
+            type_rows = conn.execute(type_sql, params).fetchall()
+            by_type = {r["vehicle_type"]: r["cnt"] for r in type_rows}
+
+            status_sql = f"SELECT watchlist_status, COUNT(*) as cnt FROM vehicle_detections {where_sql} GROUP BY watchlist_status"
+            status_rows = conn.execute(status_sql, params).fetchall()
+            by_status = {r["watchlist_status"]: r["cnt"] for r in status_rows}
+
+            cam_sql = f"SELECT camera_id, COUNT(*) as cnt FROM vehicle_detections {where_sql} GROUP BY camera_id"
+            cam_rows = conn.execute(cam_sql, params).fetchall()
+            by_cam = {r["camera_id"]: r["cnt"] for r in cam_rows}
+
+            hour_sql = f"SELECT hour, COUNT(*) as cnt FROM vehicle_detections {where_sql} GROUP BY hour"
+            hour_rows = conn.execute(hour_sql, params).fetchall()
+            by_hour = {r["hour"]: r["cnt"] for r in hour_rows}
+
+            # Count of recognized plates
+            plate_count_sql = f"""
+            SELECT COUNT(*) FROM vehicle_detections 
+            {where_sql} {'AND' if where_sql else 'WHERE'} plate_number IS NOT NULL AND plate_number != '' AND plate_number != 'UNASSIGNED'
+            """
+            recognized_plates_count = conn.execute(plate_count_sql, params).fetchone()[0]
+
+            return {
+                "total_count": total_count,
+                "limit": limit,
+                "offset": offset,
+                "records": records,
+                "kpis": {
+                    "total_vehicles": total_count,
+                    "recognized_plates": recognized_plates_count,
+                    "watchlist_alerts": by_status.get("SUSPECT", 0) + by_status.get("FLAGGED", 0),
+                    "cleared_vehicles": by_status.get("CLEARED", 0),
+                    "vip_vehicles": by_status.get("VIP", 0),
+                    "by_type": by_type,
+                    "by_camera": by_cam,
+                    "by_status": by_status,
+                    "by_hour": by_hour
+                },
+                "applied_filters": {
+                    "date": date,
+                    "date_from": date_from,
+                    "date_to": date_to,
+                    "hour_from": hour_from,
+                    "hour_to": hour_to,
+                    "time_window": time_window or "ALL",
+                    "vehicle_type": vehicle_type or "ALL",
+                    "camera_id": camera_id or "ALL",
+                    "watchlist_status": watchlist_status or "ALL",
+                    "search": search or ""
+                }
+            }
+
     def get_plates(self, search: Optional[str] = None, status: Optional[str] = None,
                    limit: int = 50) -> List[Dict[str, Any]]:
         """Fetch searchable vehicle & ANPR plates with SQL."""
@@ -427,16 +690,17 @@ class AnalyticsDatabase:
 
     def seed_historical_data(self, days: int = 35):
         """Generates realistic daily and hourly traffic data across cameras with male/female and vehicle types."""
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.now()
         cameras = ["CAM-01", "CAM-02", "CAM-03", "CAM-04", "CAM-05", "CAM-06"]
         genders = ["MALE", "MALE", "MALE", "FEMALE", "FEMALE", "UNKNOWN"]
-        veh_types = ["CAR", "CAR", "SUV", "TRUCK", "MOTORCYCLE", "BUS", "MILITARY_VEHICLE"]
+        veh_types = ["TRUCK", "CAR", "SUV", "MOTORCYCLE", "BICYCLE", "BUS", "CAR", "SUV"]
         plates_pool = [
             ("PB08-CX-9912", "CLEARED"), ("DL01-AB-4321", "CLEARED"),
             ("JK02-AK-8877", "FLAGGED"), ("HR26-DF-5544", "CLEARED"),
             ("UP14-BR-2233", "SUSPECT"), ("CH01-TA-7788", "VIP"),
             ("MH12-KN-1002", "CLEARED"), ("KA04-ZX-5511", "CLEARED"),
-            ("AR01-MIL-009", "CLEARED"), ("RJ19-TR-4040", "SUSPECT")
+            ("AR01-MIL-009", "CLEARED"), ("RJ19-TR-4040", "SUSPECT"),
+            ("PB10-MC-4011", "CLEARED"), ("DL04-TR-9901", "CLEARED")
         ]
 
         person_rows = []
@@ -489,14 +753,18 @@ class AnalyticsDatabase:
                     cam = random.choice(["CAM-01", "CAM-02", "CAM-04", "CAM-05"])
                     track_counter += 1
                     vt = random.choice(veh_types)
-                    plate_tuple = random.choice(plates_pool)
-                    plate_num = plate_tuple[0]
-                    # Randomize suffix for variety
-                    if random.random() > 0.4:
-                        plate_num = f"{plate_num[:4]}-{random.choice(['AA','BB','CX','TR'])}-{random.randint(1000,9999)}"
-                    status = plate_tuple[1]
-                    speed = round(random.uniform(20.0, 65.0), 1)
-                    conf = round(random.uniform(0.85, 0.99), 2)
+                    if vt == "BICYCLE":
+                        plate_num = "NON-MOTORIZED"
+                        status = "CLEARED"
+                        speed = round(random.uniform(10.0, 22.0), 1)
+                    else:
+                        plate_tuple = random.choice(plates_pool)
+                        plate_num = plate_tuple[0]
+                        if random.random() > 0.4:
+                            plate_num = f"{plate_num[:4]}-{random.choice(['AA','BB','CX','TR','WD'])}-{random.randint(1000,9999)}"
+                        status = plate_tuple[1]
+                        speed = round(random.uniform(25.0, 75.0), 1)
+                    conf = round(random.uniform(0.86, 0.99), 2)
                     vehicle_rows.append((cam, track_counter, vt, plate_num, conf, speed, status, ts, date_str, h, month_str))
 
         incident_rows = []

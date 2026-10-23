@@ -3,6 +3,7 @@ import os
 import time
 import uuid
 import logging
+import threading
 from typing import List, Dict, Any, Optional
 
 logging.basicConfig(level=logging.INFO)
@@ -21,22 +22,39 @@ class IncidentManager:
         self.timeout_sec = timeout_sec
         self.incidents: Dict[str, Dict[str, Any]] = {}  # key: "camera_id_track_id"
         self.saved_incidents: List[Dict[str, Any]] = []
+        self._last_save_time = 0.0
+        self._save_lock = threading.Lock()
         self._load_incidents()
 
     def _load_incidents(self):
         if os.path.exists(INCIDENTS_FILE):
             try:
                 with open(INCIDENTS_FILE, "r") as f:
-                    self.saved_incidents = json.load(f)
+                    self.saved_incidents = json.load(f)[:50]
             except Exception as e:
                 logger.error(f"Error loading incidents file: {e}")
+                self.saved_incidents = []
 
-    def _save_incidents(self):
-        try:
-            with open(INCIDENTS_FILE, "w") as f:
-                json.dump(self.saved_incidents, f, indent=2)
-        except Exception as e:
-            logger.error(f"Error saving incidents file: {e}")
+    def _save_incidents(self, force: bool = False):
+        now = time.time()
+        if not force and (now - self._last_save_time < 2.0):
+            return
+        self._last_save_time = now
+        self.saved_incidents = self.saved_incidents[:50]
+        data = list(self.saved_incidents)
+
+        def _write():
+            with self._save_lock:
+                try:
+                    os.makedirs(os.path.dirname(INCIDENTS_FILE) or ".", exist_ok=True)
+                    tmp_file = f"{INCIDENTS_FILE}.tmp_{uuid.uuid4().hex[:6]}"
+                    with open(tmp_file, "w") as f:
+                        json.dump(data, f, indent=2)
+                    os.replace(tmp_file, INCIDENTS_FILE)
+                except Exception as e:
+                    logger.error(f"Error saving incidents file: {e}")
+
+        threading.Thread(target=_write, daemon=True).start()
 
     def _generate_ai_summary(
         self,
@@ -107,6 +125,11 @@ class IncidentManager:
                 camera_id, inc["object_type"], track_id, inc["reasons"], inc["highest_severity"], inc["max_risk_score"], identity_status
             )
 
+            # Update SOP recommendation if escalated
+            if inc["highest_severity"] == "CRITICAL" and inc["status"] != "RESOLVED":
+                inc["status"] = "ESCALATED"
+            inc["sop_recommendation"] = self._get_sop_recommendation(inc["primary_event_type"], inc["highest_severity"])
+
             # Append snapshot if provided
             if snapshot_filename and snapshot_filename not in inc["snapshots"]:
                 inc["snapshots"].append(snapshot_filename)
@@ -127,6 +150,9 @@ class IncidentManager:
             ai_sum = self._generate_ai_summary(
                 camera_id, track["object_type"], track_id, reasons, severity, score, identity_status
             )
+            init_status = "ESCALATED" if severity == "CRITICAL" else "ACTIVE"
+            sop_action = self._get_sop_recommendation(event_type, severity)
+
             inc = {
                 "incident_id": inc_id,
                 "camera_id": camera_id,
@@ -137,6 +163,7 @@ class IncidentManager:
                 "max_risk_score": score,
                 "explanation": explanation,
                 "ai_summary": ai_sum,
+                "sop_recommendation": sop_action,
                 "reasons": list(reasons),
                 "point_breakdown": dict(point_bd),
                 "identity_status": identity_status,
@@ -152,7 +179,7 @@ class IncidentManager:
                 ],
                 "first_seen": timestamp_str,
                 "last_seen": timestamp_str,
-                "status": "ACTIVE",
+                "status": init_status,
                 "operator_notes": ""
             }
             self.incidents[key] = inc
@@ -161,6 +188,33 @@ class IncidentManager:
 
         self._save_incidents()
         return inc
+
+    def _get_sop_recommendation(self, event_type: str, severity: str) -> str:
+        """Generates frontline SSB/BSF SOP action recommendation based on event type."""
+        evt = (event_type or "").upper()
+        if "NIGHT_MOVEMENT" in evt or "NIGHT" in evt:
+            return "Activate high-intensity thermal spotlights on target quadrant, deploy sentry night patrol with night-vision optics."
+        elif "PROBING" in evt:
+            return "Lock PTZ auto-tracker onto target, alert perimeter towers of potential tactical breach reconnaissance."
+        elif "STOP" in evt or "UNUSUAL_VEHICLE" in evt:
+            return "Dispatch checkpoint sentry patrol to investigate stationary vehicle, verify driver manifest."
+        elif "SPATIAL" in evt:
+            return "Sound perimeter alarm, vector Quick Reaction Force (QRF) along correlated multi-camera trajectory."
+        elif "FENCE" in evt or evt == "FENCE_CROSSING":
+            return "Deploy Quick Reaction Force (QRF) to boundary perimeter, sound border horn, illuminate sector spotlights."
+        elif "MISMATCH" in evt or "DRIVER" in evt:
+            return "Halt vehicle at inspection bay, verify driver biometrics, cross-examine credentials against vehicle registration."
+        elif "ANPR" in evt or "WATCHLIST" in evt:
+            return "Seal Checkpoint Gates Alpha & Bravo, alert roadblock detachment, intercept suspect vehicle."
+        elif "RESTRICTED" in evt or evt == "ZONE_ENTRY":
+            if severity == "CRITICAL":
+                return "Alert sentry bunker, dispatch tactical intercept team to restricted quadrant."
+            return "Monitor PTZ optical zoom, verify authorization, issue loudspeaker warning if unmoving."
+        elif "LOITERING" in evt:
+            return "Activate border loudspeaker challenge, instruct subject to vacate buffer zone immediately."
+        elif "PERIMETER" in evt or "APPROACH" in evt:
+            return "Lock camera target tracking, notify adjacent watchtower sentry of incoming vector."
+        return "Maintain visual tracking and log target telemetry in station duty register."
 
 
     def get_incidents(self, status: Optional[str] = None, severity: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -182,3 +236,23 @@ class IncidentManager:
                 self._save_incidents()
                 return True
         return False
+
+    def clear_incidents(self, camera_id: Optional[str] = None):
+        """Clears active and saved incidents from memory and storage, optionally filtered by camera."""
+        with self._save_lock:
+            if camera_id:
+                self.incidents = {
+                    k: v for k, v in self.incidents.items()
+                    if not k.startswith(f"{camera_id}_")
+                }
+                self.saved_incidents = [
+                    inc for inc in self.saved_incidents
+                    if inc.get("camera_id") != camera_id
+                ]
+                logger.info(f"Incidents for camera {camera_id} cleared successfully.")
+            else:
+                self.incidents.clear()
+                self.saved_incidents.clear()
+                logger.info("All incidents cleared successfully.")
+        self._save_incidents(force=True)
+

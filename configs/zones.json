@@ -2,29 +2,49 @@
   "CAM-01": {
     "zones": [
       {
-        "zone_id": "RESTRICTED-01",
-        "name": "Restricted Area Alpha",
+        "zone_id": "zone-1788891702409",
+        "name": "Restricted-Zone-CAM-01",
         "type": "RESTRICTED",
+        "severity": "CRITICAL",
         "polygon": [
-          [100, 300],
-          [500, 300],
-          [500, 600],
-          [100, 600]
+          [
+            190,
+            201
+          ],
+          [
+            640,
+            206
+          ],
+          [
+            667,
+            571
+          ],
+          [
+            199,
+            563
+          ]
         ],
-        "color": [0, 0, 220]
+        "metric_polygon": [
+          [
+            1.74,
+            3243.92
+          ],
+          [
+            32.16,
+            1877.06
+          ],
+          [
+            8.88,
+            116.25
+          ],
+          [
+            2.02,
+            137.35
+          ]
+        ]
       }
     ],
-    "fences": [
-      {
-        "fence_id": "FENCE-01",
-        "name": "Perimeter Fence Alpha",
-        "line": [
-          [100, 350],
-          [500, 350]
-        ],
-        "color": [0, 140, 255]
-      }
-    ]
+    "fences": []
   },
   "CAM-02": {
     "zones": [],
@@ -291,6 +311,10 @@
     "fences": []
   },
   "CAM-06": {
+    "zones": [],
+    "fences": []
+  },
+  "CAM-08": {
     "zones": [],
     "fences": []
   }
