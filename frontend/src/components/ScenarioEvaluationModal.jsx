@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-
-const API_BASE = 'http://localhost:8000'
+import { API_BASE } from '../config'
 
 export default function ScenarioEvaluationModal({ isOpen, onClose }) {
   const [running, setRunning] = useState(false)

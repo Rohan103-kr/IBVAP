@@ -6,7 +6,7 @@ services:
     name: ibvap-backend
     env: docker
     dockerfilePath: Dockerfile
-    plan: starter
+    plan: free
     region: oregon
     envVars:
       - key: PORT

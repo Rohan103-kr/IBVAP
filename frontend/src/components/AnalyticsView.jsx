@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
-
-const API_BASE = 'http://localhost:8000'
+import { API_BASE } from '../config'
 
 export default function AnalyticsView() {
   // ── Period & Filter State ──

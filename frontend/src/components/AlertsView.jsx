@@ -2,8 +2,7 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import ShiftSummaryModal from './ShiftSummaryModal'
 import TargetContinuityCard from './TargetContinuityCard'
 import SpeedometerGauge from './SpeedometerGauge'
-
-const API_BASE = 'http://localhost:8000'
+import { API_BASE } from '../config'
 
 const SEV_ORDER = { CRITICAL: 0, HIGH: 1, WARNING: 2, INFO: 3 }
 
@@ -161,7 +160,7 @@ function IncidentClusterCard({ cluster, onInvestigate, onOpenDispatch, onAcknowl
               title="Inspect evidence snapshot in Forensic Dossier"
             >
               <img
-                src={`http://localhost:8000/api/v1/snapshots/${cluster.snapshot.replace(/^.*[\\\/]/, '')}`}
+                src={`${API_BASE}/api/v1/snapshots/${cluster.snapshot.replace(/^.*[\\\/]/, '')}`}
                 alt="Evidence"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => { e.target.parentElement.style.display = 'none' }}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { API_BASE } from '../config'
 
 function fmtTs(ts) {
   if (!ts) return '--:--:--'
@@ -40,11 +41,11 @@ export default function ForensicDossierModal({ alert, onClose, onOpenDispatch })
     let snap = alert.snapshot || (Array.isArray(alert.snapshots) && alert.snapshots[0]) || alert.snapshot_filename || alert.snapshot_url
     if (snap && typeof snap === 'string') {
       const filename = snap.replace(/^.*[\\\/]/, '').trim()
-      if (filename) return `http://localhost:8000/api/v1/snapshots/${filename}`
+      if (filename) return `${API_BASE}/api/v1/snapshots/${filename}`
     }
     const eid = alert.event_id || alert.id
     if (eid && typeof eid === 'string' && eid.startsWith('EVT-')) {
-      return `http://localhost:8000/api/v1/snapshots/${eid}_snapshot.jpg`
+      return `${API_BASE}/api/v1/snapshots/${eid}_snapshot.jpg`
     }
     return null
   }
@@ -61,7 +62,7 @@ export default function ForensicDossierModal({ alert, onClose, onOpenDispatch })
     setFeedback(type)
     setFeedbackMsg(`Action "${label}" recorded. Feedback stored to calibration dataset.`)
     try {
-      await fetch(`http://localhost:8000/api/v1/incidents/${alert.id || alert.event_id || 'EVT-001'}/feedback`, {
+      await fetch(`${API_BASE}/api/v1/incidents/${alert.id || alert.event_id || 'EVT-001'}/feedback`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ feedback_type: type, notes: label, operator_id: 'Op-Cmd-01' })
@@ -119,7 +120,7 @@ export default function ForensicDossierModal({ alert, onClose, onOpenDispatch })
                       const eid = alert.event_id || alert.id
                       if (!retryRef.current && eid) {
                         retryRef.current = true
-                        setImgSrc(`http://localhost:8000/api/v1/snapshots/${eid}_snapshot.jpg?t=${Date.now()}`)
+                        setImgSrc(`${API_BASE}/api/v1/snapshots/${eid}_snapshot.jpg?t=${Date.now()}`)
                       } else {
                         setImgFailed(true)
                       }

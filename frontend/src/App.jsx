@@ -16,8 +16,7 @@ import KnownFacesModal from './components/KnownFacesModal'
 import TargetContinuityCard from './components/TargetContinuityCard'
 import VehicleAdminView from './components/VehicleAdminView'
 import AdminPanelView from './components/AdminPanelView'
-
-const API = 'http://localhost:8000'
+import { API, API_BASE } from './config'
 
 const fetchJSON = async (url) => {
   const r = await fetch(url)

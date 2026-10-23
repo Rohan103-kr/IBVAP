@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import SpeedometerGauge from './SpeedometerGauge'
+import { API_BASE } from '../config'
 
 const EVENT_LABELS = {
   FENCE_CROSSING:           { icon: 'fence',          label: 'FENCE BREACH',       color: '#f43f5e' },
@@ -172,7 +173,7 @@ export default function TacticalAlertBanner({ alert, onInvestigate, onOpenDispat
               title="Click to inspect evidence snapshot in Forensic Dossier"
             >
               <img
-                src={`http://localhost:8000/api/v1/snapshots/${(alert.snapshot || alert.snapshot_filename).replace(/^.*[\\\/]/, '')}`}
+                src={`${API_BASE}/api/v1/snapshots/${(alert.snapshot || alert.snapshot_filename).replace(/^.*[\\\/]/, '')}`}
                 alt="Evidence snapshot"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => { e.target.parentElement.style.display = 'none' }}

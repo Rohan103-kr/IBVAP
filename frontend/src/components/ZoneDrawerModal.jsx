@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { API_BASE } from '../config'
 
 // ── Homography Projective Geometry Helper ───────────────────────────────────
 function project2DToMetric(u, v, H) {
@@ -41,7 +42,7 @@ export default function ZoneDrawerModal({ cam, onClose }) {
   useEffect(() => {
     let isMounted = true
 
-    fetch(`http://localhost:8000/api/v1/zones?camera_id=${cam.id}`)
+    fetch(`${API_BASE}/api/v1/zones?camera_id=${cam.id}`)
       .then(res => res.json())
       .then(data => {
         if (!isMounted) return
@@ -52,7 +53,7 @@ export default function ZoneDrawerModal({ cam, onClose }) {
       })
       .catch(err => console.error('Failed to load existing zones:', err))
 
-    fetch(`http://localhost:8000/api/v1/calibration/${cam.id}`)
+    fetch(`${API_BASE}/api/v1/calibration/${cam.id}`)
       .then(res => res.json())
       .then(data => {
         if (!isMounted) return
@@ -423,7 +424,7 @@ export default function ZoneDrawerModal({ cam, onClose }) {
     }
 
     try {
-      await fetch(`http://localhost:8000/api/v1/zones/${cam.id}`, {
+      await fetch(`${API_BASE}/api/v1/zones/${cam.id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -549,7 +550,7 @@ export default function ZoneDrawerModal({ cam, onClose }) {
             <div style={{ position: 'relative', width: '100%', height: 280, background: '#04070e', border: '1px solid var(--border-light)', borderRadius: 6, overflow: 'hidden' }}>
               <img
                 key={`2D-${bgVersion}`}
-                src={`http://localhost:8000/api/v1/camera/${cam.id}/frame?t=${bgVersion}`}
+                src={`${API_BASE}/api/v1/camera/${cam.id}/frame?t=${bgVersion}`}
                 alt={`${cam.label} feed background`}
                 onError={(e) => {
                   e.currentTarget.onerror = null;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { API_BASE } from '../config'
 
 const TABS = [
   { id: 'live',      label: 'Live Feeds',      icon: 'videocam' },
@@ -118,7 +119,7 @@ export default function Header({
                   const scenarioId = e.target.value
                   if (scenarioId) {
                     try {
-                      const res = await fetch(`http://localhost:8000/api/v1/simulation/trigger/${scenarioId}`, { method: 'POST' })
+                      const res = await fetch(`${API_BASE}/api/v1/simulation/trigger/${scenarioId}`, { method: 'POST' })
                       const data = await res.json()
                       if (onScenarioTriggered) {
                         onScenarioTriggered(data.scenario || { id: scenarioId })

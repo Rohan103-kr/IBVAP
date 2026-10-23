@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
-
-const API_BASE = 'http://localhost:8000'
+import { API_BASE } from '../config'
 
 const VEHICLE_CONFIGS = {
   ALL:        { label: 'All Types',    icon: 'apps',               color: '#94a3b8' },

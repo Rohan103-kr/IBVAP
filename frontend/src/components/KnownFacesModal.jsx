@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
-const API = 'http://localhost:8000'
+import { API } from '../config'
 
 export default function KnownFacesModal({ isOpen, onClose }) {
   const [identities, setIdentities] = useState([])

@@ -5,8 +5,7 @@ import FolderVideoModal from './FolderVideoModal'
 import GroundCalibrationModal from './GroundCalibrationModal'
 import BEVRadarOverlay from './BEVRadarOverlay'
 import Demo1SummaryModal from './Demo1SummaryModal'
-
-const API_BASE = 'http://localhost:8000'
+import { API_BASE } from '../config'
 
 const CAMS = [
   {
@@ -985,7 +984,7 @@ function RtspConfigModal({ camId, currentUrl, onClose, onSave }) {
     setTesting(true)
     setTestResult(null)
     try {
-      const r = await fetch('http://localhost:8000/api/v1/cameras/test-connection', {
+      const r = await fetch(`${API_BASE}/api/v1/cameras/test-connection`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ stream_url: url })
@@ -1001,7 +1000,7 @@ function RtspConfigModal({ camId, currentUrl, onClose, onSave }) {
 
   const handleSave = async () => {
     try {
-      await fetch('http://localhost:8000/api/v1/cameras', {
+      await fetch(`${API_BASE}/api/v1/cameras`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ camera_id: camId, name: camName, stream_url: url })
@@ -1250,7 +1249,7 @@ export default function LiveFeedsView({ alerts = [], simBboxes = {}, onInvestiga
   const pageSize = 4
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/v1/cameras')
+    fetch(`${API_BASE}/api/v1/cameras`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -1413,8 +1412,8 @@ export default function LiveFeedsView({ alerts = [], simBboxes = {}, onInvestiga
 
   const handleClearAlerts = useCallback(async () => {
     try {
-      await fetch('http://localhost:8000/api/v1/events/clear', { method: 'POST' })
-      await fetch('http://localhost:8000/api/v1/incidents/clear', { method: 'POST' })
+      await fetch(`${API_BASE}/api/v1/events/clear`, { method: 'POST' })
+      await fetch(`${API_BASE}/api/v1/incidents/clear`, { method: 'POST' })
     } catch (err) {
       console.error('Clear alerts error:', err)
     }
@@ -1507,7 +1506,7 @@ export default function LiveFeedsView({ alerts = [], simBboxes = {}, onInvestiga
             style={{ background: 'var(--critical-bg)', border: '1px solid var(--critical-bd)', color: 'var(--critical)', whiteSpace: 'nowrap' }}
             onClick={async () => {
               try {
-                await fetch('http://localhost:8000/api/v1/cameras/reset-defaults', { method: 'POST' });
+                await fetch(`${API_BASE}/api/v1/cameras/reset-defaults`, { method: 'POST' });
                 setRtspStreams({});
                 const now = Date.now();
                 const newVersions = {};

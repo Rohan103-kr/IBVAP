@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
-
-const API_BASE = 'http://localhost:8000'
+import { API_BASE } from '../config'
 
 // ── Mathematical Homography Solvers (8x8 Linear System via Gaussian Elimination) ──
 function solve8x8(A, B) {
